@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
  
-const sequelize = new Sequelize('condopro', 'root', 'go.', {//Modifica los datos para conectarte a la Bd
+const sequelize = new Sequelize('condopro', 'root', '', {//Modifica los datos para conectarte a la Bd
     host: 'localhost',
     dialect: 'mysql'
 });

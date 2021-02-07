@@ -4,7 +4,7 @@ import {gql} from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
 const createPropietario = gql `
-  mutation CreatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!, $nombre: String! ) {
+  mutation CreatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!) {
     createPropietario(nombre: $nombre, apellido: $apellido, cedula: $cedula, correo: $correo, telefono: $telefono, activo: true) {
       id
       nombre
@@ -32,7 +32,7 @@ export const OwnerForm = () => {
     e.preventDefault();
     console.log(formValues);
 
-    // createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
+    createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
   }
 
   return (
