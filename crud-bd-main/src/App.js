@@ -8,9 +8,12 @@ import {
 } from "react-router-dom";
 import { OwnerForm } from "./components/OwnerForm";
 import { OwnersInfo } from "./components/OwnersInfo";
+import { CreateOwner } from "./pages/CreateOwner";
+import { EditOwner } from "./pages/EditOwner";
 
 
 function App() {  
+  
   return (
 
     <div className="App">
@@ -18,8 +21,12 @@ function App() {
         <NavBar/>
         <Switch>
           
-            <Route path="/ownerForm">
-              <OwnerForm />
+            <Route path="/createOwner">
+              <CreateOwner />
+            </Route>
+            
+            <Route path="/editOwner/:ownerId">
+              <EditOwner />
             </Route>
 
             <Route path="/">

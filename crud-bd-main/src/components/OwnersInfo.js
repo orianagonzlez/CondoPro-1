@@ -77,8 +77,8 @@ export const OwnersInfo = () => {
     <Container className="mt-5">
       <h1>Lista de propietarios</h1>
       <div className="d-flex justify-content-around">
-        <Button href="/ownerForm" variant="outline-primary" className="my-5">Nuevo propietario</Button>
-        <Button onClick={ handleCleaning} variant="outline-primary" className="my-5">Limpiar filtro</Button>
+        <Button href="/createOwner" variant="outline-primary" className="my-5">Nuevo propietario</Button>
+        <Button onClick={ handleCleaning } variant="outline-primary" className="my-5">Limpiar filtro</Button>
       
       </div>
       <InputGroup className="mb-3">
@@ -96,13 +96,15 @@ export const OwnersInfo = () => {
       </InputGroup>
       <Table striped bordered hover className="mt-5">
         <thead>
-          <tr>
+          <tr className="text-center">
             <th>#ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>CI</th>
             <th>Telefono</th>
             <th>Correo</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>

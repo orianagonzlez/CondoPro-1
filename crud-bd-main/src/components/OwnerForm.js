@@ -1,7 +1,8 @@
-import { Form, Button, Container  } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import {gql} from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import { useEffect, useState } from 'react';
 
 const createPropietario = gql `
   mutation CreatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!) {
@@ -13,33 +14,72 @@ const createPropietario = gql `
   }
 `
 
-export const OwnerForm = () => {
-  
-  
-    const [ formValues , handleInputChange, reset] = useForm({
-    nombre: '',
-    apellido:'',
-    cedula:'',
-    telefono: '',
-    correo: '',
-  });
-  
+const updatePropietario = gql `
+  mutation UpdatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!, $id: Int!) {
+    updatePropietario(nombre: $nombre, apellido: $apellido, cedula: $cedula, correo: $correo, telefono: $telefono, id: $id) {
+      id
+      nombre
+      apellido
+    }
+  }
+
+`
+
+export const OwnerForm = ({owner}) => {
+
+  const initialFormState = ( ) => {
+    console.log(owner)
+    let form;
+    if(owner){
+      form = {
+        nombre: owner.nombre,
+        apellido: owner.apellido,
+        cedula: owner.cedula,
+        telefono: owner.telefono,
+        correo: owner.correo,
+      }
+    }else{
+      form = {
+        nombre: '',
+        apellido:'',
+        cedula:'',
+        telefono: '',
+        correo: '',
+      }
+    }
+    return form
+  }
+
+  const [ formValues , handleInputChange, reset] = useForm( initialFormState());
+
   const { nombre, apellido, cedula, telefono,  correo }= formValues;
 
+
   const [createMessage]= useMutation(createPropietario);
+
+  const [updateOwner] = useMutation(updatePropietario)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
-
-    createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
+    
+    if(owner){
+      console.log("1")
+      let id = owner.id
+      updateOwner({variables:  {nombre, apellido, cedula, correo, telefono, id} })
+      window.alert("Propietario actualizado con exito")
+    }else{
+      console.log("2")
+      createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
+      window.alert("Propietario registrado con exito")
+    }
+    
   }
 
   return (
     
     <div>
-      <Container className=" ownerFormContainer my-5 ">
-        <h1>Registro de propietario</h1>
+     
         <Form onSubmit={ handleSubmit } className="my-5">
 
           <Form.Group controlId="formBasicEmail">
@@ -72,7 +112,6 @@ export const OwnerForm = () => {
            Crear nuevo propietario
           </Button>
         </Form>
-    </Container>
     </div>
   )
 }

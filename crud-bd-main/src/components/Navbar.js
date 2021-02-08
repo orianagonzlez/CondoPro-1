@@ -1,5 +1,4 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 export const NavBar = () => {
@@ -17,10 +16,10 @@ export const NavBar = () => {
              
             </li>
             <li className="nav-item">
-              <Link to="/"   className="nav-link" >Read</Link>
+              <Link to="/"   className="nav-link" >Propietarios</Link>
             </li>
             <li className="nav-item">
-              <Link to="/ownerForm" className="nav-link" >Create</Link>
+              <Link to="/createOwner" className="nav-link" >Crear propietario</Link>
             </li>
           </ul>
         </div>
