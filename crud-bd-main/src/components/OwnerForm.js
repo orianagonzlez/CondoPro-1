@@ -25,7 +25,7 @@ const updatePropietario = gql `
 
 `
 
-export const OwnerForm = ({owner}) => {
+export const OwnerForm = ({owner, buttonText}) => {
 
   const initialFormState = ( ) => {
     console.log(owner)
@@ -109,7 +109,7 @@ export const OwnerForm = ({owner}) => {
 
 
           <Button variant="dark" type="submit">
-           Crear nuevo propietario
+           {buttonText}
           </Button>
         </Form>
     </div>

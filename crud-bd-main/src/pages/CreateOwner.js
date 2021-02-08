@@ -8,7 +8,7 @@ export const CreateOwner = () => {
 
     <Container className=" ownerFormContainer my-5 ">
       <h1>Registrar Propietario</h1>
-      <OwnerForm/>
+      <OwnerForm buttonText="Crear propietario"/>
     </Container>
   )
 }
