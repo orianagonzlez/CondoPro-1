@@ -48,7 +48,7 @@ export const EditOwner = () => {
     
     <Container className=" ownerFormContainer my-5 ">
       <h1>Actualizar propietario</h1>
-      <OwnerForm owner = { owner }/>
+      <OwnerForm owner = { owner } buttonText="Actualizar propietario"/>
     </Container>
   )
 }

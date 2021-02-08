@@ -3,11 +3,11 @@ const resolvers = {
     Query: {
 
         async getPropietarios(root, args, { models }){
-            return await models.propietario.findAll({             
-               where: {
-                activo: true
-              }}
-            )
+            return await models.propietario.findAll({
+                where: {
+                    activo: true
+                }
+            })
         },
         async getPropietario(root, args, { models }){
             return await models.propietario.findByPk(args.id)
@@ -38,9 +38,7 @@ const resolvers = {
           
           let propietario = await models.propietario.findByPk(id);
           
-
-
-          return propietario.update( {active: false} )
+          return propietario.update( {activo: false} )
         
         }
     }
