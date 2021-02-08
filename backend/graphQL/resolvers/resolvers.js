@@ -10,7 +10,12 @@ const resolvers = {
             })
         },
         async getPropietario(root, args, { models }){
-            return await models.propietario.findByPk(args.id)
+            return await models.propietario.findOne({
+                where: {
+                  id: args.id,
+                  activo: true, 
+                },
+              })
         }
 
     },
