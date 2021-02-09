@@ -59,6 +59,13 @@ const resolvers = {
           return propietario.update(data)
         },
         
+        async deletePropietario(root, { id }, { models }){
+          
+            let propietario = await models.propietario.findByPk(id);
+            
+            return propietario.update( {activo: false} )
+          
+          },
 
         //Apartamento
         async createApartamento(root, { numero, dimensiones, estado, activo }, { models }) {
@@ -76,10 +83,17 @@ const resolvers = {
             };
 
             return apartamento.update(data)
-        }
 
+        },
+
+        async deleteApartamento(root, { id }, { models }){
+          
+            let apartamento = await models.apartamento.findByPk(id);
+            
+            return apartamento.update( {activo: false} )
+          
+          }
     }
-
 };
 
 module.exports = resolvers;

@@ -30,8 +30,11 @@ type Query{
 type Mutation{
     createPropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, activo: Boolean!): Propietario!
     updatePropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, id: Int!): Propietario!,
+    deletePropietario(id: Int!): Propietario!
     createApartamento(numero: String!, dimensiones: String!, estado: String!, activo: Boolean!): Apartamento!,
     updateApartamento(numero: String!, dimensiones: String!, estado: String!, id: Int!): Apartamento!
+    deleteApartamento(id: Int!): Apartamento!
+    
 }
 `
 module.exports = typeDefs;

@@ -57,7 +57,7 @@ export const OwnerForm = ({owner, buttonText}) => {
 
   const [createMessage]= useMutation(createPropietario);
 
-  const [updateOwner] = useMutation(updatePropietario)
+  const [updateOwner] = useMutation(updatePropietario);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,12 +66,12 @@ export const OwnerForm = ({owner, buttonText}) => {
     if(owner){
       console.log("1")
       let id = owner.id
-      updateOwner({variables:  {nombre, apellido, cedula, correo, telefono, id} })
-      window.alert("Propietario actualizado con exito")
+      updateOwner({variables:  {nombre, apellido, cedula, correo, telefono, id} });
+      window.alert("Propietario actualizado con exito");
     }else{
       console.log("2")
       createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
-      window.alert("Propietario registrado con exito")
+      window.alert("Propietario registrado con exito");
     }
     
   }
