@@ -62,7 +62,7 @@ const resolvers = {
 
         //Apartamento
         async createApartamento(root, { numero, dimensiones, estado, activo }, { models }) {
-            return await npmodels.apartamento.create({ numero, dimensiones, estado, activo })
+            return await models.apartamento.create({ numero, dimensiones, estado, activo })
         },
 
         async updateApartamento(root, { numero, dimensiones, estado, id }, { models }){
