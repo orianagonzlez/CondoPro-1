@@ -2,7 +2,7 @@ const resolvers = {
 
     Query: {
 
-        //Propietario
+        //----------------------------------Propietario------------------------------------------------
         async getPropietarios(root, args, { models }){
             return await models.propietario.findAll({
                 where: {
@@ -19,27 +19,45 @@ const resolvers = {
               })
         },
 
-        //Apartamento
-        async getApartamentos(root, args, { models }) {
-            return await models.apartamento.findAll({
+        //----------------------------------Casa------------------------------------------------
+        async getCasas(root, args, { models }) {
+            return await models.casa.findAll({
                 where: {
                     activo: true
                 }
             })
         },
-        async getApartamento(root, args, { models }) {
-            return await models.apartamento.findOne({
+        async getCasa(root, args, { models }) {
+            return await models.casa.findOne({
                 where: {
                     id: args.id,
                     activo:true,
                 }
             })
-        }
+        },
+
+        //----------------------------------Condominio------------------------------------------------
+        async getCondominios(root, args, { models }) {
+            return await models.condominio.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getCondominio(root, args, { models }) {
+            return await models.condominio.findOne({
+                where: {
+                    id: args.id,
+                    activo:true,
+                }
+            })
+        },
     },
 
     Mutation: {
 
-        //Propietario
+         //----------------------------------Propietario------------------------------------------------
         async createPropietario(root, { nombre, apellido, cedula, correo, telefono, activo }, { models }){
             return await models.propietario.create( {nombre, apellido, cedula, correo, telefono, activo} )
         },
@@ -59,26 +77,75 @@ const resolvers = {
           return propietario.update(data)
         },
         
+        async deletePropietario(root, { id }, { models }){
+          
+            let propietario = await models.propietario.findByPk(id);
+            
+            return propietario.update( {activo: false} )
+          
+          },
 
-        //Apartamento
-        async createApartamento(root, { numero, dimensiones, estado, activo }, { models }) {
-            return await npmodels.apartamento.create({ numero, dimensiones, estado, activo })
+        //----------------------------------Casa------------------------------------------------
+        async createCasa(root, { numero, dimensiones, estado, alicuota, activo }, { models }) {
+            return await models.casa.create({ numero, dimensiones, estado, alicuota, activo })
         },
 
-        async updateApartamento(root, { numero, dimensiones, estado, id }, { models }){
+        async updateCasa(root, { numero, dimensiones, estado, alicuota, id }, { models }){
 
-            let apartamento = await models.apartamento.findByPk(id);
+            let casa = await models.casa.findByPk(id);
 
             let data = {
                 numero: numero,
                 dimensiones: dimensiones,
-                estado:estado
+                estado:estado,
+                alicuota: alicuota
             };
 
-            return apartamento.update(data)
-        }
+            return casa.update(data)
+
+        },
+
+        async deleteCasa(root, { id }, { models }){
+          
+            let casa = await models.casa.findByPk(id);
+            
+            return casa.update( {activo: false} )
+          
+          },
+        
+        //----------------------------------Condominio------------------------------------------------
+
+        async createCondominio(root, { nombre, estado, ciudad, direccion, activo }, { models }) {
+            return await models.condominio.create({ nombre, estado, ciudad, direccion, activo })
+        },
+
+        async updateCondominio(root, { nombre, estado, ciudad, direccion, id }, { models }){
+
+            let casa = await models.condominio.findByPk(id);
+
+            let data = {
+                nombre: nombre,
+                estado: estado,
+                ciudad: ciudad,
+                direccion: direccion,
+            };
+
+            return condominio.update(data)
+
+        },
+
+        async deleteCondominio(root, { id }, { models }){
+          
+            let casa = await models.condominio.findByPk(id);
+            
+            return casa.update( {activo: false} )
+          
+          },
 
     }
+
+     
+
 
 };
 
