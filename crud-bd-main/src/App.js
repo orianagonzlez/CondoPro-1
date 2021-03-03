@@ -10,6 +10,12 @@ import { OwnerForm } from "./components/OwnerForm";
 import { OwnersInfo } from "./components/OwnersInfo";
 import { CreateOwner } from "./pages/CreateOwner";
 import { EditOwner } from "./pages/EditOwner";
+import { RegisterGuest } from "./pages/RegisterGuest";
+import { CreateCondo } from "./pages/CreateCondo";
+import { CreateFactura } from "./pages/CreateFactura";
+import { ResumenDeudas } from "./pages/ResumenDeudas";
+import { UserHome } from "./pages/UserHome";
+import { DetallePago } from "./pages/DetallePago";
 
 
 function App() {  
@@ -27,6 +33,30 @@ function App() {
             
             <Route path="/editOwner/:ownerId">
               <EditOwner />
+            </Route>
+
+            <Route path="/registerGuest">
+              <RegisterGuest />
+            </Route>
+
+            <Route path="/createCondo">
+              <CreateCondo />
+            </Route>
+
+            <Route path="/createFactura">
+              <CreateFactura />
+            </Route>
+
+            <Route path="/resumenDeudas">
+              <ResumenDeudas />
+            </Route>
+
+            <Route path="/userHome">
+              <UserHome />
+            </Route>
+
+            <Route path="/detallePago">
+              <DetallePago />
             </Route>
 
             <Route path="/">
