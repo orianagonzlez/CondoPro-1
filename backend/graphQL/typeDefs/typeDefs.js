@@ -2,6 +2,15 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+type Condominio{
+    id: Int!
+    nombre: String!
+    estado: String!
+    ciudad: String!
+    direccion: String!
+    activo: Boolean!
+}
+
 type Propietario{
     id: Int!
     nombre: String!
@@ -12,29 +21,36 @@ type Propietario{
     activo: Boolean!
 }
 
-type Apartamento{
+type Casa{
     id: Int!
     numero: String!
-    dimensiones: String!
+    dimensiones: Int!
     estado: String!
+    alicuota: Float!
     activo: Boolean!
 }
+
+
 
 type Query{
     getPropietarios: [Propietario],
     getPropietario(id: Int!): Propietario,
-    getApartamentos: [Apartamento],
-    getApartamento(id: Int!): Apartamento
+    getCasas: [Casa],
+    getCasa(id: Int!): Casa,
+    getCondominio(id: Int!): Condominio,
+    getCondominios: [Condominio]
 }
 
 type Mutation{
     createPropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, activo: Boolean!): Propietario!
     updatePropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, id: Int!): Propietario!,
     deletePropietario(id: Int!): Propietario!
-    createApartamento(numero: String!, dimensiones: String!, estado: String!, activo: Boolean!): Apartamento!,
-    updateApartamento(numero: String!, dimensiones: String!, estado: String!, id: Int!): Apartamento!
-    deleteApartamento(id: Int!): Apartamento!
-    
+    createCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float!, activo: Boolean!): Casa!,
+    updateCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float!, id: Int!): Casa!
+    deleteCasa(id: Int!): Casa!,
+    createCondominio(nombre: String!, estado: String!, ciudad: String!, direccion: String!,  activo: Boolean! ): Condominio!,
+    updateCondominio(nombre: String!, estado: String!, ciudad: String!, direccion: String!, id: Int! ): Condominio!
+    deleteCondominio(id: Int!): Condominio!
 }
 `
 module.exports = typeDefs;
