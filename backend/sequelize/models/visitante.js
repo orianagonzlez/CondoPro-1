@@ -1,25 +1,25 @@
 module.exports = (sequelize, DataTypes) => {
-    const Casa = sequelize.define('Casa', {
+    const Visitante = sequelize.define('Visitante', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true, 
             primaryKey: true,
             allowNull: false
         },
-        numero: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        dimensiones: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        estado: {
+        nombre: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        alicuota:{
-            type: DataTypes.FLOAT,
+        apellido: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        cedula: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        fecha:{
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         activo: {
@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {});
 
-    Casa.belongsTo(sequelize.import('./propietario'));
-    Casa.belongsTo(sequelize.import('./condominio'), { foreignKey: { allowNull: false }});
-    return Casa
+    Visitante.belongsTo(sequelize.import('./casa'), { foreignKey: { allowNull: false }});
+    return Visitante
 }

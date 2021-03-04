@@ -10,7 +10,21 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        estado: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        ciudad: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        direccion: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
       
     }, {});
+
+    Condominio.belongsTo(sequelize.import('./admin'), { foreignKey: { allowNull: false }});
     return Condominio
 }

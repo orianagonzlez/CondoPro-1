@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
  
-const sequelize = new Sequelize('condopro', 'root', 'Formula18', {//Modifica los datos para conectarte a la Bd
+const sequelize = new Sequelize('db_condopro', 'root', '', {//Modifica los datos para conectarte a la Bd
     host: 'localhost',
     dialect: 'mysql', 
     define: {
@@ -9,9 +9,16 @@ const sequelize = new Sequelize('condopro', 'root', 'Formula18', {//Modifica los
 });
  
 const models = {
+    admin: sequelize.import('./admin'),
     propietario: sequelize.import('./propietario'),
     casa: sequelize.import('./casa'),
-    condominio: sequelize.import('./condominio')
+    condominio: sequelize.import('./condominio'),
+    factura: sequelize.import('./factura'),
+    GastoDeFactura: sequelize.import('./gastoDeFactura'),
+    gasto: sequelize.import('./gasto'),
+    instrumentoDePago: sequelize.import('./instrumentoDePago'),
+    pago: sequelize.import('./pago'),
+    visitante: sequelize.import('./visitante')
 };
  
 models.sequelize = sequelize;
