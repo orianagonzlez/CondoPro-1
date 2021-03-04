@@ -1,4 +1,5 @@
 import { NavBar } from "./components/Navbar";
+import { NavBarUser } from "./components/NavbarUser";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -16,27 +17,30 @@ import { CreateFactura } from "./pages/CreateFactura";
 import { ResumenDeudas } from "./pages/ResumenDeudas";
 import { UserHome } from "./pages/UserHome";
 import { DetallePago } from "./pages/DetallePago";
+import { Login } from "./pages/Login";
 
 
-function App() {  
-  
-  return (
+function App() {
 
-    <div className="App">
-      <Router>
-        <NavBar/>
-        <Switch>
-          
+  const admin = true;
+
+  if (admin) {
+    return (
+      <div className="App">
+        <Router>
+          <NavBar />
+          <Switch>
+
+            <Route path="/login">
+              <Login />
+            </Route>
+
             <Route path="/createOwner">
               <CreateOwner />
             </Route>
-            
+
             <Route path="/editOwner/:ownerId">
               <EditOwner />
-            </Route>
-
-            <Route path="/registerGuest">
-              <RegisterGuest />
             </Route>
 
             <Route path="/createCondo">
@@ -49,6 +53,33 @@ function App() {
 
             <Route path="/resumenDeudas">
               <ResumenDeudas />
+            </Route>
+
+            <Route path="/">
+              <OwnersInfo />
+            </Route>
+
+            <Redirect to="/" />
+
+          </Switch>
+        </Router>
+      </div>
+
+    )
+  } else {
+    return (
+
+      <div className="App">
+        <Router>
+          <NavBarUser />
+
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+
+            <Route path="/registerGuest">
+              <RegisterGuest />
             </Route>
 
             <Route path="/userHome">
@@ -67,9 +98,9 @@ function App() {
 
           </Switch>
         </Router>
-    </div>
-
-  );
+      </div>
+    )
+  };
 }
 
 export default App;
