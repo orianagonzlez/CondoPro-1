@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Apartamento = sequelize.define('Apartamento', {
+    const Casa = sequelize.define('Casa', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true, 
@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         dimensiones: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         estado: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        alicuota:{
+            type: DataTypes.FLOAT,
             allowNull: false
         },
         activo: {
@@ -23,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {});
-    return Apartamento
+    return Casa
 }
