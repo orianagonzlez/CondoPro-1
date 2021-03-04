@@ -17,6 +17,7 @@ import { ResumenDeudas } from "./pages/ResumenDeudas";
 import { UserHome } from "./pages/UserHome";
 import { DetallePago } from "./pages/DetallePago";
 
+import "bootswatch/dist/litera/bootstrap.min.css";
 
 function App() {  
   
