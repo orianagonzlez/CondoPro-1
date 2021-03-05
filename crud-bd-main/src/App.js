@@ -17,13 +17,12 @@ import { CreateFactura } from "./pages/CreateFactura";
 import { ResumenDeudas } from "./pages/ResumenDeudas";
 import { UserHome } from "./pages/UserHome";
 import { DetallePago } from "./pages/DetallePago";
-<<<<<<< HEAD
-import { AllCondos } from "./pages/AllCondos";
-=======
-import { Login } from "./pages/Login";
->>>>>>> luis
 
-import "bootswatch/dist/litera/bootstrap.min.css";
+import { AllCondos } from "./pages/AllCondos";
+
+import { Login } from "./pages/Login";
+
+// import "bootswatch/dist/litera/bootstrap.min.css";
 import { AppProvider } from "./context/AppContext";
 import { AppRouter } from "./router/AppRouter";
 
@@ -31,112 +30,110 @@ import { AppRouter } from "./router/AppRouter";
 
 function App() {
 
-  
 
-<<<<<<< HEAD
-    <div className="App">
-      <Router>
-        <NavBar/>
-        <Switch>
-          
-            <Route path="/createOwner">
-              <CreateOwner />
-            </Route>
-            
-            <Route path="/editOwner/:ownerId">
-              <EditOwner />
-            </Route>
 
-            <Route path="/registerGuest">
-              <RegisterGuest />
-            </Route>
 
-            <Route path="/createCondo">
-              <CreateCondo />
-            </Route>
+  <div className="App">
+    <Router>
+      <NavBar />
+      <Switch>
 
-            <Route path="/allCondos">
-              <AllCondos/>
-            </Route>
+        <Route path="/createOwner">
+          <CreateOwner />
+        </Route>
 
-            <Route path="/createFactura">
-              <CreateFactura />
-            </Route>
+        <Route path="/editOwner/:ownerId">
+          <EditOwner />
+        </Route>
 
-            <Route path="/resumenDeudas">
-              <ResumenDeudas />
-            </Route>
+        <Route path="/registerGuest">
+          <RegisterGuest />
+        </Route>
 
-            <Route path="/userHome">
-              <UserHome />
-            </Route>
+        <Route path="/createCondo">
+          <CreateCondo />
+        </Route>
 
-            <Route path="/detallePago">
-              <DetallePago />
-            </Route>
+        <Route path="/allCondos">
+          <AllCondos />
+        </Route>
 
-            <Route path="/">
-              <OwnersInfo />
-            </Route>
+        <Route path="/createFactura">
+          <CreateFactura />
+        </Route>
 
-            <Redirect to="/" />
+        <Route path="/resumenDeudas">
+          <ResumenDeudas />
+        </Route>
 
-          </Switch>
-        </Router>
-=======
+        <Route path="/userHome">
+          <UserHome />
+        </Route>
+
+        <Route path="/detallePago">
+          <DetallePago />
+        </Route>
+
+        <Route path="/">
+          <OwnersInfo />
+        </Route>
+
+        <Redirect to="/" />
+
+      </Switch>
+    </Router>
+  </div>
   return (
     <div>
       <AppProvider>
-        <AppRouter/>
+        <AppRouter />
       </AppProvider>
->>>>>>> luis
+
     </div>
   )
-
-
 
   // const admin = true;
 
   // if (admin) {
   //   return (
-      // <div className="App">
-      //   <Router>
-      //     <NavBar />
-      //     <Switch>
+  // <div className="App">
+  //   <Router>
+  //     <NavBar />
+  //     <Switch>
 
-      //       <Route path="/login">
-      //         <Login />
-      //       </Route>
+  //       <Route path="/login">
+  //         <Login />
+  //       </Route>
 
-      //       <Route path="/createOwner">
-      //         <CreateOwner />
-      //       </Route>
+  //       <Route path="/createOwner">
+  //         <CreateOwner />
+  //       </Route>
 
-      //       <Route path="/editOwner/:ownerId">
-      //         <EditOwner />
-      //       </Route>
+  //       <Route path="/editOwner/:ownerId">
+  //         <EditOwner />
+  //       </Route>
 
-      //       <Route path="/createCondo">
-      //         <CreateCondo />
-      //       </Route>
+  //       <Route path="/createCondo">
+  //         <CreateCondo />
+  //       </Route>
 
-      //       <Route path="/createFactura">
-      //         <CreateFactura />
-      //       </Route>
+  //       <Route path="/createFactura">
+  //         <CreateFactura />
+  //       </Route>
 
-      //       <Route path="/resumenDeudas">
-      //         <ResumenDeudas />
-      //       </Route>
+  //       <Route path="/resumenDeudas">
+  //         <ResumenDeudas />
+  //       </Route>
 
-      //       <Route path="/">
-      //         <OwnersInfo />
-      //       </Route>
+  //       <Route path="/">
+  //         <OwnersInfo />
+  //       </Route>
 
-      //       <Redirect to="/" />
+  //       <Redirect to="/" />
 
-      //     </Switch>
-      //   </Router>
-      // </div>
+  //     </Switch>
+  //   </Router>
+  // </div>
 
   //   )
   // } else {
