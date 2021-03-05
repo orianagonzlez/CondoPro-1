@@ -81,8 +81,8 @@ export const LoginForm = ({buttonText}) => {
               </Form.Group>
     
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control name="password" value={ password } type="text" placeholder="" onChange={ handleInputChange } />
+                <Form.Label>ID de la casa</Form.Label>
+                <Form.Control name="password" value={ password } type="text" placeholder="aun no sirve calma" onChange={ handleInputChange } />
                 {/* <Form.Control name="apellido" value={ estado } onChange={ handleInputChange } type="text" placeholder="" /> */}
               </Form.Group>
     
