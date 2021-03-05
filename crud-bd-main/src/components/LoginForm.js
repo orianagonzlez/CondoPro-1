@@ -41,10 +41,17 @@ export const LoginForm = ({buttonText}) => {
    useEffect(() => {
    
     if( data && !loading && loadingLogin){
+      
       if( data.getPropietarioByCI ){
-        console.log('hiciste login hay que cambiar el context y redirigir');
+        let userInfo = data.getPropietarioByCI
+        console.log('hiciste login hay que cambiar el context y redirigir', data.getPropietarioByCI);
+        
         setUser({
          ...user,
+         cedula: userInfo.cedula,
+         id: userInfo.id,
+
+         
          isLogged: true
         });
 
