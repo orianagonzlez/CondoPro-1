@@ -28,13 +28,8 @@ type Casa{
     dimensiones: Int!
     estado: String!
     alicuota: Float!
-<<<<<<< HEAD
-    PropietarioId: Int!
-    CondominioId: Int!
-=======
     propID: Int!
     condoID: Int!
->>>>>>> luis
     activo: Boolean!
 }
 
