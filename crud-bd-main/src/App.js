@@ -16,6 +16,7 @@ import { CreateFactura } from "./pages/CreateFactura";
 import { ResumenDeudas } from "./pages/ResumenDeudas";
 import { UserHome } from "./pages/UserHome";
 import { DetallePago } from "./pages/DetallePago";
+import { AllCondos } from "./pages/AllCondos";
 
 
 function App() {  
@@ -41,6 +42,10 @@ function App() {
 
             <Route path="/createCondo">
               <CreateCondo />
+            </Route>
+
+            <Route path="/allCondos">
+              <AllCondos/>
             </Route>
 
             <Route path="/createFactura">

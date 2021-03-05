@@ -86,11 +86,11 @@ const resolvers = {
           },
 
         //----------------------------------Casa------------------------------------------------
-        async createCasa(root, { numero, dimensiones, estado, alicuota, activo }, { models }) {
-            return await models.casa.create({ numero, dimensiones, estado, alicuota, activo })
+        async createCasa(root, { numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo }, { models }) {
+            return await models.casa.create({ numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo })
         },
 
-        async updateCasa(root, { numero, dimensiones, estado, alicuota, id }, { models }){
+        async updateCasa(root, { numero, dimensiones, estado, alicuota, PropietarioId, id }, { models }){
 
             let casa = await models.casa.findByPk(id);
 
@@ -98,7 +98,8 @@ const resolvers = {
                 numero: numero,
                 dimensiones: dimensiones,
                 estado:estado,
-                alicuota: alicuota
+                alicuota: alicuota,
+                propietarioId: PropietarioId
             };
 
             return casa.update(data)
@@ -115,8 +116,8 @@ const resolvers = {
         
         //----------------------------------Condominio------------------------------------------------
 
-        async createCondominio(root, { nombre, estado, ciudad, direccion, activo }, { models }) {
-            return await models.condominio.create({ nombre, estado, ciudad, direccion, activo })
+        async createCondominio(root, { nombre, estado, ciudad, direccion, AdminId, activo }, { models }) {
+            return await models.condominio.create({ nombre, estado, ciudad, direccion, AdminId, activo })
         },
 
         async updateCondominio(root, { nombre, estado, ciudad, direccion, id }, { models }){

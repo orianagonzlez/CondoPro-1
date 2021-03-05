@@ -22,7 +22,7 @@ export const NavBar = () => {
               <Link to="/createOwner" className="nav-link" >Crear Propietario</Link>
             </li>
             <li className="nav-item">
-              <Link to="/createCondo" className="nav-link" >Crear Condominio</Link>
+              <Link to="/allCondos" className="nav-link" >Crear Condominio</Link>
             </li>
             <li className="nav-item">
               <Link to="/createFactura" className="nav-link" >Crear Factura</Link>
