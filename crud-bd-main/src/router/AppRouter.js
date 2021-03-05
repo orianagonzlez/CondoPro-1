@@ -45,7 +45,7 @@ export const AppRouter = () => {
     <div>
      <Router>
       {/* LA RUTAS ADMIN */}
-      { ( user.isAdmin  ) && (
+      { ( user.isLogged ) && (
         <div>
                  <NavBar/>
                  <Switch>
@@ -65,7 +65,7 @@ export const AppRouter = () => {
        ) }
 
         {/* LAS RUTAS DEL PROPIETARIO */}
-       { ( user.isLogged  ) &&
+       { ( user.isAdmin  ) &&
          (
         <div>
                  <NavBarUser/>

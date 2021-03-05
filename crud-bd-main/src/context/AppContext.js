@@ -22,7 +22,7 @@ export const AppProvider =  ({ children }) => {
     condoID: "",
     isLogged: false
     })
-
+    console.log('paso por aqui', user)
 
   useEffect(() => {
 

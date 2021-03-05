@@ -4,7 +4,7 @@ import { AppContext } from '../context/AppContext';
 
 export const NavBar = () => {
   
-  const {setUser, user} = useContext(AppContext);
+  const {user, setUser} = useContext(AppContext);
 
   return (
   
@@ -32,15 +32,15 @@ export const NavBar = () => {
               <Link to="/condo/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
             </li>
 
-            <li className="nav-item" onClick={ setUser({
+            <li className="nav-item" onClick={ () => {setUser({
                 isAdmin: false,
                 cedula: "",
                 id: "",
                 casaID: "",
                 condoID: "",
                 isLogged: false
-              }) } >
-                <Link to='/login'>
+              })} } >
+                <Link to='/login' className="nav-link">
                   
                   <span>Cerrar sesión</span>
                 </Link>
