@@ -38,6 +38,7 @@ activo tinyint(1) not null,
 
 CREATE TABLE IF NOT EXISTS casas(
 id integer auto_increment,
+nombre varchar(255) not null,
 numero integer not null,
 dimensiones integer not null,
 alicuota float not null,

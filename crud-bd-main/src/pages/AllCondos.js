@@ -3,8 +3,9 @@ import { Button, Container, Table } from 'react-bootstrap';
 import {gql} from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { AllCondosRow } from '../components/AllCondosRow';
+import { useHistory } from 'react-router';
 
-const getOwners = gql`
+const getCondominios = gql`
     {
         getCondominios {
         id
@@ -20,7 +21,9 @@ const getOwners = gql`
 export const AllCondos = () => {
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getOwners);
+    const { loading, error, data } = useQuery(getCondominios);
+
+    const history = useHistory();
 
     useEffect(() => {
         console.log('cambie todos los props')
@@ -37,7 +40,7 @@ export const AllCondos = () => {
         <Container className="mt-5">
             <h1>Lista de condominios</h1>
             <div className="d-flex justify-content-around">
-                <Button href="/createCondo" variant="outline-primary" className="my-5">Nuevo condominio</Button>
+                <Button onClick={() => history.push('/condo/createCondo')} variant="outline-primary" className="my-5">Nuevo condominio</Button>
             </div>
             <Table striped bordered hover className="mt-5">
                 <thead>

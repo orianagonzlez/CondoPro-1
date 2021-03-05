@@ -7,21 +7,21 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const createCasa = gql `
-  mutation CreateCasa($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!) {
-    createCasa(nombre: $nombre, apellido: $apellido, cedula: $cedula, correo: $correo, telefono: $telefono, activo: true) {
+  mutation CreateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int!, $condominioId: Int!) {
+    createCasa(nombre: $nombre, numero: $num, dimensiones: $dim, estado: $estado, alicuota: $ali, PropietarioId: $propId, CondominioId: $condominioId, activo: true) {
       id
       nombre
-      apellido
+      numero
     }
   }
 `;
 
-const updatePropietario = gql `
-  mutation UpdatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!, $id: Int!) {
-    updatePropietario(nombre: $nombre, apellido: $apellido, cedula: $cedula, correo: $correo, telefono: $telefono, id: $id) {
+const updateCasa = gql `
+  mutation UpdateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int!, $id: Int!) {
+    updateCasa(nombre: $nombre, numero: $num, dimensiones: $dim, estado: $estado, alicuota: $ali, PropietarioId: $propId, id: $id) {
       id
       nombre
-      apellido
+      numero
     }
   }
 
@@ -47,6 +47,7 @@ export const CasaForm = ({ casa, buttonText }) => {
         let form;
         if(casa){
           form = {
+            nombre: casa.nombre,
             numero: casa.numero,
             dimensiones: casa.dimensiones,
             estado: casa.estado,
@@ -55,6 +56,7 @@ export const CasaForm = ({ casa, buttonText }) => {
           };
         }else{
           form = {
+            nombre: '',
             numero: '',
             dimensiones: '',
             estado: '',
@@ -70,7 +72,7 @@ export const CasaForm = ({ casa, buttonText }) => {
 
       const { loading, error, data } = useQuery(getOwners);
       console.log(formValues);
-      const { numero, dimensiones, estado, alicuota,  propietarioId }= formValues;
+      const { nombre, numero, dimensiones, estado, alicuota,  propietarioId }= formValues;
 
       const [propietarios, setPropietarios] = useState([]);
 
@@ -82,24 +84,30 @@ export const CasaForm = ({ casa, buttonText }) => {
       }, [data]);
     
     
-    //   const [createMessage]= useMutation(createPropietario);
+      const [crearCasa]= useMutation(createCasa);
     
-    //   const [updateOwner] = useMutation(updatePropietario);
+      const [actualizarCasa] = useMutation(updateCasa);
     
       const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formValues);
         
-        // if(casa){
-        //   console.log("1")
-        //   let id = casa.id
-        //   updateOwner({variables:  {nombre, apellido, cedula, correo, telefono, id} });
-        //   window.alert("Propietario actualizado con exito");
-        // }else{
-        //   console.log("2")
-        //   createMessage({variables: {nombre, apellido, cedula, correo, telefono}});
-        //   window.alert("Propietario registrado con exito");
-        // }
+        const num = parseInt(numero);
+        const dim = parseInt(dimensiones);
+        const ali = parseFloat(alicuota);
+        const propId = propietarioId === 'Sin propietario' ? null : parseInt(propietarioId);
+        if(casa){
+          console.log("1")
+          let id = casa.id
+          actualizarCasa({variables:  {nombre, num, dim, estado, ali, propId, id} });
+          window.alert("Casa actualizada con exito");
+        }else{
+          console.log("2")
+          
+          const condominioId = 1; //poner condo en el que se este trabajando
+          crearCasa({variables: {nombre, num, dim, estado, ali, propId, condominioId}});
+          window.alert("Casa registrada con exito");
+        }
         
       }
     
@@ -109,6 +117,11 @@ export const CasaForm = ({ casa, buttonText }) => {
          
             <Form onSubmit={ handleSubmit } className="my-5">
     
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control name="nombre" value={ nombre } onChange={ handleInputChange } type="text" placeholder="" />
+              </Form.Group>
+
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Numero</Form.Label>
                 <Form.Control name="numero" value={ numero } onChange={ handleInputChange } type="number" placeholder="" />
@@ -126,7 +139,7 @@ export const CasaForm = ({ casa, buttonText }) => {
               
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Alicuota</Form.Label>
-                <Form.Control  name="alicuota" value={ alicuota } onChange={ handleInputChange } type="number" min="0" placeholder="" />
+                <Form.Control  name="alicuota" value={ alicuota } onChange={ handleInputChange } type="number" step="0.01" min="0" placeholder="" />
               </Form.Group>
     
               <Form.Group controlId="formBasicPassword">

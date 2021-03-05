@@ -17,16 +17,19 @@ export const NavBar = () => {
           <ul className="navbar-nav">
             <li className="nav-item active"></li>
             <li className="nav-item">
-              <Link to="/"   className="nav-link" >Admin Home</Link>
+              <Link to="/"   className="nav-link" >Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/createOwner" className="nav-link" >Crear Propietario</Link>
+              <Link to="/condo/ownersInfo" className="nav-link" >Propietarios</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/allCondos" className="nav-link" >Crear Condominio</Link>
+              <Link to="/condo/allCondos" className="nav-link" >Condominios</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/createFactura" className="nav-link" >Crear Factura</Link>
+              <Link to="/condo/allCasas" className="nav-link" >Casas</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/condo/createFactura" className="nav-link" >Facturas</Link>
             </li>
             <li className="nav-item">
               <Link to="/condo/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
