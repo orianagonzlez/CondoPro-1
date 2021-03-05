@@ -52,29 +52,29 @@ function App() {
       //         <Login />
       //       </Route>
 
-      //       <Route path="/createOwner">
-      //         <CreateOwner />
-      //       </Route>
+            // <Route path="/createOwner">
+            //   <CreateOwner />
+            // </Route>
 
-      //       <Route path="/editOwner/:ownerId">
-      //         <EditOwner />
-      //       </Route>
+            // <Route path="/editOwner/:ownerId">
+            //   <EditOwner />
+            // </Route>
 
-      //       <Route path="/createCondo">
-      //         <CreateCondo />
-      //       </Route>
+            // <Route path="/createCondo">
+            //   <CreateCondo />
+            // </Route>
 
-      //       <Route path="/createFactura">
-      //         <CreateFactura />
-      //       </Route>
+            // <Route path="/createFactura">
+            //   <CreateFactura />
+            // </Route>
 
-      //       <Route path="/resumenDeudas">
-      //         <ResumenDeudas />
-      //       </Route>
+            // <Route path="/resumenDeudas">
+            //   <ResumenDeudas />
+            // </Route>
 
-      //       <Route path="/">
-      //         <OwnersInfo />
-      //       </Route>
+            // <Route path="/">
+            //   <OwnersInfo />
+            // </Route>
 
       //       <Redirect to="/" />
 

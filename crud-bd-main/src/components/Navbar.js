@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
+import { AppContext } from '../context/AppContext';
 
 export const NavBar = () => {
   
+  const {setUser, user} = useContext(AppContext);
+
   return (
   
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
          <div className="navbar-brand" >CondoPRO</div>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
@@ -17,20 +20,33 @@ export const NavBar = () => {
               <Link to="/"   className="nav-link" >Admin Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/createOwner" className="nav-link" >Crear Propietario</Link>
+              <Link to="/condo/createOwner" className="nav-link" >Crear Propietario</Link>
             </li>
             <li className="nav-item">
-              <Link to="/createCondo" className="nav-link" >Crear Condominio</Link>
+              <Link to="/condo/createCondo" className="nav-link" >Crear Condominio</Link>
             </li>
             <li className="nav-item">
-              <Link to="/createFactura" className="nav-link" >Crear Factura</Link>
+              <Link to="/condo/createFactura" className="nav-link" >Crear Factura</Link>
             </li>
             <li className="nav-item">
-              <Link to="/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
+              <Link to="/condo/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
             </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link" >Login</Link>
+
+            <li className="nav-item" onClick={ setUser({
+                isAdmin: false,
+                cedula: "",
+                id: "",
+                casaID: "",
+                condoID: "",
+                isLogged: false
+              }) } >
+                <Link to='/login'>
+                  
+                  <span>Cerrar sesión</span>
+                </Link>
             </li>
+
+
           </ul>
         </div>
       </nav>

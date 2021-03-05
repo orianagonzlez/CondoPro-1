@@ -45,7 +45,7 @@ export const LoginForm = ({buttonText}) => {
         console.log('hiciste login hay que cambiar el context y redirigir');
         setUser({
          ...user,
-         isAdmin: true
+         isLogged: true
         });
 
         
