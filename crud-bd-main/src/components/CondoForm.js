@@ -39,7 +39,7 @@ export const CondoForm = ({buttonText}) => {
         e.preventDefault();
         console.log(formValues);
 
-        const adminId = 1;
+        const adminId = 1;//aqui se pone el id del admin que esta creando el condo
         createCondo({variables: {nombre, estado, ciudad, direccion, adminId}});
         window.alert("Condominio registrado con exito");
         

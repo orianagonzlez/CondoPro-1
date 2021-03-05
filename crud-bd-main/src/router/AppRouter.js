@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import { NavBarUser } from '../components/NavbarUser';
 import { OwnersInfo } from '../components/OwnersInfo';
+import { AllCasas } from '../pages/AllCasas';
+import { CreateCasa } from '../pages/CreateCasa';
+import { CreateOwner } from '../pages/CreateOwner';
 import { DetallePago } from '../pages/DetallePago';
 import { Login } from '../pages/Login';
 import { RegisterGuest } from '../pages/RegisterGuest';
@@ -36,6 +39,18 @@ export const AppRouter = () => {
 
             <Route path="/detallePago">
               <DetallePago />
+            </Route>
+
+            <Route path="/createCasa">
+              <CreateCasa />
+            </Route>
+
+            <Route path="/createOwner">
+              <CreateOwner />
+            </Route>
+
+            <Route path="/allCasas">
+              <AllCasas />
             </Route>
 
             <Route path="/">

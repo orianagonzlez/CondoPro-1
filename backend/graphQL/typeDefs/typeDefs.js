@@ -28,8 +28,8 @@ type Casa{
     dimensiones: Int!
     estado: String!
     alicuota: Float!
-    PropId: Int!
-    CondoId: Int!
+    PropietarioId: Int!
+    CondominioId: Int!
     activo: Boolean!
 }
 
@@ -100,8 +100,8 @@ type Mutation{
     createPropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, activo: Boolean!): Propietario!
     updatePropietario(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, id: Int!): Propietario!,
     deletePropietario(id: Int!): Propietario!
-    createCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float!, PropId: Int!, CondoId:Int!, activo: Boolean!): Casa!,
-    updateCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float! PropId: Int!, id: Int!): Casa!
+    createCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float!, PropietarioId: Int!, CondominioId:Int!, activo: Boolean!): Casa!,
+    updateCasa(numero: String!, dimensiones: Int!, estado: String!,alicuota: Float! PropietarioId: Int!, id: Int!): Casa!
     deleteCasa(id: Int!): Casa!,
     createCondominio(nombre: String!, estado: String!, ciudad: String!, direccion: String!, AdminId: Int!, activo: Boolean! ): Condominio!,
     updateCondominio(nombre: String!, estado: String!, ciudad: String!, direccion: String!, id: Int! ): Condominio!

@@ -25,6 +25,8 @@ import { Login } from "./pages/Login";
 // import "bootswatch/dist/litera/bootstrap.min.css";
 import { AppProvider } from "./context/AppContext";
 import { AppRouter } from "./router/AppRouter";
+import { CreateCasa } from "./pages/CreateCasa";
+import { AllCasas } from "./pages/AllCasas";
 
 
 
@@ -57,6 +59,14 @@ function App() {
         <Route path="/allCondos">
           <AllCondos />
         </Route>
+
+        {/* <Route path="/createCasas">
+          <CreateCasa />
+        </Route>
+
+        <Route path="/allCasas">
+          <AllCasas />
+        </Route> */}
 
         <Route path="/createFactura">
           <CreateFactura />

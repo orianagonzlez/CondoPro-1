@@ -1,8 +1,8 @@
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import {gql} from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { useEffect, useState } from 'react';
 
 const createPropietario = gql `
   mutation CreatePropietario($nombre: String!, $apellido: String!, $cedula: String!, $correo: String!, $telefono: String!) {
