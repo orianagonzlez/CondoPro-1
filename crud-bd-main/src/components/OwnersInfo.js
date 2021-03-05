@@ -4,6 +4,7 @@ import { OwnerInfoRow } from './OwnerInfoRow';
 import {gql} from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { useForm } from '../hooks/useForm';
+import { useHistory } from 'react-router';
 
 const getOwners = gql`
     {
@@ -35,6 +36,7 @@ query GetOwner($id: Int!)
 export const OwnersInfo = () => {
   const [ownerId, setOwnerId] = useState(0);
   const [tableData, setTableData] = useState([]);
+  const history = useHistory();
 
   const [ formValues , handleInputChange, reset] = useForm({
     searchText: ''
@@ -77,7 +79,7 @@ export const OwnersInfo = () => {
     <Container className="mt-5">
       <h1>Lista de propietarios</h1>
       <div className="d-flex justify-content-around">
-        <Button href="/createOwner" variant="outline-primary" className="my-5">Nuevo propietario</Button>
+        <Button onClick={() => history.push('/condo/createOwner')} variant="outline-primary" className="my-5">Nuevo propietario</Button>
         <Button onClick={ handleCleaning } variant="outline-primary" className="my-5">Limpiar filtro</Button>
       
       </div>

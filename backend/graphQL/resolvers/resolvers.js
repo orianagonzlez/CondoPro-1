@@ -213,20 +213,21 @@ const resolvers = {
         },
 
         //----------------------------------Casa------------------------------------------------
-        async createCasa(root, { numero, dimensiones, estado, alicuota, PropId, CondoId, activo }, { models }) {
-            return await models.casa.create({ numero, dimensiones, estado, alicuota, PropId, CondoId, activo })
+        async createCasa(root, { nombre, numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo }, { models }) {
+            return await models.casa.create({ nombre, numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo })
         },
 
-        async updateCasa(root, { numero, dimensiones, estado, alicuota, PropId, id }, { models }) {
+        async updateCasa(root, { nombre, numero, dimensiones, estado, alicuota, PropietarioId, id }, { models }) {
 
             let casa = await models.casa.findByPk(id);
 
             let data = {
+                nombre: nombre,
                 numero: numero,
                 dimensiones: dimensiones,
                 estado: estado,
                 alicuota: alicuota,
-                PropId: PropId
+                PropietarioId: PropietarioId
             };
 
             return casa.update(data)
@@ -249,7 +250,7 @@ const resolvers = {
 
         async updateCondominio(root, { nombre, estado, ciudad, direccion, id }, { models }) {
 
-            let casa = await models.condominio.findByPk(id);
+            let condominio = await models.condominio.findByPk(id);
 
             let data = {
                 nombre: nombre,
@@ -264,9 +265,9 @@ const resolvers = {
 
         async deleteCondominio(root, { id }, { models }) {
 
-            let casa = await models.condominio.findByPk(id);
+            let condominio = await models.condominio.findByPk(id);
 
-            return casa.update({ activo: false })
+            return condominio.update({ activo: false })
 
         },
 

@@ -33,7 +33,7 @@ export const OwnerInfoRow = ({ owner }) => {
             <td>{ telefono }</td>
             <td>{ correo }</td>
             <td>
-              <NavLink to={`/editOwner/${id}`}>  
+              <NavLink to={`/condo/editOwner/${id}`}>  
                 <i className="far fa-edit"></i>
               </NavLink>
             </td>
