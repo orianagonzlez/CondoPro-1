@@ -48,6 +48,7 @@ export const LoginForm = ({buttonText}) => {
         setUser({
          ...user,
          isLogged: true,
+         //isAdmin: true poner cuando sea admin
          cedula: userInfo.cedula
         });
 

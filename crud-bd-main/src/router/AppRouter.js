@@ -23,6 +23,7 @@ import { Login } from '../pages/Login';
 import { RegisterGuest } from '../pages/RegisterGuest';
 import { ResumenDeudas } from '../pages/ResumenDeudas';
 import { UserHome } from '../pages/UserHome';
+import { AllCondos } from '../pages/AllCondos';
 
 
 
@@ -45,7 +46,7 @@ export const AppRouter = () => {
     <div>
      <Router>
       {/* LA RUTAS ADMIN */}
-      { ( user.isLogged ) && (
+      { ( user.isAdmin ) && (
         <div>
                  <NavBar/>
                  <Switch>
@@ -53,6 +54,7 @@ export const AppRouter = () => {
                           <Route exact path="/condo/createOwner" component={ CreateOwner } />
                           <Route exact path="/condo/editOwner/:ownerId" component={ EditOwner } />
                           <Route exact path="/condo/createCondo" component={ CreateCondo } />
+                          <Route exact path="/condo/allCondos" component={ AllCondos } />
                           <Route exact path="/condo/createFactura" component={ CreateFactura } />
                           <Route exact path="/condo/resumenDeudas" component={ ResumenDeudas } />
                           <Route exact path="/condo/ownersInfo" component={ OwnersInfo } />
@@ -65,7 +67,7 @@ export const AppRouter = () => {
        ) }
 
         {/* LAS RUTAS DEL PROPIETARIO */}
-       { ( user.isAdmin  ) &&
+       { ( !user.isAdmin && user.isLogged ) &&
          (
         <div>
                  <NavBarUser/>
