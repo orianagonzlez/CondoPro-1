@@ -14,13 +14,7 @@ export const AppContext = createContext({
 export const AppProvider =  ({ children }) => {
 
 
-  const [user, setUser ] = useState()
-
-  useEffect(() => {
-   if(localStorage.getItem('user')){
-      setUser(JSON.parse(localStorage.getItem('user')))
-    }else{
-      setUser({
+  const [user, setUser] = useState({
     isAdmin: false,
     cedula: "",
     id: "",
@@ -28,15 +22,23 @@ export const AppProvider =  ({ children }) => {
     condoID: "",
     isLogged: false
     })
+
+
+  useEffect(() => {
+
+    console.log('ME EJECUTO ')
+   if(localStorage.getItem('user')){
+      setUser(JSON.parse(localStorage.getItem('user')))
     }
 }, [])
 
+
+
   useEffect(() => {
-    if(user){
+      console.log('ME EJECUTO 2 ')
       localStorage.setItem('user', JSON.stringify(user))
       let myUser = localStorage.getItem('user', JSON.stringify(user));
       console.log(myUser, "ayudame pls")
-    }
 
   }, [user])
 

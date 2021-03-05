@@ -14,6 +14,8 @@ import { AppContext } from '../context/AppContext';
 import { adminLogin } from '../pages/adminLogin';
 import { CreateCondo } from '../pages/CreateCondo';
 import { CreateFactura } from '../pages/CreateFactura';
+import { AllCasas } from '../pages/AllCasas';
+import { CreateCasa } from '../pages/CreateCasa';
 import { CreateOwner } from '../pages/CreateOwner';
 import { DetallePago } from '../pages/DetallePago';
 import { EditOwner } from '../pages/EditOwner';
@@ -32,6 +34,9 @@ export const AppRouter = () => {
     return <div>chamo espera</div>
   }
 
+  // esto ya funcionaria pero como he ehcho el login del admin muevan estas variables para entrar a la parte que desean
+
+
   console.log(user)
 
   return (
@@ -39,8 +44,8 @@ export const AppRouter = () => {
 
     <div>
      <Router>
-
-      { ( user.isLogged && user.isAdmin  ) && (
+      {/* LA RUTAS ADMIN */}
+      { ( user.isAdmin  ) && (
         <div>
                  <NavBar/>
                  <Switch>
@@ -51,14 +56,16 @@ export const AppRouter = () => {
                           <Route exact path="/condo/createFactura" component={ CreateFactura } />
                           <Route exact path="/condo/resumenDeudas" component={ ResumenDeudas } />
                           <Route exact path="/condo/ownersInfo" component={ OwnersInfo } />
+                          <Route exact path="/condo/createCasa" component={ CreateCasa } />
+                          <Route exact path="/condo/allCasas" component={ AllCasas } />
 
                       <Redirect to="/condo/ownersInfo" />
                   </Switch>
         </div>
        ) }
 
-
-       { ( user.isLogged && !user.isAdmin ) &&
+        {/* LAS RUTAS DEL PROPIETARIO */}
+       { ( user.isLogged  ) &&
          (
         <div>
                  <NavBarUser/>
@@ -67,8 +74,6 @@ export const AppRouter = () => {
                           <Route exact path="/condo/userHome" component={ UserHome } />
                           <Route exact path="/condo/detallePago" component={ DetallePago } />
                           <Route exact path="/condo/registerGuest" component={ RegisterGuest } />
-                          <Route exact path="/condo/registerGuest" component={ RegisterGuest } />
-
 
                       <Redirect to="/condo/userHome" />
                   </Switch>
@@ -76,7 +81,7 @@ export const AppRouter = () => {
 
        )}  
 
-
+      {/* LAS RUTAS DEL PROPIETARIO */}
       {( !user.isLogged ) &&
          (
         <div>
@@ -97,36 +102,6 @@ export const AppRouter = () => {
 
 
 
-
-
-
-
-
-
-
-    {/* <Router>
-      <div>
-        <Switch>
-
-          <PrivateRoute 
-              path="/condo"
-              component={ AdminRouter }
-              isAuthenticated={ true }         
-          />
-
-          <PublicRoute
-              path="/login"
-              component={ LoginRouter }
-              isAuthenticated={ false }
-          />
-
-
-          <Redirect to="/login" />
-
-
-        </Switch>
-      </div>
-    </Router> */}
 
     </>
   )

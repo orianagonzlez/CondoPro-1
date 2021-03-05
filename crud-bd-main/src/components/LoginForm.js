@@ -45,14 +45,10 @@ export const LoginForm = ({buttonText}) => {
       if( data.getPropietarioByCI ){
         let userInfo = data.getPropietarioByCI
         console.log('hiciste login hay que cambiar el context y redirigir', data.getPropietarioByCI);
-        
         setUser({
          ...user,
-         cedula: userInfo.cedula,
-         id: userInfo.id,
-
-         
-         isLogged: true
+         isLogged: true,
+         cedula: userInfo.cedula
         });
 
         
