@@ -35,6 +35,7 @@ type Casa{
 type Query{
     getPropietarios: [Propietario],
     getPropietario(id: Int!): Propietario,
+    getPropietarioByCI(cedula: String!): Propietario,
     getCasas: [Casa],
     getCasa(id: Int!): Casa,
     getCondominio(id: Int!): Condominio,

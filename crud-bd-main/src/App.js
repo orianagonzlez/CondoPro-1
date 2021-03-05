@@ -1,6 +1,6 @@
 import { NavBar } from "./components/Navbar";
 import { NavBarUser } from "./components/NavbarUser";
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,88 +20,104 @@ import { DetallePago } from "./pages/DetallePago";
 import { Login } from "./pages/Login";
 
 import "bootswatch/dist/litera/bootstrap.min.css";
+import { AppProvider } from "./context/AppContext";
+import { AppRouter } from "./router/AppRouter";
+
+
 
 function App() {
 
-  const admin = true;
+  
 
-  if (admin) {
-    return (
-      <div className="App">
-        <Router>
-          <NavBar />
-          <Switch>
+  return (
+    <div>
+      <AppProvider>
+        <AppRouter/>
+      </AppProvider>
+    </div>
+  )
 
-            <Route path="/login">
-              <Login />
-            </Route>
 
-            <Route path="/createOwner">
-              <CreateOwner />
-            </Route>
 
-            <Route path="/editOwner/:ownerId">
-              <EditOwner />
-            </Route>
+  // const admin = true;
 
-            <Route path="/createCondo">
-              <CreateCondo />
-            </Route>
+  // if (admin) {
+  //   return (
+      // <div className="App">
+      //   <Router>
+      //     <NavBar />
+      //     <Switch>
 
-            <Route path="/createFactura">
-              <CreateFactura />
-            </Route>
+      //       <Route path="/login">
+      //         <Login />
+      //       </Route>
 
-            <Route path="/resumenDeudas">
-              <ResumenDeudas />
-            </Route>
+      //       <Route path="/createOwner">
+      //         <CreateOwner />
+      //       </Route>
 
-            <Route path="/">
-              <OwnersInfo />
-            </Route>
+      //       <Route path="/editOwner/:ownerId">
+      //         <EditOwner />
+      //       </Route>
 
-            <Redirect to="/" />
+      //       <Route path="/createCondo">
+      //         <CreateCondo />
+      //       </Route>
 
-          </Switch>
-        </Router>
-      </div>
+      //       <Route path="/createFactura">
+      //         <CreateFactura />
+      //       </Route>
 
-    )
-  } else {
-    return (
+      //       <Route path="/resumenDeudas">
+      //         <ResumenDeudas />
+      //       </Route>
 
-      <div className="App">
-        <Router>
-          <NavBarUser />
+      //       <Route path="/">
+      //         <OwnersInfo />
+      //       </Route>
 
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
+      //       <Redirect to="/" />
 
-            <Route path="/registerGuest">
-              <RegisterGuest />
-            </Route>
+      //     </Switch>
+      //   </Router>
+      // </div>
 
-            <Route path="/userHome">
-              <UserHome />
-            </Route>
+  //   )
+  // } else {
+  //   return (
 
-            <Route path="/detallePago">
-              <DetallePago />
-            </Route>
+  //     <div className="App">
+  //       <Router>
+  //         <NavBarUser />
 
-            <Route path="/">
-              <OwnersInfo />
-            </Route>
+  //         <Switch>
+  //           <Route path="/login">
+  //             <Login />
+  //           </Route>
 
-            <Redirect to="/" />
+  //           <Route path="/registerGuest">
+  //             <RegisterGuest />
+  //           </Route>
 
-          </Switch>
-        </Router>
-      </div>
-    )
-  };
+  //           <Route path="/userHome">
+  //             <UserHome />
+  //           </Route>
+
+  //           <Route path="/detallePago">
+  //             <DetallePago />
+  //           </Route>
+
+  //           <Route path="/">
+  //             <OwnersInfo />
+  //           </Route>
+
+  //           <Redirect to="/" />
+
+  //         </Switch>
+  //       </Router>
+  //     </div>
+  //   )
+  // };
 }
 
 export default App;

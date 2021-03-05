@@ -10,10 +10,20 @@ const resolvers = {
                 }
             })
         },
+        
         async getPropietario(root, args, { models }){
             return await models.propietario.findOne({
                 where: {
                   id: args.id,
+                  activo: true, 
+                },
+              })
+        },
+
+        async getPropietarioByCI(root, args, { models }){
+            return await models.propietario.findOne({
+                where: {
+                  cedula: args.cedula,
                   activo: true, 
                 },
               })
