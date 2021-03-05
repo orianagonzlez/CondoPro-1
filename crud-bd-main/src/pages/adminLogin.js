@@ -1,9 +1,13 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
+import { AdminLoginForm } from '../components/AdminLoginForm'
 
 export const adminLogin = () => {
+  
   return (
-    <div>
-      <h1>login del admin</h1>
-    </div>
+    <Container className=" loginFormContainer my-5">
+      <h1>Bienvenido administrador!</h1>
+      <AdminLoginForm/>
+    </Container>
   )
 }
