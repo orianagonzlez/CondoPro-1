@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         fecha:{
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATEONLY, //TIPO DE DATO DATEONLY NO EXISTE EN GQL. DA ERRORES EN EL TYPEDEFS.
             allowNull: false
         },
         tipo: {

@@ -3,30 +3,30 @@ const resolvers = {
     Query: {
 
         //----------------------------------Propietario------------------------------------------------
-        async getPropietarios(root, args, { models }){
+        async getPropietarios(root, args, { models }) {
             return await models.propietario.findAll({
                 where: {
                     activo: true
                 }
             })
         },
-        
-        async getPropietario(root, args, { models }){
+
+        async getPropietario(root, args, { models }) {
             return await models.propietario.findOne({
                 where: {
-                  id: args.id,
-                  activo: true, 
+                    id: args.id,
+                    activo: true,
                 },
-              })
+            })
         },
 
-        async getPropietarioByCI(root, args, { models }){
+        async getPropietarioByCI(root, args, { models }) {
             return await models.propietario.findOne({
                 where: {
-                  cedula: args.cedula,
-                  activo: true, 
+                    cedula: args.cedula,
+                    activo: true,
                 },
-              })
+            })
         },
 
         //----------------------------------Casa------------------------------------------------
@@ -41,7 +41,7 @@ const resolvers = {
             return await models.casa.findOne({
                 where: {
                     id: args.id,
-                    activo:true,
+                    activo: true,
                 }
             })
         },
@@ -59,78 +59,195 @@ const resolvers = {
             return await models.condominio.findOne({
                 where: {
                     id: args.id,
-                    activo:true,
+                    activo: true,
                 }
+            })
+        },
+
+        //----------------------------------Admin------------------------------------------------
+        async getAdmins(root, args, { models }) {
+            return await models.admin.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getAdmin(root, args, { models }) {
+            return await models.admin.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getAdminByCI(root, args, { models }) {
+            return await models.admin.findOne({
+                where: {
+                    cedula: args.cedula,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------Visitante------------------------------------------------
+        async getVisitantes(root, args, { models }) {
+            return await models.visitante.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getVisitante(root, args, { models }) {
+            return await models.visitante.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getVisitanteByCI(root, args, { models }) {
+            return await models.visitante.findOne({
+                where: {
+                    cedula: args.cedula,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------Instrumento De Pago------------------------------------------------
+        async getInstrumentosDePago(root, args, { models }) {
+            return await models.instrumentoDePago.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getInstrumentoDePago(root, args, { models }) {
+            return await models.instrumentoDePago.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getInstrumentoDePagoByNumero(root, args, { models }) {
+            return await models.instrumentoDePago.findOne({
+                where: {
+                    numero: args.numero,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------Pago------------------------------------------------
+        async getPago(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getPago(root, args, { models }) {
+            return await models.pega.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getPagoByCondoId(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    CondoId: args.CondoId,
+                    activo: true,
+                },
+            })
+        },
+
+        async getPagoByCasaId(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    CasaId: args.CasaId,
+                    activo: true,
+                },
             })
         },
     },
 
     Mutation: {
 
-         //----------------------------------Propietario------------------------------------------------
-        async createPropietario(root, { nombre, apellido, cedula, correo, telefono, activo }, { models }){
-            return await models.propietario.create( {nombre, apellido, cedula, correo, telefono, activo} )
+        //----------------------------------Propietario------------------------------------------------
+        async createPropietario(root, { nombre, apellido, cedula, correo, telefono, activo }, { models }) {
+            return await models.propietario.create({ nombre, apellido, cedula, correo, telefono, activo })
         },
 
-        async updatePropietario(root, { nombre, apellido, cedula, correo, telefono, id }, { models }){
-           
-          let propietario = await models.propietario.findByPk(id);
-          
-          let data = {
-            nombre: nombre,
-            apellido: apellido,
-            cedula: cedula,
-            correo: correo,
-            telefono: telefono,
-          };
+        async updatePropietario(root, { nombre, apellido, cedula, correo, telefono, id }, { models }) {
 
-          return propietario.update(data)
-        },
-        
-        async deletePropietario(root, { id }, { models }){
-          
             let propietario = await models.propietario.findByPk(id);
-            
-            return propietario.update( {activo: false} )
-          
-          },
+
+            let data = {
+                nombre: nombre,
+                apellido: apellido,
+                cedula: cedula,
+                correo: correo,
+                telefono: telefono,
+            };
+
+            return propietario.update(data)
+        },
+
+        async deletePropietario(root, { id }, { models }) {
+
+            let propietario = await models.propietario.findByPk(id);
+
+            return propietario.update({ activo: false })
+
+        },
 
         //----------------------------------Casa------------------------------------------------
-        async createCasa(root, { numero, dimensiones, estado, alicuota, propID, condoID, activo }, { models }) {
-            return await models.casa.create({ numero, dimensiones, estado, alicuota, propID, condoID, activo })
+        async createCasa(root, { numero, dimensiones, estado, alicuota, PropId, CondoId, activo }, { models }) {
+            return await models.casa.create({ numero, dimensiones, estado, alicuota, PropId, CondoId, activo })
         },
 
-        async updateCasa(root, { numero, dimensiones, estado, alicuota, propID, id }, { models }){
+        async updateCasa(root, { numero, dimensiones, estado, alicuota, PropId, id }, { models }) {
 
             let casa = await models.casa.findByPk(id);
 
             let data = {
                 numero: numero,
                 dimensiones: dimensiones,
-                estado:estado,
+                estado: estado,
                 alicuota: alicuota,
-                propID: propID
+                PropId: PropId
             };
 
             return casa.update(data)
 
         },
 
-        async deleteCasa(root, { id }, { models }){
-          
+        async deleteCasa(root, { id }, { models }) {
+
             let casa = await models.casa.findByPk(id);
-            
-            return casa.update( {activo: false} )
-          
-          },
-        
+
+            return casa.update({ activo: false })
+
+        },
+
         //----------------------------------Condominio------------------------------------------------
 
         async createCondominio(root, { nombre, estado, ciudad, direccion, AdminId, activo }, { models }) {
             return await models.condominio.create({ nombre, estado, ciudad, direccion, AdminId, activo })
         },
 
-        async updateCondominio(root, { nombre, estado, ciudad, direccion, id }, { models }){
+        async updateCondominio(root, { nombre, estado, ciudad, direccion, id }, { models }) {
 
             let casa = await models.condominio.findByPk(id);
 
@@ -145,17 +262,74 @@ const resolvers = {
 
         },
 
-        async deleteCondominio(root, { id }, { models }){
-          
+        async deleteCondominio(root, { id }, { models }) {
+
             let casa = await models.condominio.findByPk(id);
-            
-            return casa.update( {activo: false} )
-          
-          },
+
+            return casa.update({ activo: false })
+
+        },
+
+
+        //----------------------------------Admins------------------------------------------------
+        async createAdmin(root, { nombre, apellido, cedula, correo, telefono, activo }, { models }) {
+            return await models.admin.create({ nombre, apellido, cedula, correo, telefono, activo })
+        },
+
+        async updateAdmin(root, { nombre, apellido, cedula, correo, telefono, id }, { models }) {
+
+            let admin = await models.admin.findByPk(id);
+
+            let data = {
+                nombre: nombre,
+                apellido: apellido,
+                cedula: cedula,
+                correo: correo,
+                telefono: telefono,
+            };
+
+            return admin.update(data)
+
+        },
+
+        async deleteAdmin(root, { id }, { models }) {
+
+            let admin = await models.admin.findByPk(id);
+
+            return admin.update({ activo: false })
+
+        },
+
+        //----------------------------------Visitante------------------------------------------------
+        async createVisitante(root, { nombre, apellido, cedula, fecha, CasaId, activo }, { models }) {
+            return await models.admin.create({ nombre, apellido, cedula, fecha, CasaId, activo })
+        },
+
+        async updateVisitante(root, { nombre, apellido, cedula, fecha, CasaId, id }, { models }) {
+
+            let admin = await models.admin.findByPk(id);
+
+            let data = {
+                nombre: nombre,
+                apellido: apellido,
+                cedula: cedula,
+                fecha: fecha,
+                CasaId: CasaId,
+            };
+
+            return admin.update(data)
+
+        },
+
+        async deleteVisitante(root, { id }, { models }) {
+
+            let visitante = await models.visitante.findByPk(id);
+
+            return visitante.update({ activo: false })
+
+        },
 
     }
-
-     
 
 
 };

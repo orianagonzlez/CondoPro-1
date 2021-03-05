@@ -22,14 +22,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.FLOAT,
             allowNull: false
         },
-        PropID:{
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        CondoID:{
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         activo: {
             type: DataTypes.BOOLEAN,
             allowNull: false
