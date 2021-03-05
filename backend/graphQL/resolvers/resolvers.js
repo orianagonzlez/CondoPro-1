@@ -10,10 +10,20 @@ const resolvers = {
                 }
             })
         },
+        
         async getPropietario(root, args, { models }){
             return await models.propietario.findOne({
                 where: {
                   id: args.id,
+                  activo: true, 
+                },
+              })
+        },
+
+        async getPropietarioByCI(root, args, { models }){
+            return await models.propietario.findOne({
+                where: {
+                  cedula: args.cedula,
                   activo: true, 
                 },
               })
@@ -86,11 +96,19 @@ const resolvers = {
           },
 
         //----------------------------------Casa------------------------------------------------
+<<<<<<< HEAD
         async createCasa(root, { numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo }, { models }) {
             return await models.casa.create({ numero, dimensiones, estado, alicuota, PropietarioId, CondominioId, activo })
         },
 
         async updateCasa(root, { numero, dimensiones, estado, alicuota, PropietarioId, id }, { models }){
+=======
+        async createCasa(root, { numero, dimensiones, estado, alicuota, propID, condoID, activo }, { models }) {
+            return await models.casa.create({ numero, dimensiones, estado, alicuota, propID, condoID, activo })
+        },
+
+        async updateCasa(root, { numero, dimensiones, estado, alicuota, propID, id }, { models }){
+>>>>>>> luis
 
             let casa = await models.casa.findByPk(id);
 
@@ -99,7 +117,11 @@ const resolvers = {
                 dimensiones: dimensiones,
                 estado:estado,
                 alicuota: alicuota,
+<<<<<<< HEAD
                 propietarioId: PropietarioId
+=======
+                propID: propID
+>>>>>>> luis
             };
 
             return casa.update(data)

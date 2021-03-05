@@ -1,5 +1,6 @@
 import { NavBar } from "./components/Navbar";
-import React from "react";
+import { NavBarUser } from "./components/NavbarUser";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,13 +17,23 @@ import { CreateFactura } from "./pages/CreateFactura";
 import { ResumenDeudas } from "./pages/ResumenDeudas";
 import { UserHome } from "./pages/UserHome";
 import { DetallePago } from "./pages/DetallePago";
+<<<<<<< HEAD
 import { AllCondos } from "./pages/AllCondos";
+=======
+import { Login } from "./pages/Login";
+>>>>>>> luis
+
+import "bootswatch/dist/litera/bootstrap.min.css";
+import { AppProvider } from "./context/AppContext";
+import { AppRouter } from "./router/AppRouter";
 
 
-function App() {  
+
+function App() {
+
   
-  return (
 
+<<<<<<< HEAD
     <div className="App">
       <Router>
         <NavBar/>
@@ -72,9 +83,97 @@ function App() {
 
           </Switch>
         </Router>
+=======
+  return (
+    <div>
+      <AppProvider>
+        <AppRouter/>
+      </AppProvider>
+>>>>>>> luis
     </div>
+  )
 
-  );
+
+
+  // const admin = true;
+
+  // if (admin) {
+  //   return (
+      // <div className="App">
+      //   <Router>
+      //     <NavBar />
+      //     <Switch>
+
+      //       <Route path="/login">
+      //         <Login />
+      //       </Route>
+
+      //       <Route path="/createOwner">
+      //         <CreateOwner />
+      //       </Route>
+
+      //       <Route path="/editOwner/:ownerId">
+      //         <EditOwner />
+      //       </Route>
+
+      //       <Route path="/createCondo">
+      //         <CreateCondo />
+      //       </Route>
+
+      //       <Route path="/createFactura">
+      //         <CreateFactura />
+      //       </Route>
+
+      //       <Route path="/resumenDeudas">
+      //         <ResumenDeudas />
+      //       </Route>
+
+      //       <Route path="/">
+      //         <OwnersInfo />
+      //       </Route>
+
+      //       <Redirect to="/" />
+
+      //     </Switch>
+      //   </Router>
+      // </div>
+
+  //   )
+  // } else {
+  //   return (
+
+  //     <div className="App">
+  //       <Router>
+  //         <NavBarUser />
+
+  //         <Switch>
+  //           <Route path="/login">
+  //             <Login />
+  //           </Route>
+
+  //           <Route path="/registerGuest">
+  //             <RegisterGuest />
+  //           </Route>
+
+  //           <Route path="/userHome">
+  //             <UserHome />
+  //           </Route>
+
+  //           <Route path="/detallePago">
+  //             <DetallePago />
+  //           </Route>
+
+  //           <Route path="/">
+  //             <OwnersInfo />
+  //           </Route>
+
+  //           <Redirect to="/" />
+
+  //         </Switch>
+  //       </Router>
+  //     </div>
+  //   )
+  // };
 }
 
 export default App;

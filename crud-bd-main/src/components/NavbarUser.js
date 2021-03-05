@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBarUser = () => {
   
   return (
   
@@ -14,19 +14,13 @@ export const NavBar = () => {
           <ul className="navbar-nav">
             <li className="nav-item active"></li>
             <li className="nav-item">
-              <Link to="/"   className="nav-link" >Admin Home</Link>
+              <Link to="/userHome" className="nav-link" >Home Usuario</Link>
             </li>
             <li className="nav-item">
-              <Link to="/createOwner" className="nav-link" >Crear Propietario</Link>
+              <Link to="/detallePago" className="nav-link" >Detalle y Pago de Facturas</Link>
             </li>
             <li className="nav-item">
-              <Link to="/allCondos" className="nav-link" >Crear Condominio</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/createFactura" className="nav-link" >Crear Factura</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
+              <Link to="/registerGuest" className="nav-link" >Registrar Invitados</Link>
             </li>
             <li className="nav-item">
               <Link to="/login" className="nav-link" >Login</Link>
