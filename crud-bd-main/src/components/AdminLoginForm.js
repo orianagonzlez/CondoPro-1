@@ -33,14 +33,14 @@ export const AdminLoginForm = () => {
 
     const { CI }= formValues;
 
-    const [getPropietario, { loading, error, data } ] = useLazyQuery( getAdminByCI, {
+    const [getAdmin, { loading, error, data } ] = useLazyQuery( getAdminByCI, {
      variables: { CI: CI }
    });
 
    useEffect(() => {
-   
+  
     if( data && !loading && loadingLogin){
-      
+     
       if( data.getAdminByCI ){
         let userInfo = data.getAdminByCI
         console.log('hiciste login hay que cambiar el context y redirigir', data.getAdminByCI);
@@ -50,19 +50,18 @@ export const AdminLoginForm = () => {
          isAdmin: true,  //poner cuando sea admin
          cedula: userInfo.cedula
         });
-
         
-      }else if( data.getPropietarioByCI === null){
+      }else if( data.getPropietarioByCI == null){
         console.log( 'Credenciales invalidas ');
         setLoadingLogin(false);
       }
     }
 
-   }, [data, loading, loadingLogin])
+   }, [data, loading, loadingLogin, user])
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      getPropietario();
+      getAdmin();
       setLoadingLogin(true);
     }
 
@@ -79,7 +78,7 @@ export const AdminLoginForm = () => {
               </Form.Group>
     
     
-              <Button variant="dark" type="submit">
+              <Button variant="dark" type="submit" >
                Iniciar sesión
               </Button>
             </Form>

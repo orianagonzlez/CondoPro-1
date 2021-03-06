@@ -64,6 +64,16 @@ const resolvers = {
             })
         },
 
+        
+        async getCondominioByAdminId(root, args, { models }) {
+            return await models.condominio.findOne({
+                where: {
+                    AdminId: args.adminId,
+                    activo: true,
+                }
+            })
+        },
+
         //----------------------------------Admin------------------------------------------------
         async getAdmins(root, args, { models }) {
             return await models.admin.findAll({

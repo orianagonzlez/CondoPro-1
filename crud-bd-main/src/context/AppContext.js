@@ -26,7 +26,7 @@ export const AppProvider =  ({ children }) => {
 
   useEffect(() => {
 
-    console.log('ME EJECUTO ')
+    //console.log('ME EJECUTO ')
    if(localStorage.getItem('user')){
       setUser(JSON.parse(localStorage.getItem('user')))
     }
@@ -35,10 +35,10 @@ export const AppProvider =  ({ children }) => {
 
 
   useEffect(() => {
-      console.log('ME EJECUTO 2 ')
+      //console.log('ME EJECUTO 2 ')
       localStorage.setItem('user', JSON.stringify(user))
       let myUser = localStorage.getItem('user', JSON.stringify(user));
-      console.log(myUser, "ayudame pls")
+      //console.log(myUser, "ayudame pls")
 
   }, [user])
 
