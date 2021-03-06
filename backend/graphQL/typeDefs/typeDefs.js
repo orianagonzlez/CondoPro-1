@@ -63,14 +63,38 @@ type InstrumentoDePago{
     activo: Boolean!
 }
 
+type Pago{
+    id: Int!,
+    FacturaId: Int!,
+    InstrumentoDePagoId: String!,
+    activo: Boolean!
+}
+
 type Gasto{
     id: Int!,
     concepto: String!,
     tipo: String!,
     monto: Int!,
     CondominioId: Int!,
-    CasaId: Int,
+    CasaId: Int!,
     activo: Boolean!
+}
+
+type Factura{
+    id: Int!,
+    numero: Int!,
+    estado: String!,
+    fechaEmision: String!,
+    fechaVenc: String!,
+    saldo: Float!,
+    CasaId: Int!,
+    activo: Boolean!
+}
+
+type GastoDeFactura{
+    id: Int!,
+    GastoId: Int!,
+    FacturaId: Int!
 }
 
 type Query{
@@ -93,8 +117,20 @@ type Query{
     getInstrumentoDePagoByNumero(numero: Int!): InstrumentoDePago,
     getGastos: [Gasto],
     getGasto(id: Int!): Gasto,
-    getGastosByCondoId(condoId: Int!): [Gasto],
-    getGastosByCasaId(id: Int!): [Gasto],
+    getGastosByCondoId(CondoId: Int!): [Gasto],
+    getGastosByCasaId(CasaId: Int!): [Gasto],
+    getFacturas: [Factura],
+    getFactura(id: Int!): Factura,
+    getFacturasByNumero(numero: Int!): [Factura],
+    getFacturasByCasaId(CasaId: Int!): [Factura],
+    getPagos: [Pago],
+    getPago(id: Int!): Pago,
+    getPagosByFactura(FacturaId: Int!): [Pago],
+    getPagosByInstrumentoDePago(InstrumentoDePagoId: Int!): [Pago],
+    getGastosDeFactura: [GastoDeFactura],
+    getGastoDeFactura(id: Int!): GastoDeFactura,
+    getGastosDeFacturaByGasto(GastoId: Int!): [GastoDeFactura],
+    getGastosDeFacturaByFactura(FacturaId: Int!): [GastoDeFactura],
 
 }
 
@@ -120,6 +156,15 @@ type Mutation{
     createGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, activo: Boolean!): Gasto!
     updateGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, id: Int!): Gasto!,
     deleteGasto(id: Int!): Gasto!
+    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, activo: Boolean!): Factura!
+    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, id: Int!): Factura!,
+    deleteFactura(id: Int!): Factura!
+    createPago(FacturaId: Int!, InstrumentoDePagoId: Int!): Pago!
+    updatePago(FacturaId: Int!, InstrumentoDePagoId: Int!, id: Int!): Pago!,
+    deletePago(id: Int!): Pago!
+    createGastoDeFactura(GastoId: Int!, FacturaId: Int!): GastoDeFactura!
+    updateGastoDeFactura(GastoId: Int!, FacturaId: Int!, id: Int!): GastoDeFactura!,
+    deleteGastoDeFactura(id: Int!): GastoDeFactura!
 }
 `
 module.exports = typeDefs;

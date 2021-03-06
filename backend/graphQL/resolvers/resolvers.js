@@ -65,7 +65,7 @@ const resolvers = {
             })
         },
 
-        
+
         async getCondominioByAdminId(root, args, { models }) {
             return await models.condominio.findOne({
                 where: {
@@ -187,6 +187,114 @@ const resolvers = {
             return await models.gasto.findAll({
                 where: {
                     CasaId: args.casaId,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------Factura------------------------------------------------
+        async getFacturas(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getFactura(root, args, { models }) {
+            return await models.factura.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getFacturasByNumero(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    numero: args.numero,
+                    activo: true,
+                },
+            })
+        },
+
+        async getFacturasByCasaId(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    CasaId: args.CasaId,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------Pago------------------------------------------------
+        async getPagos(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getPago(root, args, { models }) {
+            return await models.pago.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getPagosByFactura(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    FacturaId: args.FacturaId,
+                    activo: true,
+                },
+            })
+        },
+
+        async getPagosByInstrumentoDePago(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    InstrumentoDePagoId: args.InstrumentoDePagoId,
+                    activo: true,
+                },
+            })
+        },
+
+        //----------------------------------GastoDeFactura------------------------------------------------
+        async getGastosDeFactura(root, args, { models }) {
+            return await models.gastoDeFactura.findAll({
+                where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getGastoDeFactura(root, args, { models }) {
+            return await models.gastoDeFactura.findOne({
+                where: {
+                    id: args.id,
+                    activo: true,
+                },
+            })
+        },
+
+        async getGastosDeFacturaByGasto(root, args, { models }) {
+            return await models.gastoDeFactura.findAll({
+                where: {
+                    GastoId: args.GastoId,
+                    activo: true,
+                },
+            })
+        },
+
+        async getGastosDeFacturaByFactura(root, args, { models }) {
+            return await models.gastoDeFactura.findAll({
+                where: {
+                    FacturaId: args.FacturaId,
                     activo: true,
                 },
             })
@@ -314,12 +422,12 @@ const resolvers = {
 
         //----------------------------------Visitante------------------------------------------------
         async createVisitante(root, { nombre, apellido, cedula, fecha, CasaId, activo }, { models }) {
-            return await models.admin.create({ nombre, apellido, cedula, fecha, CasaId, activo })
+            return await models.visitante.create({ nombre, apellido, cedula, fecha, CasaId, activo })
         },
 
         async updateVisitante(root, { nombre, apellido, cedula, fecha, CasaId, id }, { models }) {
 
-            let admin = await models.admin.findByPk(id);
+            let visitante = await models.visitante.findByPk(id);
 
             let data = {
                 nombre: nombre,
@@ -329,7 +437,7 @@ const resolvers = {
                 CasaId: CasaId,
             };
 
-            return admin.update(data)
+            return visitante.update(data)
 
         },
 
@@ -340,9 +448,144 @@ const resolvers = {
             return visitante.update({ activo: false })
 
         },
+
         //----------------------------------Gasto------------------------------------------------
         async createGasto(root, { concepto, tipo, monto, CondominioId, CasaId, activo }, { models }) {
-            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, activo })
+            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, CasaId, activo })
+        },
+
+        async updateGasto(root, { concepto, tipo, monto, CondominioId, CasaId, id }, { models }) {
+
+            let gasto = await models.gasto.findByPk(id);
+
+            let data = {
+                concepto: concepto,
+                tipo: tipo,
+                monto: monto,
+                CondominioId: CondominioId,
+                CasaId: CasaId,
+            };
+
+            return gasto.update(data)
+
+        },
+
+        async deleteGasto(root, { id }, { models }) {
+
+            let gasto = await models.gasto.findByPk(id);
+
+            return gasto.update({ activo: false })
+
+        },
+
+        //----------------------------------Factura------------------------------------------------
+        async createFactura(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo }, { models }) {
+            return await models.factura.create({ numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo })
+        },
+
+        async updateFactura(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, id }, { models }) {
+
+            let factura = await models.factura.findByPk(id);
+
+            let data = {
+                numero: numero,
+                estado: estado,
+                fechaEmision: fechaEmision,
+                fechaVenc: fechaVenc,
+                saldo: saldo,
+                CasaId: CasaId,
+            };
+
+            return factura.update(data)
+
+        },
+
+        async deleteFactura(root, { id }, { models }) {
+
+            let factura = await models.factura.findByPk(id);
+
+            return factura.update({ activo: false })
+
+        },
+
+        //----------------------------------Intrumento De Pago------------------------------------------------
+        async createInstrumentoDePago(root, { numero, fecha, tipo, monto, activo }, { models }) {
+            return await models.instrumentoDePago.create({ numero, fecha, tipo, monto, activo })
+        },
+
+        async updateInstrumentoDePago(root, { numero, fecha, tipo, monto, id }, { models }) {
+
+            let instrumentoDePago = await models.instrumentoDePago.findByPk(id);
+
+            let data = {
+                numero: numero,
+                fecha: fecha,
+                tipo: tipo,
+                monto: monto
+            };
+
+            return instrumentoDePago.update(data)
+
+        },
+
+        async deleteInstrumentoDePago(root, { id }, { models }) {
+
+            let instrumentoDePago = await models.instrumentoDePago.findByPk(id);
+
+            return instrumentoDePago.update({ activo: false })
+
+        },
+
+        //----------------------------------Pago------------------------------------------------
+        async createPago(root, { FacturaId, InstrumentoDePagoId }, { models }) {
+            return await models.pago.create({ FacturaId, InstrumentoDePagoId })
+        },
+
+        async updatePago(root, { FacturaId, InstrumentoDePagoId, id }, { models }) {
+
+            let pago = await models.pago.findByPk(id);
+
+            let data = {
+                FacturaId: FacturaId,
+                InstrumentoDePagoId: InstrumentoDePagoId,
+            };
+
+            return pago.update(data)
+
+        },
+
+        async deletePago(root, { id }, { models }) {
+
+            let pago = await models.pago.findByPk(id);
+
+            return pago.update({ activo: false })
+
+        },
+
+        //----------------------------------GastoDeFactura------------------------------------------------
+        async createGastoDeFactura(root, { GastoId, FacturaId }, { models }) {
+            return await models.gastoDeFactura.create({ GastoId, FacturaId })
+        },
+
+        async updateGastoDeFactura(root, { GastoId, FacturaId, id }, { models }) {
+
+            let gastoDeFactura = await models.gastoDeFactura.findByPk(id);
+
+            let data = {
+                GastoId: GastoId,
+                FacturaId: FacturaId,
+            };
+
+            return gastoDeFactura.update(data)
+
+        },
+
+        async deleteGastoDeFactura(root, { id }, { models }) {
+
+            let gastoDeFactura = await models.gastoDeFactura.findByPk(id);
+
+            return gastoDeFactura.update({ activo: false })
+
         },
     }
 
