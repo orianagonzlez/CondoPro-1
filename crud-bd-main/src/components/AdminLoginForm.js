@@ -64,13 +64,14 @@ export const AdminLoginForm = () => {
         let userInfo = data.getAdminByCI
         let myCondo = condominios.filter( (condo) => condo.AdminId === userInfo.id )
         
-        if(myCondo){
+        if(myCondo.length>0){
             console.log('hiciste login hay que cambiar el context y redirigir', data.getAdminByCI);
             setUser({
             ...user,
             isLogged: true,
             isAdmin: true,  //poner cuando sea admin
-            cedula: userInfo.cedula
+            cedula: userInfo.cedula,
+            condoID: condoId
             });
         }else{
            console.log( 'Credenciales invalidas ');
