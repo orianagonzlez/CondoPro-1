@@ -1,8 +1,9 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { AppContext } from '../context/AppContext';
 import { useForm } from '../hooks/useForm';
 
 const createGasto = gql `
@@ -15,10 +16,10 @@ const createGasto = gql `
   }
 `;
 
-const getCasas = gql`
-    query GetCasas($condoId: Int!)
+const getCasasByCondoId = gql`
+    query GetCasasByCondoId($condoId: Int!)
     {
-        getCasas(condoId: $condoId) {
+        getCasasByCondoId(condoId: $condoId) {
         id
         nombre
         numero
@@ -31,6 +32,8 @@ const getCasas = gql`
    `;
 
 export const GastoForm = () => {
+    const { user } = useContext(AppContext);
+
     const initialFormState = ( ) => {
     let form;
     form = {
@@ -46,8 +49,8 @@ export const GastoForm = () => {
 
     const [ formValues , handleInputChange, reset] = useForm( initialFormState());
 
-    const { loading, error, data } = useQuery(getCasas, {
-        variables: { condoId: 1}
+    const { loading, error, data } = useQuery(getCasasByCondoId, {
+        variables: { condoId: user.condoID}
     });
 
     const { concepto, tipo, monto, atribuido, casaId }= formValues;
@@ -56,9 +59,9 @@ export const GastoForm = () => {
 
     useEffect(() => {
         console.log('cambie todos los props')
-        if (!loading && data?.getCasas) {
+        if (!loading && data?.getCasasByCondoId) {
     
-          setCasas(data?.getCasas);
+          setCasas(data?.getCasasByCondoId);
         }
       }, [data]);
 
@@ -69,7 +72,7 @@ export const GastoForm = () => {
         console.log(formValues);
 
         const mon = parseInt(monto);
-        const condoId = 1;//aqui se pone el id del condo
+        const condoId = user.condoID;
         const casId = atribuido === 'casa' ? parseInt(casaId) : null;
 
         crearGasto({variables: {concepto, tipo, mon, condoId, casId}});

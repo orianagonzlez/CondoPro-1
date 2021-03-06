@@ -33,11 +33,20 @@ const resolvers = {
         async getCasas(root, args, { models }) {
             return await models.casa.findAll({
                 where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getCasasByCondoId(root, args, { models }) {
+            return await models.casa.findAll({
+                where: {
                     CondominioId: args.condoId,
                     activo: true
                 }
             })
         },
+        
         async getCasa(root, args, { models }) {
             return await models.casa.findOne({
                 where: {

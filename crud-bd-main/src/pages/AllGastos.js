@@ -1,10 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { AllGastosRow } from '../components/AllGastosRow';
 import { GastoForm } from '../components/GastoForm';
+import { AppContext } from '../context/AppContext';
 
 const getGastos = gql`
     query GetGastosByCondoId($condoId: Int!)
@@ -20,10 +21,12 @@ const getGastos = gql`
    `;
 
 export const AllGastos = () => {
+    const { user } = useContext(AppContext);
+
     const [tableData, setTableData] = useState([]);
 
     const { loading, error, data } = useQuery(getGastos, {
-        variables: {condoId: 1}
+        variables: {condoId: user.condoID}
     });
 
     useEffect(() => {

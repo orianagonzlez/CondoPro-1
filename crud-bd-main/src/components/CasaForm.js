@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import {gql} from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { AppContext } from '../context/AppContext';
 
 const createCasa = gql `
   mutation CreateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int, $condominioId: Int!) {
@@ -42,8 +43,9 @@ const getOwners = gql`
 
 export const CasaForm = ({ casa, buttonText }) => {
 
+    const { user } = useContext(AppContext);
+
     const initialFormState = ( ) => {
-        console.log(casa);
         let form;
         if(casa){
           form = {
@@ -103,8 +105,8 @@ export const CasaForm = ({ casa, buttonText }) => {
           window.alert("Casa actualizada con exito");
         }else{
           console.log("2")
-          
-          const condominioId = 1; //poner condo en el que se este trabajando
+          console.log(user);
+          const condominioId = user.condoID;
           crearCasa({variables: {nombre, num, dim, estado, ali, propId, condominioId}});
           window.alert("Casa registrada con exito");
         }

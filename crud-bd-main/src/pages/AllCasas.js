@@ -1,15 +1,17 @@
 import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { AllCasasRow } from '../components/AllCasasRow';
+import { AppContext } from '../context/AppContext';
 
-const getCasas = gql`
-    query GetCasas($condoId: Int!)
+const getCasasByCondoId = gql`
+    query GetCasasByCondoId($condoId: Int!)
     {
-        getCasas(condoId: $condoId) {
+        getCasasByCondoId(condoId: $condoId) {
         id
         nombre
         numero
@@ -22,19 +24,21 @@ const getCasas = gql`
    `;
 
 export const AllCasas = () => {
+    const { user } = useContext(AppContext);
+
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getCasas, {
-        variables: {condoId: 1}
+    const { loading, error, data } = useQuery(getCasasByCondoId, {
+        variables: {condoId: user.condoID}
     });
 
     const history = useHistory();
 
     useEffect(() => {
         console.log('cambie todos los props')
-        if (!loading && data?.getCasas) {
+        if (!loading && data?.getCasasByCondoId) {
     
-          setTableData(data?.getCasas);
+          setTableData(data?.getCasasByCondoId);
         }
       }, [data]);
 

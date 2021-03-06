@@ -68,27 +68,28 @@ export const LoginForm = ({buttonText}) => {
 
 
    useEffect(() => {
-   
     if( data && !loading && loadingLogin){
 
       if( data.getPropietarioByCI ){
         
         let userInfo = data.getPropietarioByCI;
-        let myCasa = casas.filter((casa) => casa.PropietarioId === userInfo.id);
-        myCasa = myCasa[0];
+        let myCasa = casas.filter((casa) => casa.id === parseInt(casaId) && casa.PropietarioId === userInfo.id);
+        // myCasa = myCasa[0];
 
-        if(myCasa){
+        if(myCasa.length > 0){
           console.log('hiciste login hay que cambiar el context y redirigir', data.getPropietarioByCI);
           setUser({
           ...user,
+          id: userInfo.id,
           isLogged: true,
-          casaID: casaId,
+          casaID: parseInt(casaId),
           cedula: userInfo.cedula,
           condoID: myCasa.CondominioId
         });
 
         }else{
           console.log( 'Credenciales invalidas ');
+          setLoadingLogin(false);
         }
 
 
@@ -104,6 +105,7 @@ export const LoginForm = ({buttonText}) => {
 
 
     const handleSubmit = (e) => {
+      console.log('entregue')
       e.preventDefault();
 
       getPropietario();
