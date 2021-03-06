@@ -116,7 +116,7 @@ export const AdminLoginForm = () => {
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Propietario</Form.Label>
+                <Form.Label>Condominio</Form.Label>
                 <Form.Control as="select" name="condoId" value={ condoId } onChange={ handleInputChange } type="email" placeholder="">
                     <option>Seleccione el condominio</option>
                     

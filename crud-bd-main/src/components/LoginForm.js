@@ -101,7 +101,6 @@ export const LoginForm = ({buttonText}) => {
     if (loadingCasas) return <p>Cargando casas</p>
     if (errorCasas) console.log('error', error);
 
-    console.log(casas, "wujule")
       return (
     
         <div>
