@@ -15,15 +15,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         fechaEmision:{
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: false
         },
         fechaVenc:{
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: false
         },
         saldo: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false
         },
         activo: {
