@@ -71,7 +71,7 @@ export const CasaForm = ({ casa, buttonText }) => {
       const [ formValues , handleInputChange, reset] = useForm( initialFormState());
 
       const { loading, error, data } = useQuery(getOwners);
-      console.log(formValues);
+
       const { nombre, numero, dimensiones, estado, alicuota,  propietarioId }= formValues;
 
       const [propietarios, setPropietarios] = useState([]);

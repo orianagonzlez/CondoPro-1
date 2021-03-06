@@ -77,7 +77,6 @@ export const AdminLoginForm = () => {
            console.log( 'Credenciales invalidas ');
         }
 
-
         
       }else if( data.getPropietarioByCI == null){
         console.log( 'Credenciales invalidas ');
