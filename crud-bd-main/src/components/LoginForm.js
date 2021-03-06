@@ -31,6 +31,7 @@ const getCasas = gql`
         estado
         alicuota
         PropietarioId
+        CondominioId
       }
     }
    `;
@@ -69,16 +70,27 @@ export const LoginForm = ({buttonText}) => {
    useEffect(() => {
    
     if( data && !loading && loadingLogin){
-      
+
       if( data.getPropietarioByCI ){
+        
         let userInfo = data.getPropietarioByCI;
-        console.log('hiciste login hay que cambiar el context y redirigir', data.getPropietarioByCI);
-        setUser({
-         ...user,
-         isLogged: true,
-         casaID: casaId,
-         cedula: userInfo.cedula
+        let myCasa = casas.filter((casa) => casa.PropietarioId === userInfo.id);
+        myCasa = myCasa[0];
+
+        if(myCasa){
+          console.log('hiciste login hay que cambiar el context y redirigir', data.getPropietarioByCI);
+          setUser({
+          ...user,
+          isLogged: true,
+          casaID: casaId,
+          cedula: userInfo.cedula,
+          condoID: myCasa.CondominioId
         });
+
+        }else{
+          console.log( 'Credenciales invalidas ');
+        }
+
 
         
       }else if( data.getPropietarioByCI === null){
