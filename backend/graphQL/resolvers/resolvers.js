@@ -33,6 +33,7 @@ const resolvers = {
         async getCasas(root, args, { models }) {
             return await models.casa.findAll({
                 where: {
+                    CondominioId: args.condoId,
                     activo: true
                 }
             })
@@ -145,17 +146,17 @@ const resolvers = {
             })
         },
 
-        //----------------------------------Pago------------------------------------------------
-        async getPago(root, args, { models }) {
-            return await models.pago.findAll({
+        //----------------------------------Gasto------------------------------------------------
+        async getGastos(root, args, { models }) {
+            return await models.gasto.findAll({
                 where: {
                     activo: true
                 }
             })
         },
 
-        async getPago(root, args, { models }) {
-            return await models.pega.findOne({
+        async getGasto(root, args, { models }) {
+            return await models.gasto.findOne({
                 where: {
                     id: args.id,
                     activo: true,
@@ -163,19 +164,19 @@ const resolvers = {
             })
         },
 
-        async getPagoByCondoId(root, args, { models }) {
-            return await models.pago.findAll({
+        async getGastosByCondoId(root, args, { models }) {
+            return await models.gasto.findAll({
                 where: {
-                    CondoId: args.CondoId,
+                    CondominioId: args.condoId,
                     activo: true,
                 },
             })
         },
 
-        async getPagoByCasaId(root, args, { models }) {
-            return await models.pago.findAll({
+        async getGastosByCasaId(root, args, { models }) {
+            return await models.gasto.findAll({
                 where: {
-                    CasaId: args.CasaId,
+                    CasaId: args.casaId,
                     activo: true,
                 },
             })

@@ -7,8 +7,9 @@ import { useHistory } from 'react-router';
 import { AllCasasRow } from '../components/AllCasasRow';
 
 const getCasas = gql`
+    query GetCasas($condoId: Int!)
     {
-        getCasas {
+        getCasas(condoId: $condoId) {
         id
         nombre
         numero
@@ -23,7 +24,9 @@ const getCasas = gql`
 export const AllCasas = () => {
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getCasas);
+    const { loading, error, data } = useQuery(getCasas, {
+        variables: {condoId: 1}
+    });
 
     const history = useHistory();
 

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const createCasa = gql `
-  mutation CreateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int!, $condominioId: Int!) {
+  mutation CreateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int, $condominioId: Int!) {
     createCasa(nombre: $nombre, numero: $num, dimensiones: $dim, estado: $estado, alicuota: $ali, PropietarioId: $propId, CondominioId: $condominioId, activo: true) {
       id
       nombre
@@ -17,7 +17,7 @@ const createCasa = gql `
 `;
 
 const updateCasa = gql `
-  mutation UpdateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int!, $id: Int!) {
+  mutation UpdateCasa($nombre: String!, $num: Int!, $dim: Int!, $estado: String!, $ali: Float!, $propId: Int, $id: Int!) {
     updateCasa(nombre: $nombre, numero: $num, dimensiones: $dim, estado: $estado, alicuota: $ali, PropietarioId: $propId, id: $id) {
       id
       nombre
@@ -71,7 +71,7 @@ export const CasaForm = ({ casa, buttonText }) => {
       const [ formValues , handleInputChange, reset] = useForm( initialFormState());
 
       const { loading, error, data } = useQuery(getOwners);
-      console.log(formValues);
+
       const { nombre, numero, dimensiones, estado, alicuota,  propietarioId }= formValues;
 
       const [propietarios, setPropietarios] = useState([]);
@@ -145,7 +145,7 @@ export const CasaForm = ({ casa, buttonText }) => {
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Propietario</Form.Label>
                 <Form.Control as="select" name="propietarioId" value={ propietarioId } onChange={ handleInputChange } type="email" placeholder="">
-                    <option>Sin propietario</option>
+                    <option value="">Sin propietario</option>
                     
                     {propietarios.map(propietario => (
                         <option key={propietario.id} value={propietario.id}>{propietario.nombre} {propietario.apellido}</option>
