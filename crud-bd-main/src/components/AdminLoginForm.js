@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import { gql } from 'apollo-boost';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
@@ -20,6 +20,19 @@ query GetAdminByCI($CI: String!)
   }
 `; 
 
+const getCondominios = gql`
+    {
+        getCondominios {
+        id
+        nombre
+        estado
+        ciudad
+        direccion
+        AdminId
+      }
+    }
+   `; 
+
 
 export const AdminLoginForm = () => {
   
@@ -27,29 +40,43 @@ export const AdminLoginForm = () => {
 
   const [loadingLogin, setLoadingLogin] = useState(false);
 
+  const [condominios, setCondominios] = useState([]);
+
     const [ formValues , handleInputChange, reset] = useForm({
         CI: "",
+        condoId: ""
     });
 
-    const { CI }= formValues;
+    const { CI, condoId }= formValues;
 
     const [getAdmin, { loading, error, data } ] = useLazyQuery( getAdminByCI, {
      variables: { CI: CI }
    });
 
+    const { loadin: loadingCondo, error: errorCondo, data: dataCondo } = useQuery(getCondominios);
+
    useEffect(() => {
   
     if( data && !loading && loadingLogin){
      
-      if( data.getAdminByCI ){
+      if( data.getAdminByCI && condoId !== ""){
+        
         let userInfo = data.getAdminByCI
-        console.log('hiciste login hay que cambiar el context y redirigir', data.getAdminByCI);
-        setUser({
-         ...user,
-         isLogged: true,
-         isAdmin: true,  //poner cuando sea admin
-         cedula: userInfo.cedula
-        });
+        let myCondo = condominios.filter( (condo) => condo.AdminId === userInfo.id )
+        
+        if(myCondo){
+            console.log('hiciste login hay que cambiar el context y redirigir', data.getAdminByCI);
+            setUser({
+            ...user,
+            isLogged: true,
+            isAdmin: true,  //poner cuando sea admin
+            cedula: userInfo.cedula
+            });
+        }else{
+           console.log( 'Credenciales invalidas ');
+        }
+
+
         
       }else if( data.getPropietarioByCI == null){
         console.log( 'Credenciales invalidas ');
@@ -57,13 +84,24 @@ export const AdminLoginForm = () => {
       }
     }
 
-   }, [data, loading, loadingLogin, user])
+   }, [data, loading, loadingLogin, user]);
+
+   useEffect(() => {
+    if (!loadingCondo && dataCondo) {
+          console.log(dataCondo.getCondominios)
+          setCondominios(dataCondo.getCondominios);
+          }
+   }, [dataCondo])
 
     const handleSubmit = (e) => {
       e.preventDefault();
       getAdmin();
       setLoadingLogin(true);
     }
+
+    
+    if (loadingCondo) return <p>Cargando condominios</p>
+    if (errorCondo) console.log('error', errorCondo);
 
   return (
         <div>
@@ -76,7 +114,18 @@ export const AdminLoginForm = () => {
                 <Form.Control name="CI" value={ CI } type="text" placeholder="" onChange={ handleInputChange }/>
                 {/* <Form.Control name="nombre" value={ nombre } onChange={ handleInputChange } type="text" placeholder="" /> */}
               </Form.Group>
-    
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Propietario</Form.Label>
+                <Form.Control as="select" name="condoId" value={ condoId } onChange={ handleInputChange } type="email" placeholder="">
+                    <option>Seleccione el condominio</option>
+                    
+                    {condominios.map(condo => (
+                        <option key={condo.id} value={condo.id}> {condo.nombre}</option>
+                    ))
+                    }
+                </Form.Control>
+              </Form.Group>
     
               <Button variant="dark" type="submit" >
                Iniciar sesión
