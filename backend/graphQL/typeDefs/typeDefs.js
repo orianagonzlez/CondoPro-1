@@ -76,7 +76,7 @@ type Gasto{
     tipo: String!,
     monto: Int!,
     CondominioId: Int!,
-    CasaId: Int!,
+    CasaId: Int,
     activo: Boolean!
 }
 
@@ -118,8 +118,8 @@ type Query{
     getInstrumentoDePagoByNumero(numero: Int!): InstrumentoDePago,
     getGastos: [Gasto],
     getGasto(id: Int!): Gasto,
-    getGastosByCondoId(CondoId: Int!): [Gasto],
-    getGastosByCasaId(CasaId: Int!): [Gasto],
+    getGastosByCondoId(condoId: Int!): [Gasto],
+    getGastosByCasaId(casaId: Int!): [Gasto],
     getFacturas: [Factura],
     getFactura(id: Int!): Factura,
     getFacturasByNumero(numero: Int!): [Factura],

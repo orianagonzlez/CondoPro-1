@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { AppContext } from '../context/AppContext';
 import { useForm } from '../hooks/useForm';
+import { gastos } from '../types/gastos';
 
 const createGasto = gql `
   mutation CreateGasto($concepto: String!, $tipo: String!, $mon: Int!, $condoId: Int!, $casId: Int) {
@@ -15,6 +16,33 @@ const createGasto = gql `
     }
   }
 `;
+
+const tiposGasto = [
+  {
+    label: "Servicios",
+    value: gastos.SERVICIOS,
+  },
+  {
+    label: "Mantenimiento",
+    value: gastos.MANTENIMIENTO,
+  },
+  {
+    label: "Gastos Administrativos",
+    value: gastos.ADMINISTRATIVOS,
+  },
+  {
+    label: "Gastos Imprevistos",
+    value: gastos.IMPREVISTOS,
+  },
+  {
+    label: "Seguridad",
+    value: gastos.SEGURIDAD,
+  },
+  {
+    label: "Otros",
+    value: gastos.OTROS,
+  }
+];
 
 const getCasasByCondoId = gql`
     query GetCasasByCondoId($condoId: Int!)
@@ -94,7 +122,14 @@ export const GastoForm = () => {
 
                 <Form.Group controlId="formBasicPassword">
                 <Form.Label>Tipo</Form.Label>
-                <Form.Control name="tipo" value={ tipo } onChange={ handleInputChange } type="text" placeholder="" />
+                <Form.Control as="select" name="tipo" value={ tipo } onChange={ handleInputChange } type="text" placeholder="">
+                <option value="">Seleccione el tipo</option>
+                  {
+                    tiposGasto.map((gasto,i) => (
+                      <option key={gasto.value} value={gasto.value}>{gasto.label}</option>
+                    ))
+                  }
+                </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">

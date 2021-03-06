@@ -460,7 +460,7 @@ const resolvers = {
 
         //----------------------------------Gasto------------------------------------------------
         async createGasto(root, { concepto, tipo, monto, CondominioId, CasaId, activo }, { models }) {
-            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, CasaId, activo })
+            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, activo })
         },
 
         async updateGasto(root, { concepto, tipo, monto, CondominioId, CasaId, id }, { models }) {
