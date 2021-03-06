@@ -128,7 +128,7 @@ export const CasaForm = ({ casa, buttonText }) => {
               </Form.Group>
     
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Dimensiones</Form.Label>
+                <Form.Label>Dimensiones (m2)</Form.Label>
                 <Form.Control name="dimensiones" value={ dimensiones } onChange={ handleInputChange } type="number" min="0" placeholder="" />
               </Form.Group>
     
@@ -144,7 +144,7 @@ export const CasaForm = ({ casa, buttonText }) => {
     
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Propietario</Form.Label>
-                <Form.Control as="select" name="propietarioId" value={ propietarioId } onChange={ handleInputChange } type="email" placeholder="">
+                <Form.Control as="select" name="propietarioId" value={ propietarioId } onChange={ handleInputChange } placeholder="">
                     <option value="">Sin propietario</option>
                     
                     {propietarios.map(propietario => (

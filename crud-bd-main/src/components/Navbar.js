@@ -29,7 +29,7 @@ export const NavBar = () => {
               <Link to="/condo/allCasas" className="nav-link" >Casas</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/createFactura" className="nav-link" >Facturas</Link>
+              <Link to="/condo/allGastos" className="nav-link" >Gastos</Link>
             </li>
             <li className="nav-item">
               <Link to="/condo/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>

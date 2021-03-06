@@ -25,6 +25,7 @@ import { ResumenDeudas } from '../pages/ResumenDeudas';
 import { UserHome } from '../pages/UserHome';
 import { AllCondos } from '../pages/AllCondos';
 import { EditCasa } from '../pages/EditCasa';
+import { AllGastos } from '../pages/AllGastos';
 
 
 
@@ -62,6 +63,7 @@ export const AppRouter = () => {
                           <Route exact path="/condo/createCasa" component={ CreateCasa } />
                           <Route exact path="/condo/editCasa/:casaId" component={ EditCasa } />
                           <Route exact path="/condo/allCasas" component={ AllCasas } />
+                          <Route exact path="/condo/allGastos" component={ AllGastos } />
 
                       <Redirect to="/condo/ownersInfo" />
                   </Switch>

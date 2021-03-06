@@ -53,7 +53,7 @@ export const AllCasas = () => {
                     <th>#ID</th>
                     <th>Nombre</th>
                     <th>Numero</th>
-                    <th>Dimensiones</th>
+                    <th>Dimensiones (m2)</th>
                     <th>Estado</th>
                     <th>Alicuota</th>
                     <th>Propietario</th>

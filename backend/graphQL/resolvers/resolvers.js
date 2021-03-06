@@ -340,7 +340,10 @@ const resolvers = {
             return visitante.update({ activo: false })
 
         },
-
+        //----------------------------------Gasto------------------------------------------------
+        async createGasto(root, { concepto, tipo, monto, CondominioId, CasaId, activo }, { models }) {
+            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, activo })
+        },
     }
 
 

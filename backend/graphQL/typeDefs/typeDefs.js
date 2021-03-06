@@ -93,7 +93,7 @@ type Query{
     getInstrumentoDePagoByNumero(numero: Int!): InstrumentoDePago,
     getGastos: [Gasto],
     getGasto(id: Int!): Gasto,
-    getGastosByCondoId(id: Int!): [Gasto],
+    getGastosByCondoId(condoId: Int!): [Gasto],
     getGastosByCasaId(id: Int!): [Gasto],
 
 }
