@@ -92,7 +92,7 @@ export const FacturaForm = () => {
                     <option> </option>
                     
                     {casas.map(casa => (
-                        <option key={casa.id} value={casa.id}>ID:{casa.id} - {casa.nombre}</option>
+                        <option key={casa.id} value={casa.id}>ID:{casa.id} / {casa.nombre}</option>
                     ))
                     }
                 </Form.Control>

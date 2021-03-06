@@ -36,6 +36,19 @@ const getCasas = gql`
     }
    `;
 
+const getCondominios = gql`
+    {
+        getCondominios {
+        id
+        nombre
+        estado
+        ciudad
+        direccion
+        AdminId
+      }
+    }
+   `; 
+
 export const LoginForm = ({buttonText}) => {
 
   const {setUser, user} = useContext(AppContext)
@@ -57,6 +70,7 @@ export const LoginForm = ({buttonText}) => {
 
    const { loading: loadingCasas, error: errorCasas, data: dataCasas } = useQuery(getCasas);
 
+   const { loadin: loadingCondo, error: errorCondo, data: dataCondo } = useQuery(getCondominios);
    
    useEffect(() => {
      
@@ -125,6 +139,7 @@ export const LoginForm = ({buttonText}) => {
                 <Form.Control name="CI" value={ CI } type="text" placeholder="" onChange={ handleInputChange }/>
                 
               </Form.Group>
+              
 
               
               <Form.Group controlId="formBasicPassword">
