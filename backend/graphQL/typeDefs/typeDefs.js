@@ -80,7 +80,8 @@ type Query{
     getCasas(condoId: Int!): [Casa],
     getCasa(id: Int!): Casa,
     getCondominio(id: Int!): Condominio,
-    getCondominios: [Condominio]
+    getCondominios: [Condominio],
+    getCondominioByAdminId(adminId: Int!): Condominio!,
     getAdmins: [Admin],
     getAdmin(id: Int!): Admin,
     getAdminByCI(cedula: String!): Admin,
