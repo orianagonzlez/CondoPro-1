@@ -19,6 +19,10 @@ const getCasasByCondoId = gql`
         estado
         alicuota
         PropietarioId
+        Propietario {
+            nombre
+            apellido
+        }
       }
     }
    `;

@@ -16,6 +16,10 @@ const getGastos = gql`
         tipo
         monto
         CasaId
+        Casa {
+            numero
+            nombre
+        }
       }
     }
    `;

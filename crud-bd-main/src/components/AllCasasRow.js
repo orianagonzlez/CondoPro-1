@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const AllCasasRow = ({ casa }) => {
 
-    const {id, nombre, numero, dimensiones, estado, alicuota, PropietarioId} = casa;
+    const {id, nombre, numero, dimensiones, estado, alicuota, Propietario} = casa;
 
     return (
         <>
@@ -14,7 +14,7 @@ export const AllCasasRow = ({ casa }) => {
                     <td>{ dimensiones }</td>
                     <td>{ estado }</td>
                     <td>{ alicuota }</td>
-                    <td>{ PropietarioId }</td>
+                    <td>{ Propietario?.nombre } { Propietario?.apellido }</td>
                     <td>
                     <NavLink to={`/condo/editCasa/${id}`}>  
                         <i className="far fa-edit"></i>

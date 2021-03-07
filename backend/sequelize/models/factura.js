@@ -32,6 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {});
 
-    Factura.belongsTo(sequelize.import('./casa'), { foreignKey: { allowNull: false }});
+    // Factura.belongsTo(sequelize.import('./casa'), { foreignKey: { allowNull: false }});
     return Factura
 }

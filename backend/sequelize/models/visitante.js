@@ -28,6 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {});
 
-    Visitante.belongsTo(sequelize.import('./casa'), { foreignKey: { allowNull: false }});
+    // Visitante.belongsTo(sequelize.import('./casa'), { foreignKey: { allowNull: false }});
     return Visitante
 }

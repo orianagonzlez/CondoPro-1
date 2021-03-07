@@ -2,7 +2,7 @@ import React from 'react';
 
 export const AllGastosRow = ({ gasto }) => {
     console.log(gasto)
-    const {id, concepto, tipo, monto, CasaId } = gasto;
+    const {id, concepto, tipo, monto, Casa } = gasto;
 
     return (
        
@@ -12,7 +12,7 @@ export const AllGastosRow = ({ gasto }) => {
                     <td>{ concepto }</td>
                     <td>{ tipo }</td>
                     <td>{ monto }</td>
-                    <td>{ CasaId === null ? 'Todas' : CasaId }</td>
+                    <td>{ Casa === null ? 'Todas' : `#${Casa.numero} ${Casa.nombre}` }</td>
             </tr>
         </>
         

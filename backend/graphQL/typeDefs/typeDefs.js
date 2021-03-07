@@ -42,6 +42,7 @@ type Casa{
     alicuota: Float!
     PropietarioId: Int
     CondominioId: Int!
+    Propietario: Propietario
     activo: Boolean!
 }
 
@@ -78,6 +79,7 @@ type Gasto{
     monto: Int!,
     CondominioId: Int!,
     CasaId: Int,
+    Casa: Casa
     activo: Boolean!
 }
 

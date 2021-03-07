@@ -34,7 +34,8 @@ const resolvers = {
             return await models.casa.findAll({
                 where: {
                     activo: true
-                }
+                },
+                include: models.propietario,
             })
         },
 
@@ -43,7 +44,8 @@ const resolvers = {
                 where: {
                     CondominioId: args.condoId,
                     activo: true
-                }
+                },
+                include: models.propietario,
             })
         },
         
@@ -52,7 +54,8 @@ const resolvers = {
                 where: {
                     id: args.id,
                     activo: true,
-                }
+                },
+                include: models.propietario,
             })
         },
 
@@ -182,7 +185,8 @@ const resolvers = {
             return await models.gasto.findAll({
                 where: {
                     activo: true
-                }
+                },
+                include: models.casa,
             })
         },
 
@@ -192,6 +196,7 @@ const resolvers = {
                     id: args.id,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
@@ -201,6 +206,7 @@ const resolvers = {
                     CondominioId: args.condoId,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
@@ -210,6 +216,7 @@ const resolvers = {
                     CasaId: args.casaId,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
