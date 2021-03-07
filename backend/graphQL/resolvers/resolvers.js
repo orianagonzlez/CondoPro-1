@@ -61,7 +61,8 @@ const resolvers = {
             return await models.condominio.findAll({
                 where: {
                     activo: true
-                }
+                },
+                include: models.admin,
             })
         },
 
@@ -70,7 +71,8 @@ const resolvers = {
                 where: {
                     id: args.id,
                     activo: true,
-                }
+                },
+                include: models.admin
             })
         },
 
@@ -80,7 +82,8 @@ const resolvers = {
                 where: {
                     AdminId: args.adminId,
                     activo: true,
-                }
+                },
+                include: models.admin
             })
         },
 

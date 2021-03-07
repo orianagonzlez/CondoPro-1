@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
  
-const sequelize = new Sequelize('db_condopro', 'root', '', {//Modifica los datos para conectarte a la Bd
+const sequelize = new Sequelize('db_condopro', 'root', 'go.unimet21', {//Modifica los datos para conectarte a la Bd
     host: 'localhost',
     dialect: 'mysql', 
     define: {
@@ -21,7 +21,14 @@ const models = {
     visitante: sequelize.import('./visitante')
 };
  
+//Asociaciones
+models.admin.hasMany(models.condominio);
+models.condominio.belongsTo(models.admin, { foreignKey: { allowNull: false }});
+
+
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
+
+
  
 module.exports = models;

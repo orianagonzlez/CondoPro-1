@@ -2,6 +2,16 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+type Admin{
+    id: Int!
+    nombre: String!
+    apellido: String!
+    cedula: String!
+    correo: String!
+    telefono: String!
+    activo: Boolean!
+}
+
 type Condominio{
     id: Int!
     nombre: String!
@@ -9,6 +19,7 @@ type Condominio{
     ciudad: String!
     direccion: String!
     AdminId: Int!
+    Admin: Admin!
     activo: Boolean!
 }
 
@@ -31,16 +42,6 @@ type Casa{
     alicuota: Float!
     PropietarioId: Int
     CondominioId: Int!
-    activo: Boolean!
-}
-
-type Admin{
-    id: Int!
-    nombre: String!
-    apellido: String!
-    cedula: String!
-    correo: String!
-    telefono: String!
     activo: Boolean!
 }
 

@@ -13,13 +13,19 @@ const getCondominios = gql`
         estado
         ciudad
         direccion
-        AdminId
+        AdminId 
+        Admin {
+            nombre
+            apellido
+        }
+        
       }
     }
    `; 
 
 export const AllCondos = () => {
     const [tableData, setTableData] = useState([]);
+    console.log('tablaaa', tableData)
 
     const { loading, error, data, refetch } = useQuery(getCondominios);
 
@@ -32,7 +38,7 @@ export const AllCondos = () => {
     useEffect(() => {
         console.log('cambie todos los props')
         if (!loading && data?.getCondominios) {
-    
+            
           setTableData(data?.getCondominios);
         }
       }, [data]);

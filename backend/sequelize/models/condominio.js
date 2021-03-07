@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       
     }, {});
 
-    Condominio.belongsTo(sequelize.import('./admin'), { foreignKey: { allowNull: false }});
+    // Condominio.belongsTo(sequelize.import('./admin'), { foreignKey: { allowNull: false }});
+    // Condominio.hasMany(sequelize.import('./casa'));
+    // Condominio.hasMany(sequelize.import('./gasto'));
     return Condominio
 }

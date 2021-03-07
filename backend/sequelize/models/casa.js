@@ -34,5 +34,9 @@ module.exports = (sequelize, DataTypes) => {
 
     Casa.belongsTo(sequelize.import('./propietario'));
     Casa.belongsTo(sequelize.import('./condominio'), { foreignKey: { allowNull: false }});
+    // Casa.hasMany(sequelize.import('./factura'));
+    // Casa.hasMany(sequelize.import('./gasto'));
+    // Casa.hasMany(sequelize.import('./visitante'));
+    
     return Casa
 }
