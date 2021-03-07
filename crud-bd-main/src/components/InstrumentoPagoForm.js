@@ -8,41 +8,50 @@ import { useForm } from '../hooks/useForm';
 
 
 const createInstrumentoDePago = gql`
-  mutation createInstrumentoDePago($num: Int!, $date: String!, $tipo: String!, $mon: Int!) {
-    createInstrumentoDePago(numero: $num, fecha: $date, tipo: $tipo, monto: $mon, activo: true) {
-        numero
-        tipo
-        fecha
-        monto
-      }
-  }
+    mutation createInstrumentoDePago($num: Int!, $date: String!, $tipo: String!, $mon: Int!) {
+        createInstrumentoDePago(numero: $num, fecha: $date, tipo: $tipo, monto: $mon, activo: true) {
+            tipo
+        }
+    }
 `;
 
-// const getFacturasByCasaId = gql`
-//     {
-//         getFacturasByCasaId(CasaId: $CasaId) {
-//         id
-//         numero
-//         estado
-//         fechaEmision
-//         fechaVenc
-//         saldo
-//         CasaId
-//       }
-//     }
-//    `;
+const updateFactura = gql`
+    mutation updateFactura ($Fnumero: Int!, $Festado: String!, $FfechaEmision: String!, $FfechaVenc: String!, $resta: Int!, $FCasaId: Int!, $Fid: Int!) {
+        updateFactura(numero: $Fnumero, estado: $Festado, fechaEmision: $FfechaEmision, fechaVenc: $FfechaVenc, saldo: $resta, CasaId: $FCasaId, id: $Fid) {
+            id
+            estado
+            CasaId
+        }
+    }
 
-export const InstrumentoDePagoForm = () => {
+   `;
+
+export const InstrumentoDePagoForm = ({ factura }) => {
 
     const { user } = useContext(AppContext);
 
+    if (factura){
+        console.log("Hay Factura");
+    }else{
+        console.log("No Hay Factura");
+    }
+
     const initialFormState = () => {
+        console.log(factura);
+
         let form;
         form = {
             numero: '',
             fecha: '',
             tipo: '',
             monto: '',
+            Fnumero: factura.numero,
+            Festado: factura.estado,
+            FfechaEmision: factura.fechaEmision,
+            FfechaVenc: factura.fechaVenc,
+            Fsaldo: factura.saldo,
+            FCasaId: factura.CasaId,
+            Fid: factura.id
         };
 
         return form
@@ -50,23 +59,10 @@ export const InstrumentoDePagoForm = () => {
 
     const [formValues, handleInputChange, reset] = useForm(initialFormState());
 
-    // const { loading, error, data } = useQuery(getFacturasByCasaId, {
-    //     variables: { casaId: user.casaId }
-    // });
-
-    const { numero, fecha, tipo, monto } = formValues;
-
-    const [facturas, setFacturas] = useState([]);
-
-    // useEffect(() => {
-    //     console.log('useEffect')
-    //     if (!loading && data?.getFacturasByCasaId) {
-    //         console.log(data.getFacturasByCasaId);
-    //         setFacturas(data?.getFacturasByCasaId);
-    //     }
-    // }, [data]);
+    const { numero, fecha, tipo, monto, Fnumero, Festado, FfechaEmision, FfechaVenc, Fsaldo, FCasaId } = formValues;
 
     const [crearInstrumentoDePago] = useMutation(createInstrumentoDePago);
+    const [cambiarSaldoFactura] = useMutation(updateFactura);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -75,13 +71,16 @@ export const InstrumentoDePagoForm = () => {
         const num = parseInt(numero);
         const date = new Date(`${fecha}T00:00:00`).toDateString();
         const mon = parseInt(monto);
+        const resta = Fsaldo - mon;
 
         crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
         window.alert("Instrumento de Pago registrado con exito");
+        let Fid = factura.id
+        cambiarSaldoFactura({variables: {Fnumero, Festado, FfechaEmision, FfechaVenc, resta, FCasaId, Fid}})
         reset();
-
     }
 
+    
     return (
 
         <div>
@@ -107,18 +106,6 @@ export const InstrumentoDePagoForm = () => {
                     <Form.Label>Monto ($)</Form.Label>
                     <Form.Control name="monto" value={monto} onChange={handleInputChange} type="number" />
                 </Form.Group>
-
-                {/* <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Factura a Pagar</Form.Label>
-                    <Form.Control as="select" name="factura" value={FacturaId} onChange={handleInputChange} placeholder="">
-
-                        {facturas.map(factura => (
-                            <option key={factura.id} value={factura.id}>{factura.numero} {factura.estado} {factura.fechaEmision} {factura.fechaVenc} {factura.saldo}</option>
-                        ))
-                        }
-                    </Form.Control>
-                </Form.Group> */}
-
 
                 <Button variant="dark" type="submit">
                     Crear instrumento de Pago

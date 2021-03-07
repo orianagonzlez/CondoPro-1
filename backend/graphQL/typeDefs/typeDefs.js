@@ -158,8 +158,8 @@ type Mutation{
     createGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, activo: Boolean!): Gasto!
     updateGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, id: Int!): Gasto!,
     deleteGasto(id: Int!): Gasto!
-    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, activo: Boolean!): Factura!
-    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, id: Int!): Factura!,
+    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Int, CasaId: Int!, activo: Boolean!): Factura!
+    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Int, CasaId: Int!, id: Int!): Factura!,
     deleteFactura(id: Int!): Factura!
     createPago(FacturaId: Int!, InstrumentoDePagoId: Int!): Pago!
     updatePago(FacturaId: Int!, InstrumentoDePagoId: Int!, id: Int!): Pago!,
