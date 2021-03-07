@@ -14,7 +14,7 @@ const models = {
     casa: sequelize.import('./casa'),
     condominio: sequelize.import('./condominio'),
     factura: sequelize.import('./factura'),
-    GastoDeFactura: sequelize.import('./gastoDeFactura'),
+    gastoDeFactura: sequelize.import('./gastoDeFactura'),
     gasto: sequelize.import('./gasto'),
     instrumentoDePago: sequelize.import('./instrumentoDePago'),
     pago: sequelize.import('./pago'),

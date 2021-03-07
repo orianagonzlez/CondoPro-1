@@ -76,7 +76,7 @@ type Gasto{
     tipo: String!,
     monto: Int!,
     CondominioId: Int!,
-    CasaId: Int!,
+    CasaId: Int,
     activo: Boolean!
 }
 
@@ -101,7 +101,8 @@ type Query{
     getPropietarios: [Propietario],
     getPropietario(id: Int!): Propietario,
     getPropietarioByCI(cedula: String!): Propietario,
-    getCasas(condoId: Int!): [Casa],
+    getCasas: [Casa],
+    getCasasByCondoId(condoId: Int!): [Casa],
     getCasa(id: Int!): Casa,
     getCondominio(id: Int!): Condominio,
     getCondominios: [Condominio],
@@ -117,8 +118,8 @@ type Query{
     getInstrumentoDePagoByNumero(numero: Int!): InstrumentoDePago,
     getGastos: [Gasto],
     getGasto(id: Int!): Gasto,
-    getGastosByCondoId(CondoId: Int!): [Gasto],
-    getGastosByCasaId(CasaId: Int!): [Gasto],
+    getGastosByCondoId(condoId: Int!): [Gasto],
+    getGastosByCasaId(casaId: Int!): [Gasto],
     getFacturas: [Factura],
     getFactura(id: Int!): Factura,
     getFacturasByNumero(numero: Int!): [Factura],
@@ -156,8 +157,8 @@ type Mutation{
     createGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, activo: Boolean!): Gasto!
     updateGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, id: Int!): Gasto!,
     deleteGasto(id: Int!): Gasto!
-    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, activo: Boolean!): Factura!
-    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaEmision: String!, saldo: Int, CasaId: Int!, id: Int!): Factura!,
+    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, activo: Boolean!): Factura!
+    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, id: Int!): Factura!,
     deleteFactura(id: Int!): Factura!
     createPago(FacturaId: Int!, InstrumentoDePagoId: Int!): Pago!
     updatePago(FacturaId: Int!, InstrumentoDePagoId: Int!, id: Int!): Pago!,

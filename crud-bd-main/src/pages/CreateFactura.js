@@ -8,7 +8,7 @@ export const CreateFactura = () => {
   return (
 
     <Container className="  my-5 ">
-      <h1>Registrar Factura</h1>
+     
       <FacturaForm/>
    
     </Container>

@@ -2,7 +2,8 @@ import { Form, Button } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import {gql} from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../context/AppContext';
 
 const createCondominio = gql `
   mutation CreateCondominio($nombre: String!, $estado: String!, $ciudad: String!, $direccion: String!, $adminId: Int!) {
@@ -16,6 +17,8 @@ const createCondominio = gql `
 `
 
 export const CondoForm = ({buttonText}) => {
+
+  const { user } = useContext(AppContext);
 
     const initialFormState = ( ) => {
         let form;
@@ -39,7 +42,8 @@ export const CondoForm = ({buttonText}) => {
         e.preventDefault();
         console.log(formValues);
 
-        const adminId = 1;//aqui se pone el id del admin que esta creando el condo
+        console.log(user);
+        const adminId = user.id;//aqui se pone el id del admin que esta creando el condo
         createCondo({variables: {nombre, estado, ciudad, direccion, adminId}});
         window.alert("Condominio registrado con exito");
         

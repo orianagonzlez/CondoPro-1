@@ -33,11 +33,20 @@ const resolvers = {
         async getCasas(root, args, { models }) {
             return await models.casa.findAll({
                 where: {
+                    activo: true
+                }
+            })
+        },
+
+        async getCasasByCondoId(root, args, { models }) {
+            return await models.casa.findAll({
+                where: {
                     CondominioId: args.condoId,
                     activo: true
                 }
             })
         },
+        
         async getCasa(root, args, { models }) {
             return await models.casa.findOne({
                 where: {
@@ -266,18 +275,14 @@ const resolvers = {
 
         //----------------------------------GastoDeFactura------------------------------------------------
         async getGastosDeFactura(root, args, { models }) {
-            return await models.gastoDeFactura.findAll({
-                where: {
-                    activo: true
-                }
-            })
+            return await models.gastoDeFactura.findAll(
+            )
         },
 
         async getGastoDeFactura(root, args, { models }) {
             return await models.gastoDeFactura.findOne({
                 where: {
                     id: args.id,
-                    activo: true,
                 },
             })
         },
@@ -286,7 +291,6 @@ const resolvers = {
             return await models.gastoDeFactura.findAll({
                 where: {
                     GastoId: args.GastoId,
-                    activo: true,
                 },
             })
         },
@@ -451,7 +455,7 @@ const resolvers = {
 
         //----------------------------------Gasto------------------------------------------------
         async createGasto(root, { concepto, tipo, monto, CondominioId, CasaId, activo }, { models }) {
-            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, CasaId, activo })
+            return await models.gasto.create({ concepto, tipo, monto, CondominioId, CasaId, activo })
         },
 
         async updateGasto(root, { concepto, tipo, monto, CondominioId, CasaId, id }, { models }) {
