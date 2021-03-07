@@ -15,7 +15,7 @@ export const UnloggedNav = () => {
               <Link to="/login" className="nav-link" >Iniciar como Propietario</Link>
             </li>
             <li className="nav-item">
-              <Link to="/adminLogin" className="nav-link" >Inciar como Admin</Link>
+              <Link to="/adminLogin" className="nav-link" >Iniciar como Admin</Link>
             </li>
 
           </ul>
