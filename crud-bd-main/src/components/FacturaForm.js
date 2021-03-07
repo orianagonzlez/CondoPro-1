@@ -181,19 +181,7 @@ export const FacturaForm = () => {
       
 
     }
-  
-  // let date = new Date();
-  // date = date.getDate() + "-"+ "0"+(date.getMonth()+1)+ "-" +date.getFullYear();
-  // console.log( date )
-  // let date2 = new Date(fVencimiento);
-  // date2.setDate( date2.getDate()+1);
-  // console.log(date2, "epa chamo");
-  // date2 = date2.toDateString();
-  // console.log(date2)
 
-  // let date3 = new Date(date2);
-  // console.log(date3.toDateString());
-  
     if (loadingCasas && loadingFact) return <p>Cargando casas</p>
     if (errorCasas || errorFact) console.log('error', errorCasas);
    
@@ -233,10 +221,7 @@ export const FacturaForm = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Monto</Form.Label>
-              <Form.Control name="monto"  value={ monto } onChange={ handleInputChange } type="text" placeholder="" />
-            </Form.Group>
+            <h5>Monto total: { monto }</h5>
 
 
 

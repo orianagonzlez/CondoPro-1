@@ -26,6 +26,8 @@ import { UserHome } from '../pages/UserHome';
 import { AllCondos } from '../pages/AllCondos';
 import { EditCasa } from '../pages/EditCasa';
 import { AllGastos } from '../pages/AllGastos';
+import { AllFacturas } from '../pages/AllFacturas';
+import { FacturaDetail } from '../pages/FacturaDetail';
 
 
 
@@ -39,8 +41,6 @@ export const AppRouter = () => {
 
   // esto ya funcionaria pero como he ehcho el login del admin muevan estas variables para entrar a la parte que desean
 
-
-  console.log(user)
 
   return (
     <>
@@ -61,7 +61,9 @@ export const AppRouter = () => {
                           <Route exact path="/condo/resumenDeudas" component={ ResumenDeudas } />
                           <Route exact path="/condo/ownersInfo" component={ OwnersInfo } />
                           <Route exact path="/condo/createCasa" component={ CreateCasa } />
+                          <Route exact path="/condo/facturaDetail/:facturaId" component={ FacturaDetail } />
                           <Route exact path="/condo/editCasa/:casaId" component={ EditCasa } />
+                          <Route exact path="/condo/AllFacturas" component={ AllFacturas } />
                           <Route exact path="/condo/allCasas" component={ AllCasas } />
                           <Route exact path="/condo/allGastos" component={ AllGastos } />
 
@@ -87,7 +89,7 @@ export const AppRouter = () => {
 
        )}  
 
-      {/* LAS RUTAS DEL PROPIETARIO */}
+      {/* LAS RUTAS DE LOGIN */}
       {( !user.isLogged ) &&
          (
         <div>

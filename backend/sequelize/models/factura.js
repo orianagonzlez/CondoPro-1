@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         fechaEmision:{
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         fechaVenc:{
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         saldo: {

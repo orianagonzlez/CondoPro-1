@@ -1,3 +1,4 @@
+const { QueryTypes, Sequelize } = require('sequelize');
 const resolvers = {
 
     Query: {
@@ -56,6 +57,7 @@ const resolvers = {
             })
         },
 
+
         //----------------------------------Condominio------------------------------------------------
         async getCondominios(root, args, { models }) {
             return await models.condominio.findAll({
@@ -64,6 +66,8 @@ const resolvers = {
                 }
             })
         },
+
+
 
         async getCondominio(root, args, { models }) {
             return await models.condominio.findOne({
@@ -303,6 +307,7 @@ const resolvers = {
                 },
             })
         },
+
     },
 
     Mutation: {
