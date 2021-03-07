@@ -81,7 +81,7 @@ export const AppRouter = () => {
                  <Switch>
 
                           <Route exact path="/condo/userHome" component={ UserHome } />
-                          <Route exact path="/condo/detallePago" component={ DetallePago } />
+                          <Route exact path="/condo/detallePago/:facturaId" component={ DetallePago } />
                           <Route exact path="/condo/registerGuest" component={ RegisterGuest } />
                           <Route exact path="/condo/editGuest/:visitanteId" component={ EditGuest } />
                           <Route exact path="/condo/allGuests" component={ AllGuests } />

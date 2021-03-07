@@ -1,4 +1,3 @@
-const { QueryTypes, Sequelize } = require('sequelize');
 const resolvers = {
 
     Query: {
@@ -35,7 +34,8 @@ const resolvers = {
             return await models.casa.findAll({
                 where: {
                     activo: true
-                }
+                },
+                include: models.propietario,
             })
         },
 
@@ -44,7 +44,8 @@ const resolvers = {
                 where: {
                     CondominioId: args.condoId,
                     activo: true
-                }
+                },
+                include: models.propietario,
             })
         },
         
@@ -53,10 +54,10 @@ const resolvers = {
                 where: {
                     id: args.id,
                     activo: true,
-                }
+                },
+                include: models.propietario,
             })
         },
-
 
         //----------------------------------Condominio------------------------------------------------
         async getCondominios(root, args, { models }) {
@@ -67,8 +68,6 @@ const resolvers = {
                 include: models.admin,
             })
         },
-
-
 
         async getCondominio(root, args, { models }) {
             return await models.condominio.findOne({
@@ -186,7 +185,8 @@ const resolvers = {
             return await models.gasto.findAll({
                 where: {
                     activo: true
-                }
+                },
+                include: models.casa,
             })
         },
 
@@ -196,6 +196,7 @@ const resolvers = {
                     id: args.id,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
@@ -205,6 +206,7 @@ const resolvers = {
                     CondominioId: args.condoId,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
@@ -214,6 +216,7 @@ const resolvers = {
                     CasaId: args.casaId,
                     activo: true,
                 },
+                include: models.casa,
             })
         },
 
@@ -291,14 +294,18 @@ const resolvers = {
 
         //----------------------------------GastoDeFactura------------------------------------------------
         async getGastosDeFactura(root, args, { models }) {
-            return await models.gastoDeFactura.findAll(
-            )
+            return await models.gastoDeFactura.findAll({
+                where: {
+                    activo: true
+                }
+            })
         },
 
         async getGastoDeFactura(root, args, { models }) {
             return await models.gastoDeFactura.findOne({
                 where: {
                     id: args.id,
+                    activo: true,
                 },
             })
         },
@@ -307,6 +314,7 @@ const resolvers = {
             return await models.gastoDeFactura.findAll({
                 where: {
                     GastoId: args.GastoId,
+                    activo: true,
                 },
             })
         },
@@ -319,7 +327,6 @@ const resolvers = {
                 },
             })
         },
-
     },
 
     Mutation: {
@@ -502,9 +509,6 @@ const resolvers = {
         async createFactura(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo }, { models }) {
             return await models.factura.create({ numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo })
         },
-        
-
-       
 
         async updateFactura(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, id }, { models }) {
 
@@ -531,7 +535,85 @@ const resolvers = {
 
         },
 
+        //----------------------------------Intrumento De Pago------------------------------------------------
+        async createInstrumentoDePago(root, { numero, fecha, tipo, monto, activo }, { models }) {
+            return await models.instrumentoDePago.create({ numero, fecha, tipo, monto, activo })
+        },
 
+        async updateInstrumentoDePago(root, { numero, fecha, tipo, monto, id }, { models }) {
+
+            let instrumentoDePago = await models.instrumentoDePago.findByPk(id);
+
+            let data = {
+                numero: numero,
+                fecha: fecha,
+                tipo: tipo,
+                monto: monto
+            };
+
+            return instrumentoDePago.update(data)
+
+        },
+
+        async deleteInstrumentoDePago(root, { id }, { models }) {
+
+            let instrumentoDePago = await models.instrumentoDePago.findByPk(id);
+
+            return instrumentoDePago.update({ activo: false })
+
+        },
+
+        //----------------------------------Pago------------------------------------------------
+        async createPago(root, { FacturaId, InstrumentoDePagoId }, { models }) {
+            return await models.pago.create({ FacturaId, InstrumentoDePagoId })
+        },
+
+        async updatePago(root, { FacturaId, InstrumentoDePagoId, id }, { models }) {
+
+            let pago = await models.pago.findByPk(id);
+
+            let data = {
+                FacturaId: FacturaId,
+                InstrumentoDePagoId: InstrumentoDePagoId,
+            };
+
+            return pago.update(data)
+
+        },
+
+        async deletePago(root, { id }, { models }) {
+
+            let pago = await models.pago.findByPk(id);
+
+            return pago.update({ activo: false })
+
+        },
+
+        //----------------------------------GastoDeFactura------------------------------------------------
+        async createGastoDeFactura(root, { GastoId, FacturaId }, { models }) {
+            return await models.gastoDeFactura.create({ GastoId, FacturaId })
+        },
+
+        async updateGastoDeFactura(root, { GastoId, FacturaId, id }, { models }) {
+
+            let gastoDeFactura = await models.gastoDeFactura.findByPk(id);
+
+            let data = {
+                GastoId: GastoId,
+                FacturaId: FacturaId,
+            };
+
+            return gastoDeFactura.update(data)
+
+        },
+
+        async deleteGastoDeFactura(root, { id }, { models }) {
+
+            let gastoDeFactura = await models.gastoDeFactura.findByPk(id);
+
+            return gastoDeFactura.update({ activo: false })
+
+        },
     }
 
 

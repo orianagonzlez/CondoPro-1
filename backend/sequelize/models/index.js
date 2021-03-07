@@ -25,6 +25,35 @@ const models = {
 models.admin.hasMany(models.condominio);
 models.condominio.belongsTo(models.admin, { foreignKey: { allowNull: false }});
 
+models.condominio.hasMany(models.casa);
+models.casa.belongsTo(models.condominio, { foreignKey: { allowNull: false }});
+
+models.condominio.hasMany(models.gasto);
+models.gasto.belongsTo(models.condominio, { foreignKey: { allowNull: false }});
+
+models.propietario.hasMany(models.casa);
+models.casa.belongsTo(models.propietario);
+
+models.casa.hasMany(models.factura);
+models.factura.belongsTo(models.casa, { foreignKey: { allowNull: false }});
+
+models.casa.hasMany(models.gasto);
+models.gasto.belongsTo(models.casa);
+
+models.casa.hasMany(models.visitante);
+models.visitante.belongsTo(models.casa, { foreignKey: { allowNull: false }});
+
+models.gasto.hasMany(models.gastoDeFactura);
+models.gastoDeFactura.belongsTo(models.gasto, { foreignKey: { allowNull: false }});
+
+models.factura.hasMany(models.gastoDeFactura);
+models.gastoDeFactura.belongsTo(models.factura, { foreignKey: { allowNull: false }});
+
+models.factura.hasMany(models.pago);
+models.pago.belongsTo(models.factura, { foreignKey: { allowNull: false }});
+
+models.instrumentoDePago.hasMany(models.pago);
+models.pago.belongsTo(models.instrumentoDePago, { foreignKey: { allowNull: false }});
 
 
 

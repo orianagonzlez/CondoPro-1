@@ -42,6 +42,7 @@ type Casa{
     alicuota: Float!
     PropietarioId: Int
     CondominioId: Int!
+    Propietario: Propietario
     activo: Boolean!
 }
 
@@ -78,8 +79,8 @@ type Gasto{
     monto: Int!,
     CondominioId: Int!,
     CasaId: Int,
+    Casa: Casa
     activo: Boolean!
-    Facturas: [Factura]
 }
 
 type Factura{
@@ -91,7 +92,6 @@ type Factura{
     saldo: Float!,
     CasaId: Int!,
     activo: Boolean!
-    Gastos: [Gasto!]
 }
 
 type GastoDeFactura{
@@ -161,8 +161,8 @@ type Mutation{
     createGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, activo: Boolean!): Gasto!
     updateGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, id: Int!): Gasto!,
     deleteGasto(id: Int!): Gasto!
-    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, activo: Boolean!): Factura!
-    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, id: Int!): Factura!,
+    createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float, CasaId: Int!, activo: Boolean!): Factura!
+    updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float, CasaId: Int!, id: Int!): Factura!,
     deleteFactura(id: Int!): Factura!
     createPago(FacturaId: Int!, InstrumentoDePagoId: Int!): Pago!
     updatePago(FacturaId: Int!, InstrumentoDePagoId: Int!, id: Int!): Pago!,

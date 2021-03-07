@@ -153,7 +153,7 @@ export const FacturaForm = () => {
   
   const [crearFactura]= useMutation(createFactura);
 
-  const [crearGastoDrFactura]= useMutation(createGastoDeFactura);
+  const [crearGastoDeFactura]= useMutation(createGastoDeFactura);
 
     const handleSubmit = async (e) => {
       console.log('entregue')
@@ -173,10 +173,11 @@ export const FacturaForm = () => {
       let res = await crearFactura({ variables:  { num, estado, fechaEmi, fechaVen, saldo, CasaId }} )
 
       let FacturaId = res.data.createFactura.id;
-      
+      console.log(FacturaId, "SOOOOS")
       gastos.forEach(gasto => {
        let GastoId = gasto.id;
-       crearGastoDrFactura({ variables:  { FacturaId, GastoId }} )
+       console.log(GastoId);
+       crearGastoDeFactura({ variables:  { FacturaId, GastoId }} )
       });
       
 

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {});
 
-    Pago.belongsTo(sequelize.import('./factura'), { foreignKey: { allowNull: false }});
-    Pago.belongsTo(sequelize.import('./instrumentoDePago'), { foreignKey: { allowNull: false }});
+    // Pago.belongsTo(sequelize.import('./factura'), { foreignKey: { allowNull: false }});
+    // Pago.belongsTo(sequelize.import('./instrumentoDePago'), { foreignKey: { allowNull: false }});
     return Pago
 }
