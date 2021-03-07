@@ -28,11 +28,15 @@ export const AllCasas = () => {
 
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getCasasByCondoId, {
+    const { loading, error, data, refetch } = useQuery(getCasasByCondoId, {
         variables: {condoId: user.condoID}
     });
 
     const history = useHistory();
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     useEffect(() => {
         console.log('cambie todos los props')

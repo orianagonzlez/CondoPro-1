@@ -21,9 +21,13 @@ const getCondominios = gql`
 export const AllCondos = () => {
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getCondominios);
+    const { loading, error, data, refetch } = useQuery(getCondominios);
 
     const history = useHistory();
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     useEffect(() => {
         console.log('cambie todos los props')

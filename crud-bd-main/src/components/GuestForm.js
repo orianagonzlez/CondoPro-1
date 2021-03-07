@@ -32,19 +32,19 @@ export const GuestForm = ({visitante, buttonText}) => {
     const initialFormState = ( ) => {
         let form;
         if(visitante) {
-          const date = new Date(visitante.fecha);
-          console.log(date);
+          // const date = new Date(visitante.fecha);
+          // console.log(date);
 
-          let month = date.getMonth() + 1;
-          month = month < 10 ? `0${month}` : month;
-          let day = date.getDate();
-          day = day < 10 ? `0${day}` : day;
-
+          // let month = date.getMonth() + 1;
+          // month = month < 10 ? `0${month}` : month;
+          // let day = date.getDate();
+          // day = day < 10 ? `0${day}` : day;
+// `${date.getFullYear()}-${month}-${day}`
           form = {
             nombre: visitante.nombre,
             apellido: visitante.apellido,
             cedula: visitante.cedula,
-            fecha: `${date.getFullYear()}-${month}-${day}`,
+            fecha: visitante.fecha,
           }
         } else {
           form = {
@@ -69,10 +69,10 @@ export const GuestForm = ({visitante, buttonText}) => {
         e.preventDefault();
         console.log(formValues);
 
-        const date = new Date(`${fecha}T00:00:00`).toDateString();
-        console.log(new Date(`${fecha}T00:00:00`));
-        console.log(new Date(`${fecha}T00:00:00`).toDateString());
-        
+        // const date = new Date(`${fecha}T00:00:00`).toDateString();
+        // console.log(new Date(`${fecha}T00:00:00`));
+        // console.log(new Date(`${fecha}T00:00:00`).toDateString());
+        const date = fecha;
         
         if(visitante){
           let id = visitante.id
