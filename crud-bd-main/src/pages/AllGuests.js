@@ -26,14 +26,16 @@ export const AllGuests = () => {
     const history = useHistory();
     const { user } = useContext(AppContext);
 
-    const { loading, error, data } = useQuery(getVisitantesByCasaId, {
+    const { loading, error, data, refetch } = useQuery(getVisitantesByCasaId, {
         variables: {casaId: user.casaID}
     });
 
     useEffect(() => {
-        console.log('cambie todos los props')
+        refetch();
+    }, []);
+
+    useEffect(() => {
         if (!loading && data?.getVisitantesByCasaId) {
-    
           setTableData(data?.getVisitantesByCasaId);
         }
       }, [data]);
