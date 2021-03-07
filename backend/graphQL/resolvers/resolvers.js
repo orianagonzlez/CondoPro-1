@@ -120,6 +120,15 @@ const resolvers = {
             })
         },
 
+        async getVisitantesByCasaId(root, args, { models }) {
+            return await models.visitante.findAll({
+                where: {
+                    CasaId: args.casaId,
+                    activo: true
+                }
+            })
+        },
+
         async getVisitante(root, args, { models }) {
             return await models.visitante.findOne({
                 where: {
@@ -434,7 +443,7 @@ const resolvers = {
             return await models.visitante.create({ nombre, apellido, cedula, fecha, CasaId, activo })
         },
 
-        async updateVisitante(root, { nombre, apellido, cedula, fecha, CasaId, id }, { models }) {
+        async updateVisitante(root, { nombre, apellido, cedula, fecha, id }, { models }) {
 
             let visitante = await models.visitante.findByPk(id);
 
@@ -443,7 +452,6 @@ const resolvers = {
                 apellido: apellido,
                 cedula: cedula,
                 fecha: fecha,
-                CasaId: CasaId,
             };
 
             return visitante.update(data)

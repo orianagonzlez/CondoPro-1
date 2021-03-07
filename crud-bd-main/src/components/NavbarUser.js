@@ -17,13 +17,13 @@ export const NavBarUser = () => {
           <ul className="navbar-nav">
             <li className="nav-item active"></li>
             <li className="nav-item">
-              <Link to="/condo/userHome" className="nav-link" >Home Usuario</Link>
+              <Link to="/condo/userHome" className="nav-link" >Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/detallePago" className="nav-link" >Detalle y Pago de Facturas</Link>
+              <Link to="/condo/detallePago" className="nav-link" >Pagos</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/registerGuest" className="nav-link" >Registrar Invitados</Link>
+              <Link to="/condo/allGuests" className="nav-link" >Visitantes</Link>
             </li>
             <li className="nav-item" onClick={ () => {setUser ({
                 isAdmin: false,

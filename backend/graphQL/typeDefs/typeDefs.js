@@ -111,6 +111,7 @@ type Query{
     getAdmin(id: Int!): Admin,
     getAdminByCI(cedula: String!): Admin,
     getVisitantes: [Visitante],
+    getVisitantesByCasaId(casaId: Int!): [Visitante],
     getVisitante(id: Int!): Visitante,
     getVisitanteByCI(cedula: String!): Visitante,
     getInstrumentosDePago: [InstrumentoDePago],
@@ -149,7 +150,7 @@ type Mutation{
     updateAdmin(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, id: Int!): Admin!,
     deleteAdmin(id: Int!): Admin!
     createVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, CasaId: Int!, activo: Boolean!): Visitante!
-    updateVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, CasaId: Int!, id: Int!): Visitante!,
+    updateVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, id: Int!): Visitante!,
     deleteVisitante(id: Int!): Visitante!
     createInstrumentoDePago(numero: Int!, fecha: String!, tipo: String!, monto: Int!, activo: Boolean!): InstrumentoDePago!
     updateInstrumentoDePago(numero: Int!, fecha: String!, tipo: String!, monto: Int!, id: Int!): InstrumentoDePago!,
