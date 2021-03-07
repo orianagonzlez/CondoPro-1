@@ -31,5 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {});
+
+    // Admin.hasMany(sequelize.import('./condominio'));
     return Admin
 }

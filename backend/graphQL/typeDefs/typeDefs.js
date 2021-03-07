@@ -2,6 +2,16 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+type Admin{
+    id: Int!
+    nombre: String!
+    apellido: String!
+    cedula: String!
+    correo: String!
+    telefono: String!
+    activo: Boolean!
+}
+
 type Condominio{
     id: Int!
     nombre: String!
@@ -9,6 +19,7 @@ type Condominio{
     ciudad: String!
     direccion: String!
     AdminId: Int!
+    Admin: Admin!
     activo: Boolean!
 }
 
@@ -31,16 +42,6 @@ type Casa{
     alicuota: Float!
     PropietarioId: Int
     CondominioId: Int!
-    activo: Boolean!
-}
-
-type Admin{
-    id: Int!
-    nombre: String!
-    apellido: String!
-    cedula: String!
-    correo: String!
-    telefono: String!
     activo: Boolean!
 }
 
@@ -78,6 +79,7 @@ type Gasto{
     CondominioId: Int!,
     CasaId: Int,
     activo: Boolean!
+    Facturas: [Factura]
 }
 
 type Factura{
@@ -89,6 +91,7 @@ type Factura{
     saldo: Float!,
     CasaId: Int!,
     activo: Boolean!
+    Gastos: [Gasto!]
 }
 
 type GastoDeFactura{
@@ -111,6 +114,7 @@ type Query{
     getAdmin(id: Int!): Admin,
     getAdminByCI(cedula: String!): Admin,
     getVisitantes: [Visitante],
+    getVisitantesByCasaId(casaId: Int!): [Visitante],
     getVisitante(id: Int!): Visitante,
     getVisitanteByCI(cedula: String!): Visitante,
     getInstrumentosDePago: [InstrumentoDePago],
@@ -149,7 +153,7 @@ type Mutation{
     updateAdmin(nombre: String!, apellido: String!, cedula: String!, correo: String!, telefono: String!, id: Int!): Admin!,
     deleteAdmin(id: Int!): Admin!
     createVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, CasaId: Int!, activo: Boolean!): Visitante!
-    updateVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, CasaId: Int!, id: Int!): Visitante!,
+    updateVisitante(nombre: String!, apellido: String!, cedula: String!, fecha: String!, id: Int!): Visitante!,
     deleteVisitante(id: Int!): Visitante!
     createInstrumentoDePago(numero: Int!, fecha: String!, tipo: String!, monto: Int!, activo: Boolean!): InstrumentoDePago!
     updateInstrumentoDePago(numero: Int!, fecha: String!, tipo: String!, monto: Int!, id: Int!): InstrumentoDePago!,
@@ -158,6 +162,7 @@ type Mutation{
     updateGasto(concepto: String!, tipo: String!, monto: Int!, CondominioId: Int!, CasaId: Int, id: Int!): Gasto!,
     deleteGasto(id: Int!): Gasto!
     createFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, activo: Boolean!): Factura!
+    createFactura2(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, activo: Boolean!, gastosIds:[Int] )
     updateFactura(numero: Int!, estado: String!, fechaEmision: String!, fechaVenc: String!, saldo: Float!, CasaId: Int!, id: Int!): Factura!,
     deleteFactura(id: Int!): Factura!
     createPago(FacturaId: Int!, InstrumentoDePagoId: Int!): Pago!

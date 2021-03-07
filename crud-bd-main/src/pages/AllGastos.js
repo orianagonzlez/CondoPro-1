@@ -25,9 +25,13 @@ export const AllGastos = () => {
 
     const [tableData, setTableData] = useState([]);
 
-    const { loading, error, data } = useQuery(getGastos, {
+    const { loading, error, data, refetch } = useQuery(getGastos, {
         variables: {condoId: user.condoID}
     });
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     useEffect(() => {
         console.log('cambie todos los props')

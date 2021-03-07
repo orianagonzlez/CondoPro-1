@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +27,8 @@ import { EditCasa } from '../pages/EditCasa';
 import { AllGastos } from '../pages/AllGastos';
 import { AllFacturas } from '../pages/AllFacturas';
 import { FacturaDetail } from '../pages/FacturaDetail';
+import { AllGuests } from '../pages/AllGuests';
+import { EditGuest } from '../pages/EditGuest';
 
 
 
@@ -82,6 +83,8 @@ export const AppRouter = () => {
                           <Route exact path="/condo/userHome" component={ UserHome } />
                           <Route exact path="/condo/detallePago" component={ DetallePago } />
                           <Route exact path="/condo/registerGuest" component={ RegisterGuest } />
+                          <Route exact path="/condo/editGuest/:visitanteId" component={ EditGuest } />
+                          <Route exact path="/condo/allGuests" component={ AllGuests } />
 
                       <Redirect to="/condo/userHome" />
                   </Switch>

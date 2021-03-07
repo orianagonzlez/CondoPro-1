@@ -31,5 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {});
+
+    // Propietario.hasMany(sequelize.import('./casa'));
     return Propietario
 }

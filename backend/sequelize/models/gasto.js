@@ -25,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
 
     Gasto.belongsTo(sequelize.import('./condominio'), { foreignKey: { allowNull: false }});
-    Gasto.belongsTo(sequelize.import('./casa'));
+    //Gasto.belongsTo(sequelize.import('./casa'));
     return Gasto
 }

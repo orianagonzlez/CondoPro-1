@@ -44,10 +44,14 @@ export const OwnersInfo = () => {
 
   const { searchText }= formValues;
 
-   const { loading, error, data } = useQuery(getOwners);
+   const { loading, error, data, refetch } = useQuery(getOwners);
    const { loading: loadingOwner, error: ownerError, data: owner } = useQuery(getOwner, {
      variables: { id: ownerId}
    });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     console.log('cambie todos los props')
