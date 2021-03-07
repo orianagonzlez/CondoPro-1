@@ -502,20 +502,6 @@ const resolvers = {
         async createFactura(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo }, { models }) {
             return await models.factura.create({ numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo })
         },
-
-        async createFactura2(root, { numero, estado, fechaEmision, fechaVenc, saldo, CasaId, gastosIds , activo }, { models }) {
-            let myFactura = await models.factura.create({ numero, estado, fechaEmision, fechaVenc, saldo, CasaId, activo })
-            
-            let thisGasto;
-
-            gastosIds.forEach( gasto => {
-
-              thisGasto = await models.gasto.findByPk( gasto.id);
-              myFactura.addGasto()
-              
-            });
-          },
-        
         
 
        
@@ -545,7 +531,7 @@ const resolvers = {
 
         },
 
-,
+
     }
 
 

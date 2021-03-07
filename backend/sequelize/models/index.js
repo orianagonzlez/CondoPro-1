@@ -25,17 +25,6 @@ const models = {
 models.admin.hasMany(models.condominio);
 models.condominio.belongsTo(models.admin, { foreignKey: { allowNull: false }});
 
-models.factura.belongsToMany( models.gasto, {
-  through: "detallesDeFactura",
-  as: "facturas",
-  foreignKey: "gasto_id",
-});
-
-models.gasto.belongsToMany( models.factura, {
-  through: "detallesDeFactura",
-  as: "gastos",
-  foreignKey: "factura_id",
-});
 
 
 
