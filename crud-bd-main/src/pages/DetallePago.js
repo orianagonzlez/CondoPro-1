@@ -1,16 +1,15 @@
 import React from 'react'
-import { OwnerForm } from '../components/OwnerForm'
 import {  Container  } from 'react-bootstrap';
+import { InstrumentoDePagoForm } from '../components/InstrumentoPagoForm';
 
 export const DetallePago = () => {
   
   return (
 
-    <h1>Detalle y Pago de Facturas</h1>
+    <Container className=" InstrumentoDePagoFormContainer my-5 ">
+      <h1>Detalles de Pago</h1>
+      <InstrumentoDePagoForm buttonText="Crear Instrumento de Pago"/>
+    </Container>
 
-    // <Container className=" ownerFormContainer my-5 ">
-    //   <h1>Registrar Condominio</h1>
-    //   <OwnerForm buttonText="Crear condominio"/>
-    // </Container>
   )
 }
