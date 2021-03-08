@@ -1,11 +1,11 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import React from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
 import { useHistory } from 'react-router';
-import { AllCasasRow } from '../components/AllCasasRow';
+import { FactPenByCasaRow } from '../components/FactPenByCasaRow';
 import { AppContext } from '../context/AppContext';
 
 const getCasasByCondoId = gql`
@@ -27,7 +27,11 @@ const getCasasByCondoId = gql`
     }
    `;
 
-export const AllCasas = () => {
+
+
+
+
+export const FactPenByCasa = () => {
     const { user } = useContext(AppContext);
 
     const [tableData, setTableData] = useState([]);
@@ -36,46 +40,43 @@ export const AllCasas = () => {
         variables: {condoId: user.condoID}
     });
 
-    const history = useHistory();
-
     useEffect(() => {
         refetch();
     }, []);
 
     useEffect(() => {
         console.log('cambie todos los props')
+        let casas;
         if (!loading && data?.getCasasByCondoId) {
-    
+          
+          console.log(casas,'Estas son las CASAS')
           setTableData(data?.getCasasByCondoId);
+
         }
       }, [data]);
+
 
     if (loading) return <p>Cargando casas</p>
     if (error) console.log('error', error);
 
     return (
         <Container className="mt-5">
-            <h1>Lista de casas</h1>
-            <div className="d-flex justify-content-around">
-                <Button onClick={() => history.push('/condo/createCasa')} variant="outline-primary" className="my-5">Nueva casa</Button>
-            </div>
+            <h1>Lista de Propietarios por facturas pendientes </h1>
             <Table striped bordered hover className="mt-5">
                 <thead>
                 <tr className="text-center">
                     <th>#ID</th>
                     <th>Nombre</th>
                     <th>Numero</th>
-                    <th>Dimensiones (m2)</th>
-                    <th>Estado</th>
-                    <th>Alicuota (%)</th>
                     <th>Propietario</th>
-                    <th>Editar</th>
+                    <th>#Facturas Pendientes</th>
+                    <th>Detalles</th>
                 </tr>
                 </thead>
                 <tbody>
                     {
                     tableData.map((casa, i) => (
-                        <AllCasasRow key={casa.id} casa={casa}/>
+                        <FactPenByCasaRow key={casa.id} casa={casa}/>
                     ))
                     }
                 </tbody>

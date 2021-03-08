@@ -20,7 +20,6 @@ export const AllGuestsRow = ({ visitante }) => {
     const {id, nombre, apellido, cedula, fecha } = visitante;
 
     const handleDelete = (e) => {
-        console.log(id)
         deleteGuest( {variables:  { id } });
         setDeleted(true);
     };

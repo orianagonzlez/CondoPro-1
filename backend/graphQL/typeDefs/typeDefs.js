@@ -99,7 +99,20 @@ type GastoDeFactura{
     id: Int!,
     GastoId: Int!,
     FacturaId: Int!
-    Gasto: Gasto
+    Gasto: Gasto!
+}
+
+type FacturaPendientesPorCasa{
+    Casa: Casa!
+    numFactPen: Int
+}
+
+type Numero{
+  numero: Int
+}
+
+type NumFloat{
+  numero: Float
 }
 
 type Query{
@@ -131,6 +144,13 @@ type Query{
     getFactura(id: Int!): Factura,
     getFacturasByNumero(numero: Int!): [Factura],
     getFacturasByCasaId(CasaId: Int!): [Factura],
+
+
+    getDeudaByCasaId(CasaId: Int!): NumFloat,
+    getNumFacturasPenByCasaId(CasaId: Int!): Numero,
+    getFacturasPenByCasaId(CasaId: Int!): [Factura],
+    
+    
     getPagos: [Pago],
     getPago(id: Int!): Pago,
     getPagosByFactura(FacturaId: Int!): [Pago],

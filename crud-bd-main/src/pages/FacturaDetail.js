@@ -4,10 +4,6 @@ import { gql, useQuery } from '@apollo/client';
 import { AppContext } from '../context/AppContext';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { GastoRow } from '../components/GastoRow';
-import { findDeprecatedUsages } from 'graphql';
-
-
-
 
 const getDetallesFactura = gql`
     query GetDetallesFactura($id: Int!)
@@ -36,39 +32,53 @@ const getFactura = gql`
             fechaEmision
             fechaVenc
             saldo
-            CasaId 
+            CasaId
+            Casa {
+              nombre
+              dimensiones
+              estado
+              PropietarioId
+              CondominioId
+              alicuota
+              numero
+              Propietario {
+                nombre
+                apellido
+                correo
+                telefono
+                cedula
+              }
+            } 
         }
     }
 `;
 
-const getCasa = gql`
-    query GetCasa($id: Int!)
-    {
-        getCasa(id: $id) {
-          nombre
-          dimensiones
-          estado
-          PropietarioId
-          CondominioId
-          alicuota
-          numero
-          Propietario{
-            nombre
-            apellido
-            correo
-            telefono
-            cedula
-          }
-        }
-    }
-`;
+// const getCasa = gql`
+//     query GetCasa($id: Int!)
+//     {
+//         getCasa(id: $id) {
+//           nombre
+//           dimensiones
+//           estado
+//           PropietarioId
+//           CondominioId
+//           alicuota
+//           numero
+//           Propietario{
+//             nombre
+//             apellido
+//             correo
+//             telefono
+//             cedula
+//           }
+//         }
+//     }
+// `;
 
 export const FacturaDetail = () => {
   
    const { facturaId } = useParams();
 
-   const { casaId } = useParams();
-  
   const { loading, error, data } = useQuery(getDetallesFactura, {
         variables: { id: parseInt(facturaId) }
     });
@@ -77,9 +87,9 @@ export const FacturaDetail = () => {
         variables: { id: parseInt(facturaId) }
     });
 
-  const { loading: loadingCasa, error: errorCasa , data: dataCasa } = useQuery(getCasa, {
-        variables: { id: parseInt(casaId) }
-    });
+  // const { loading: loadingCasa, error: errorCasa , data: dataCasa } = useQuery(getCasa, {
+  //       variables: { id: parseInt(casaId) }
+  //   });
 
   const [gastos, setGastos] = useState([]);
 
@@ -111,34 +121,32 @@ export const FacturaDetail = () => {
     useEffect(() => {
 
         if (dataFactura?.getFactura) {
-           // console.log(dataFactura?.getFactura);
-           
             setFactura(dataFactura.getFactura);
-            //console.log(factura)
+            setCasa(dataFactura.getFactura.Casa)
         }
 
     }, [dataFactura])
 
     
     
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (dataCasa?.getCasa) {
-            console.log(dataCasa?.getCasa);
+    //     if (dataCasa?.getCasa) {
+    //         console.log(dataCasa?.getCasa);
            
-            setCasa(dataCasa.getCasa);
+    //         setCasa(dataCasa.getCasa);
 
            
-        }
+    //     }
 
-    }, [dataCasa])
+    // }, [dataCasa])
 
 
     if (loading  || loadingFactura) return <p>Cargando Facturas</p>
     if (error || errorFactura ) console.log('error', error);
 
 
-    if (!factura || !casa )return <p>Esperate que estoy cansado y harto de todo esto</p>
+    if (!factura || !casa )return <p>Cargando datos...</p>
     
   return (
     <Container className= "my-5">
@@ -195,8 +203,10 @@ export const FacturaDetail = () => {
                    
                     <th>Concepto</th>
                     <th>Tipo</th>
-                    <th>Monto ($)</th>
                     <th>Casa</th>
+                    <th> Total gasto($)</th>
+                    <th>Monto correpondiente($)</th>
+                    
                    
                   </tr>
               </thead>
@@ -208,25 +218,26 @@ export const FacturaDetail = () => {
                                 key={i} 
                                 gasto={gasto} 
                                 gastos={gastos} 
-                                setGastos={setGastos}/>
+                                setGastos={setGastos}
+                                alicuota = {casa.alicuota}/>
                             ))
                             } 
                 </tbody>
             </Table>
 
             <Row>
-              <Col>
-              <h5>Total:  { "$"+ (monto*casa.alicuota) }</h5>
-              </Col>
               <Col className="text-center">
-              <h5>Monto total de los gastos de ese mes: { "$"+monto }</h5>
+              <h5>Monto total de los gastos de factura: { "$"+monto }</h5>
+              </Col>
+              <Col>
+              <h5 className="text-center">Total a pagar:  { "$"+(monto*(casa.alicuota/100)) }</h5>
               </Col>
             </Row>
               
 
               
 
-              <h5 className="my-5">Saldo pendiente por fagar { "$"+ (factura.saldo) } </h5>
+              <h5 className="my-5">Saldo pendiente por pagar { "$"+ (factura.saldo) } </h5>
 
       
 

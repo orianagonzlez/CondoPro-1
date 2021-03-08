@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const GastoRow = ({gasto}) => {
+export const GastoRow = ({gasto, alicuota}) => {
 
   const {id, concepto, tipo, monto, CasaId } = gasto;
   
@@ -8,8 +8,10 @@ export const GastoRow = ({gasto}) => {
             <tr className="text-center">
                     <td>{ concepto }</td>
                     <td>{ tipo }</td>
+                    <td>{ CasaId === null ? 'Todas' : "Gasto específico" }</td>
                     <td>{ monto }</td>
-                    <td>{ CasaId === null ? 'Todas' : CasaId }</td>
+                    <td>{ monto*(alicuota/100) }</td>
+                   
             </tr>
   )
 }

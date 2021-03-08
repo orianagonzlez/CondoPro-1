@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-export const AllFacturasRow = ({ factura }) => {
+export const PenFacturasRow = ({ factura }) => {
 
-  const { id, numero, estado, fechaEmision ,fechaVenc , saldo, Casa, CasaId } = factura; 
+  const { id, numero, estado, fechaEmision ,fechaVenc , saldo, CasaId } = factura; 
 
   let fechaEmi = new Date(fechaEmision);
   fechaEmi = fechaEmi.toLocaleDateString();
@@ -19,7 +19,6 @@ export const AllFacturasRow = ({ factura }) => {
                     <td>{ fechaEmi }</td>
                     <td>{ fechaVen }</td>
                     <td>{ saldo }</td>
-                    <td>#{ Casa.numero } { Casa.nombre }</td>
                     <td>
                     <NavLink to={`/condo/facturaDetail/${id}/${CasaId}`}>  
                         <i className="fas fa-arrow-circle-right"></i>

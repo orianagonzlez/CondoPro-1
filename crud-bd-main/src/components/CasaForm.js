@@ -140,7 +140,7 @@ export const CasaForm = ({ casa, buttonText }) => {
               </Form.Group>
               
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Alicuota</Form.Label>
+                <Form.Label>Alicuota (%)</Form.Label>
                 <Form.Control  name="alicuota" value={ alicuota } onChange={ handleInputChange } type="number" step="0.01" min="0" placeholder="" />
               </Form.Group>
     
