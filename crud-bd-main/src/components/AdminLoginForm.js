@@ -88,7 +88,7 @@ export const AdminLoginForm = () => {
    }, [data, loading, loadingLogin, user]);
 
    useEffect(() => {
-    if (!loadingCondo && dataCondo) {
+    if (!loadingCondo && dataCondo?.getCondominios) {
           console.log(dataCondo.getCondominios)
           setCondominios(dataCondo.getCondominios);
           }

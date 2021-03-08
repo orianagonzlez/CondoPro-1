@@ -68,7 +68,6 @@ const getFacturas = gql`
 
 export const FacturaForm = () => {
   
-//OJALA ME PAGARAN POR CASA EFFECT DE ESTE COMPONENTE LMAO
   const history = useHistory();
 
   const { user } = useContext(AppContext); 
