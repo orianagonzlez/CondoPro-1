@@ -68,11 +68,14 @@ export const FacturasDeUnaCasa = () => {
         variables: { CasaId: parseInt(casaId) }
     });
   
-   useEffect(() => {
+   useEffect(() => {  
+        
+    console.log(dataFactura, "AGARRA PSSSSS");
+
         if (dataFactura?.getFacturasPenByCasaId) {
           
             setTableData(dataFactura?.getFacturasPenByCasaId);
-            console.log(dataFactura.getFacturasPenByCasaId, "hola soy facturas");
+            
         }
 
     }, [dataFactura])

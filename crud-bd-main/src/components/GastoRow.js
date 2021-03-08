@@ -10,7 +10,7 @@ export const GastoRow = ({gasto, alicuota}) => {
                     <td>{ tipo }</td>
                     <td>{ CasaId === null ? 'Todas' : "Gasto específico" }</td>
                     <td>{ monto }</td>
-                    <td>{ monto*alicuota }</td>
+                    <td>{ monto*(alicuota/100) }</td>
                    
             </tr>
   )

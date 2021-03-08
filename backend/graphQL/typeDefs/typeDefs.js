@@ -99,7 +99,7 @@ type GastoDeFactura{
     id: Int!,
     GastoId: Int!,
     FacturaId: Int!
-    Gasto: Gasto
+    Gasto: Gasto!
 }
 
 type FacturaPendientesPorCasa{
