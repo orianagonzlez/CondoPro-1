@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const AllFacturasRow = ({ factura }) => {
   console.log(factura)
 
-  const { id, numero, estado, fechaEmision ,fechaVenc , saldo, Casa } = factura; 
+  const { id, numero, estado, fechaEmision ,fechaVenc , saldo, Casa, CasaId } = factura; 
 
   let fechaEmi = new Date(fechaEmision);
   fechaEmi = fechaEmi.toLocaleDateString();
