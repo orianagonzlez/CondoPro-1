@@ -270,6 +270,42 @@ const resolvers = {
             })
         },
 
+        async getFacturasPenByCasaId(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    CasaId: args.CasaId,
+                    activo: true,
+                },
+            })
+        },
+
+        async getNumFacturasPenByCasaId(root, args, { models }) {
+            let numero = await models.factura.count({
+                where: {
+                    CasaId: args.CasaId,
+                    activo: true,
+                    estado: "Pendiente"
+                },
+            })
+            console.log(numero);
+            return {numero: numero}
+        },
+
+
+        
+        async getDeudaByCasaId(root, args, { models }) {
+            let numero = await models.factura.sum('saldo',{
+                where: {
+                    CasaId: args.CasaId,
+                    activo: true,
+                    estado: "Pendiente"
+                },
+            })
+            console.log(numero);
+            return {numero: numero}
+        },
+
+
         //----------------------------------Pago------------------------------------------------
         async getPagos(root, args, { models }) {
             return await models.pago.findAll({

@@ -138,7 +138,7 @@ export const FacturaDetail = () => {
     if (error || errorFactura ) console.log('error', error);
 
 
-    if (!factura || !casa )return <p>Esperate que estoy cansado y harto de todo esto</p>
+    if ( !factura || !casa )return <p>Esperate que estoy cansado y harto de todo esto</p>
     
   return (
     <Container className= "my-5">
