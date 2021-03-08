@@ -65,7 +65,10 @@ const resolvers = {
                 where: {
                     activo: true
                 },
-                include: models.admin,
+                include: {
+                    model: models.admin,
+                    required: true
+                },
             })
         },
 
@@ -75,7 +78,10 @@ const resolvers = {
                     id: args.id,
                     activo: true,
                 },
-                include: models.admin
+                include: {
+                    model: models.admin,
+                    required: true
+                }
             })
         },
 
@@ -86,7 +92,10 @@ const resolvers = {
                     AdminId: args.adminId,
                     activo: true,
                 },
-                include: models.admin
+                include: {
+                    model: models.admin,
+                    required: true
+                }
             })
         },
 
@@ -236,6 +245,7 @@ const resolvers = {
                 },
                 include: {
                     model: models.casa,
+                    required: true,
                     where: {
                         CondominioId: args.condoId
                     }
@@ -249,6 +259,11 @@ const resolvers = {
                     id: args.id,
                     activo: true,
                 },
+                include: {
+                    model: models.casa,
+                    required: true,
+                    include: models.propietario
+                }
             })
         },
 
@@ -309,7 +324,10 @@ const resolvers = {
         //----------------------------------GastoDeFactura------------------------------------------------
         async getGastosDeFactura(root, args, { models }) {
             return await models.gastoDeFactura.findAll({
-              include: models.gasto,
+              include: {
+                  model: models.gasto,
+                  required: true
+                },
             })
         },
 
@@ -318,7 +336,10 @@ const resolvers = {
                 where: {
                     id: args.id,
                 },
-                include: models.gasto,
+                include: {
+                    model: models.gasto,
+                    required: true
+                },
             })
         },
 
@@ -335,7 +356,10 @@ const resolvers = {
                 where: {
                     FacturaId: args.FacturaId,
                 },
-                include: models.gasto,
+                include: {
+                    model: models.gasto,
+                    required: true
+                }
             })
         }
 
