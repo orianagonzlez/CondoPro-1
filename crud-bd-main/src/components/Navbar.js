@@ -35,6 +35,9 @@ export const NavBar = () => {
               <Link to="/condo/allFacturas" className="nav-link" >Factura</Link>
             </li>
             <li className="nav-item">
+              <Link to="/condo/allPagos" className="nav-link" >Pagos</Link>
+            </li>
+            <li className="nav-item">
               <Link to="/condo/resumenDeudas" className="nav-link" >Resumen de Deudas</Link>
             </li>
 

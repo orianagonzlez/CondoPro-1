@@ -4,33 +4,47 @@ import { useHistory } from 'react-router';
 import {gql} from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { AllFacturasRow } from '../components/AllFacturasRow';
+import { AppContext } from '../context/AppContext';
+import { useContext } from 'react';
 
-const getFacturas = gql`
-    {
-        getFacturas {
+const getFacturasByCondoId = gql`
+query GetFacturasByCondoId($condoId: Int!)
+{
+    getFacturasByCondoId(condoId: $condoId) {
+      numero
+      estado
+      fechaEmision
+      fechaVenc
+      saldo
+      CasaId
+      Casa {
         numero
-        estado
-        fechaEmision
-        fechaVenc
-        saldo
-        CasaId
-        id
+        nombre
       }
-    }
-   `; 
+      id
+  }
+}
+`;
 
 
 export const AllFacturas = () => {
+  const { user } = useContext(AppContext);
   
-  const { loading, error, data } = useQuery(getFacturas);
+  const { loading, error, data, refetch } = useQuery(getFacturasByCondoId, {
+    variables: { condoId: user.condoID}
+  });
 
   const [ tableData, setTableData ] = useState([]);
 
   useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
         
-        if (!loading && data?.getFacturas) {
+        if (!loading && data?.getFacturasByCondoId) {
     
-          setTableData(data?.getFacturas);
+          setTableData(data?.getFacturasByCondoId);
         }
       }, [data]);
   
@@ -56,12 +70,12 @@ export const AllFacturas = () => {
             <Table striped bordered hover className="mt-5">
                 <thead>
                 <tr className="text-center">
-                    <th>#Numero Fact</th>
+                    <th># Factura</th>
                     <th>Estado</th>
                     <th>Fecha de emisión</th>
                     <th>Fecha de vencimiento</th>
                     <th>Saldo</th>
-                    <th>#Num de casa</th>
+                    <th>Casa</th>
                     <th>Ver detalles</th>
                     
                 </tr>

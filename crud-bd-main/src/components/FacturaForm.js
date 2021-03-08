@@ -25,22 +25,16 @@ const createGastoDeFactura= gql `
   }
 `;
 
-
-
-const getCasas = gql`
-    {
-        getCasas {
-        id
-        nombre
-        numero
-        dimensiones
-        estado
-        alicuota
-        PropietarioId
-        CondominioId
-      }
-    }
-   `;
+const getCasasByCondoId = gql`
+query GetCasasByCondoId($condoId: Int!)
+{
+    getCasasByCondoId(condoId: $condoId) {
+    id
+    nombre
+    numero
+  }
+}
+`;
 
 const getGastos = gql`
     query GetGastosByCondoId($condoId: Int!)
@@ -51,6 +45,10 @@ const getGastos = gql`
         tipo
         monto
         CasaId
+        Casa {
+          numero
+          nombre
+        }
       }
     }
    `;
@@ -76,12 +74,14 @@ export const FacturaForm = () => {
 
   const [monto, setMonto] = useState(0)
 
-  const [numFact, setNumFact] = useState()
+  const [numFact, setNumFact] = useState('');
 
   const [tableData, setTableData] = useState([]);
 
   
-  const { loading: loadingCasas, error: errorCasas, data: dataCasas } = useQuery(getCasas);
+  const { loading: loadingCasas, error: errorCasas, data: dataCasas } = useQuery(getCasasByCondoId, {
+    variables: {condoId: user.condoID}
+  });
 
   const { loading: loadingFact, error: errorFact, data: dataFact, refetch: refetchFact } = useQuery(getFacturas);
 
@@ -109,7 +109,7 @@ export const FacturaForm = () => {
      
     if (!loadingCasas && dataCasas) {
           
-          setCasas(dataCasas.getCasas);
+          setCasas(dataCasas.getCasasByCondoId);
           }
       }, [dataCasas]);
 
@@ -160,7 +160,7 @@ export const FacturaForm = () => {
       e.preventDefault();
 
       let num = parseInt(numFact);
-      let estado = "pendiente";
+      let estado = "Pendiente";
       let fechaEmi = new Date().toDateString();
       let fechaVen = new Date(fVencimiento);
       fechaVen.setDate(fechaVen.getDate() + 1);
@@ -180,6 +180,7 @@ export const FacturaForm = () => {
        crearGastoDeFactura({ variables:  { FacturaId, GastoId }} )
       });
       
+      window.alert("Factura registrada con exito");
 
     }
 
@@ -196,7 +197,7 @@ export const FacturaForm = () => {
           <Col lg={ 4 } xs ={ 12 }>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Fecha de emisión</Form.Label>
-              <Form.Control  name="fEmision" value={ fEmision } onChange = { handleInputChange } type="text" placeholder="" />
+              <Form.Control  name="fEmision" value={ fEmision } onChange = { handleInputChange } type="text" placeholder="" disabled/>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -206,7 +207,7 @@ export const FacturaForm = () => {
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Numero</Form.Label>
-              <Form.Control name="numero"  value={ numFact }  onChange = { handleInputChange } type="text" placeholder="" />
+              <Form.Control name="numero"  value={ numFact }  onChange = { handleInputChange } type="text" placeholder="" disabled/>
             </Form.Group>
 
               

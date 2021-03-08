@@ -229,6 +229,20 @@ const resolvers = {
             })
         },
 
+        async getFacturasByCondoId(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    activo: true
+                },
+                include: {
+                    model: models.casa,
+                    where: {
+                        CondominioId: args.condoId
+                    }
+                },
+            })
+        },
+
         async getFactura(root, args, { models }) {
             return await models.factura.findOne({
                 where: {

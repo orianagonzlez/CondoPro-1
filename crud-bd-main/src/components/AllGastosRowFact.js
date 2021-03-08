@@ -5,7 +5,7 @@ export const AllGastosRowFact = ({ gasto, gastos, setGastos }) => {
     
   const [inFact, setInFact] = useState(false);
 
-  const {id, concepto, tipo, monto, CasaId } = gasto;
+  const {id, concepto, tipo, monto, Casa } = gasto;
 
   const handleGasto = () => {
     
@@ -54,9 +54,9 @@ export const AllGastosRowFact = ({ gasto, gastos, setGastos }) => {
                     <td>{ concepto }</td>
                     <td>{ tipo }</td>
                     <td>{ monto }</td>
-                    <td>{ CasaId === null ? 'Todas' : CasaId }</td>
+                    <td>{ Casa === null ? 'Todas' : `#${Casa.numero} ${Casa.nombre}` }</td>
                     <td><Button  onClick={handleGasto}    variant="outline-info" >
-                      {inFact === false ? ("agregar") : ("Eliminar")} </Button></td>
+                      {inFact === false ? ("Agregar") : ("Eliminar")} </Button></td>
             </tr>
         </>
         
