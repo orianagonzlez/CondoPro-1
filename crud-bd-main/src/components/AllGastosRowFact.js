@@ -50,13 +50,17 @@ export const AllGastosRowFact = ({ gasto, gastos, setGastos }) => {
        
         <>
             <tr className="text-center">
+                    <td>{ ( inFact ) && (<i className="fas fa-check"></i>) }</td>
                     <td>{ id }</td>
                     <td>{ concepto }</td>
                     <td>{ tipo }</td>
                     <td>{ monto }</td>
                     <td>{ Casa === null ? 'Todas' : `#${Casa.numero} ${Casa.nombre}` }</td>
-                    <td><Button  onClick={handleGasto}    variant="outline-info" >
-                      {inFact === false ? ("Agregar") : ("Eliminar")} </Button></td>
+                    <td>
+                      { inFact === false ? ( 
+                      <Button  onClick={handleGasto}    variant="outline-success" > Agregar </Button>) : 
+                      (<Button  onClick={handleGasto}    variant="outline-danger" > Eliminar </Button>)}
+                     </td>
             </tr>
         </>
         

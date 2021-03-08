@@ -195,8 +195,10 @@ export const FacturaDetail = () => {
                    
                     <th>Concepto</th>
                     <th>Tipo</th>
-                    <th>Monto ($)</th>
                     <th>Casa</th>
+                    <th> Total gasto($)</th>
+                    <th>Monto correpondiente($)</th>
+                    
                    
                   </tr>
               </thead>
@@ -208,7 +210,8 @@ export const FacturaDetail = () => {
                                 key={i} 
                                 gasto={gasto} 
                                 gastos={gastos} 
-                                setGastos={setGastos}/>
+                                setGastos={setGastos}
+                                alicuota = {casa.alicuota}/>
                             ))
                             } 
                 </tbody>
@@ -216,7 +219,7 @@ export const FacturaDetail = () => {
 
             <Row>
               <Col>
-              <h5>Total:  { "$"+ (monto*casa.alicuota) }</h5>
+              <h5>Total:  { "$"+(monto*(casa.alicuota/100)) }</h5>
               </Col>
               <Col className="text-center">
               <h5>Monto total de los gastos de ese mes: { "$"+monto }</h5>

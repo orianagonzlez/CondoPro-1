@@ -5,6 +5,7 @@ import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { AppContext } from '../context/AppContext';
 import { AllGastosRowFact } from './AllGastosRowFact';
+import { useHistory } from 'react-router';
 
 
 
@@ -32,6 +33,7 @@ query GetCasasByCondoId($condoId: Int!)
     id
     nombre
     numero
+    alicuota
   }
 }
 `;
@@ -66,6 +68,9 @@ const getFacturas = gql`
 
 export const FacturaForm = () => {
   
+//OJALA ME PAGARAN POR CASA EFFECT DE ESTE COMPONENTE LMAO
+  const history = useHistory();
+
   const { user } = useContext(AppContext); 
 
   const [gastos, setGastos] = useState([]);
@@ -78,14 +83,19 @@ export const FacturaForm = () => {
 
   const [tableData, setTableData] = useState([]);
 
+  const [alicuota, setAlicuota] = useState()
+
   
-  const { loading: loadingCasas, error: errorCasas, data: dataCasas } = useQuery(getCasasByCondoId, {
+  const { loading: loadingCasas, error: errorCasas, data: dataCasas, refetch: refetchCasas } = useQuery(getCasasByCondoId, {
     variables: {condoId: user.condoID}
   });
 
   const { loading: loadingFact, error: errorFact, data: dataFact, refetch: refetchFact } = useQuery(getFacturas);
 
-    
+  const { loading, error, data, refetch } = useQuery(getGastos, {
+        variables: {condoId: user.condoID}
+    });
+
   const [ formValues , handleInputChange, reset] = useForm({
      fEmision: new Date().toLocaleDateString(),
      fVencimiento: "",
@@ -99,9 +109,7 @@ export const FacturaForm = () => {
   const { fVencimiento, fEmision, casaId }= formValues;
 
 
-  const { loading, error, data } = useQuery(getGastos, {
-        variables: {condoId: user.condoID}
-    });
+
 
 //Esto es una atrocidad con los effects pero relamnete no quiero seguir viviendo , quizas el de getNumero lo cambie despues
 
@@ -132,7 +140,7 @@ export const FacturaForm = () => {
     useEffect(() => {
       console.log("me ejecute")
         if (!loading && data?.getGastosByCondoId) {
-            console.log(data.getGastosByCondoId)
+            //console.log(data.getGastosByCondoId)
           setTableData(data?.getGastosByCondoId);
 
         }
@@ -150,13 +158,32 @@ export const FacturaForm = () => {
       setMonto(myMonto);
 
     }, [gastos])
+
+    useEffect(() => {
+
+      let myArray = [];
+      if(casaId){
+        myArray = casas.filter( ( casa ) => ( casa.id === parseInt(casaId) )  );
+        setAlicuota(myArray[0].alicuota);
+      }
+
+     
+
+    }, [casaId, casas])
+
+    useEffect(() => {
+
+    refetch();
+    refetchCasas();
+    refetchFact(); 
+
+    }, [])
   
   const [crearFactura]= useMutation(createFactura);
 
   const [crearGastoDeFactura]= useMutation(createGastoDeFactura);
 
     const handleSubmit = async (e) => {
-      console.log('entregue')
       e.preventDefault();
 
       let num = parseInt(numFact);
@@ -168,12 +195,10 @@ export const FacturaForm = () => {
       let saldo = parseFloat(monto);
       let CasaId = parseInt(casaId);
 
-     
-
       let res = await crearFactura({ variables:  { num, estado, fechaEmi, fechaVen, saldo, CasaId }} )
 
       let FacturaId = res.data.createFactura.id;
-      console.log(FacturaId, "SOOOOS")
+
       gastos.forEach(gasto => {
        let GastoId = gasto.id;
        console.log(GastoId);
@@ -181,6 +206,10 @@ export const FacturaForm = () => {
       });
       
       window.alert("Factura registrada con exito");
+
+      history.push(`/condo/facturaDetail/${FacturaId}/${CasaId}`)
+
+      
 
     }
 
@@ -222,8 +251,10 @@ export const FacturaForm = () => {
                     }
                 </Form.Control>
             </Form.Group>
-
-            <h5>Monto total: { monto }</h5>
+             
+            
+            <h5>Monto total a pagar: ${ (alicuota) ? (monto*(alicuota/100)) : ("0") }</h5>
+            <small>Seleccione la casa a la cual va dirigida la factura para calcular el monto segun la alicuota</small>
 
 
 
@@ -233,6 +264,7 @@ export const FacturaForm = () => {
               <Table striped bordered hover >
               <thead>
                   <tr className="text-center">
+                    <th>Check</th>
                     <th>#ID</th>
                     <th>Concepto</th>
                     <th>Tipo</th>
@@ -259,7 +291,7 @@ export const FacturaForm = () => {
 
         </Row>
  
-          <Button variant="dark" type="submit">
+          <Button className="my-3" variant="dark" type="submit">
            Registrar factura
           </Button>
         </Form>
