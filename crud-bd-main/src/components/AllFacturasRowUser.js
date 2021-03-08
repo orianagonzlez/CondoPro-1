@@ -8,13 +8,11 @@ export const AllFacturasRowUser = ({ factura }) => {
     return (
         <>
             <tr className="text-center">
-                <td>{id}</td>
                 <td>{numero}</td>
                 <td>{estado}</td>
                 <td>{fechaEmision}</td>
                 <td>{fechaVenc}</td>
                 <td>{saldo}</td>
-                <td>{CasaId}</td>
                 <td>
                     <NavLink to={`/condo/detallePago/${id}`}>
                         <i className="far fa-edit"></i>

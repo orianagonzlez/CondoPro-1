@@ -16,7 +16,7 @@ const createInstrumentoDePago = gql`
 `;
 
 const updateFactura = gql`
-    mutation updateFactura ($Fnumero: Int!, $Festado: String!, $FfechaEmision: String!, $FfechaVenc: String!, $resta: Int!, $FCasaId: Int!, $Fid: Int!) {
+    mutation updateFactura ($Fnumero: Int!, $Festado: String!, $FfechaEmision: String!, $FfechaVenc: String!, $resta: Float!, $FCasaId: Int!, $Fid: Int!) {
         updateFactura(numero: $Fnumero, estado: $Festado, fechaEmision: $FfechaEmision, fechaVenc: $FfechaVenc, saldo: $resta, CasaId: $FCasaId, id: $Fid) {
             id
             estado
@@ -42,7 +42,7 @@ export const InstrumentoDePagoForm = ({ factura }) => {
         let form;
         form = {
             numero: '',
-            fecha: '',
+            fecha: new Date().toLocaleDateString(),
             tipo: '',
             monto: '',
             Fnumero: factura.numero,
@@ -69,7 +69,7 @@ export const InstrumentoDePagoForm = ({ factura }) => {
         console.log(formValues);
 
         const num = parseInt(numero);
-        const date = new Date(`${fecha}T00:00:00`).toDateString();
+        const date = new Date().toDateString();
         const mon = parseInt(monto);
         const resta = Fsaldo - mon;
 
@@ -89,12 +89,12 @@ export const InstrumentoDePagoForm = ({ factura }) => {
 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Numero</Form.Label>
-                    <Form.Control name="numero" value={numero} onChange={handleInputChange} type="number" placeholder="" />
+                    <Form.Control name="numero" value={numero} onChange={handleInputChange} type="number" placeholder=""/>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Fecha</Form.Label>
-                    <Form.Control name="fecha" value={fecha} onChange={handleInputChange} type="date" placeholder="" />
+                    <Form.Control name="fecha" value={fecha} onChange={handleInputChange} type="text" placeholder="" disabled/>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">

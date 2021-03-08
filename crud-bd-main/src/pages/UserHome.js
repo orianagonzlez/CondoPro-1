@@ -31,12 +31,16 @@ export const UserHome = () => {
 
   const [tableData, setTableData] = useState([]);
 
-  const { loading, error, data } = useQuery(getFacturasByCasaId, {
+  const { loading, error, data, refetch } = useQuery(getFacturasByCasaId, {
     variables: { CasaId: user.casaID }
   });
 
 
   const history = useHistory();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     console.log('cambie todos los props')
@@ -55,13 +59,11 @@ export const UserHome = () => {
       <Table striped bordered hover className="mt-5">
         <thead>
           <tr className="text-center">
-            <th>#ID</th>
-            <th>Numero</th>
+            <th># Factura</th>
             <th>Estado</th>
-            <th>fechaEmision</th>
-            <th>fechaVenc</th>
+            <th>Fecha de emisión</th>
+            <th>Fecha de Vencimiento</th>
             <th>Saldo</th>
-            <th>CasaId</th>
             <th>Pagar</th>
           </tr>
         </thead>

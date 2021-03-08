@@ -91,6 +91,7 @@ type Factura{
     fechaVenc: String!,
     saldo: Float!,
     CasaId: Int!,
+    Casa: Casa!
     activo: Boolean!
 }
 
@@ -126,6 +127,7 @@ type Query{
     getGastosByCondoId(condoId: Int!): [Gasto],
     getGastosByCasaId(casaId: Int!): [Gasto],
     getFacturas: [Factura],
+    getFacturasByCondoId(condoId: Int!): [Factura],
     getFactura(id: Int!): Factura,
     getFacturasByNumero(numero: Int!): [Factura],
     getFacturasByCasaId(CasaId: Int!): [Factura],
