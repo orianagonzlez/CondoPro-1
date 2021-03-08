@@ -94,7 +94,7 @@ export const InstrumentoDePagoForm = ({ factura }) => {
 
             estadoFinal = "Pagada";
             crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
-            crearPago({variables: { Fid, Fnumero }});
+            crearPago({variables: { Fid, num }});
             cambiarSaldoFactura({ variables: { Fnumero, estadoFinal, FfechaEmision, FfechaVenc, resta, FCasaId, Fid } });
             window.alert("Instrumento de Pago registrado con exito");
             reset();
