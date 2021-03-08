@@ -29,6 +29,7 @@ import { AllFacturas } from '../pages/AllFacturas';
 import { FacturaDetail } from '../pages/FacturaDetail';
 import { AllGuests } from '../pages/AllGuests';
 import { EditGuest } from '../pages/EditGuest';
+import { FacturasDeUnaCasa } from '../pages/FacturasDeUnaCasa';
 
 
 
@@ -63,6 +64,7 @@ export const AppRouter = () => {
                           <Route exact path="/condo/ownersInfo" component={ OwnersInfo } />
                           <Route exact path="/condo/createCasa" component={ CreateCasa } />
                           <Route exact path="/condo/facturaDetail/:facturaId/:casaId" component={ FacturaDetail } />
+                          <Route exact path="/condo/facturasPen/:casaId" component={ FacturasDeUnaCasa } />
                           <Route exact path="/condo/editCasa/:casaId" component={ EditCasa } />
                           <Route exact path="/condo/AllFacturas" component={ AllFacturas } />
                           <Route exact path="/condo/allCasas" component={ AllCasas } />
