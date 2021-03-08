@@ -160,6 +160,8 @@ type Query{
     getGastoDeFactura(id: Int!): GastoDeFactura,
     getGastosDeFacturaByGasto(GastoId: Int!): [GastoDeFactura],
     getDetallesFactura(FacturaId: Int!): [GastoDeFactura],
+    getFacturasPendientes(CasaId: Int!): [Factura],
+    getFacturasPagadas(CasaId: Int!): [Factura],
 
 }
 

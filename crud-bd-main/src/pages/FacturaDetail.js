@@ -5,7 +5,6 @@ import { AppContext } from '../context/AppContext';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { GastoRow } from '../components/GastoRow';
 
-
 const getDetallesFactura = gql`
     query GetDetallesFactura($id: Int!)
     {
