@@ -270,6 +270,24 @@ const resolvers = {
             })
         },
 
+        async getFacturasPendientes(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    estado: "Pendiente",
+                    activo: true,
+                },
+            })
+        },
+
+        async getFacturasPagadas(root, args, { models }) {
+            return await models.factura.findAll({
+                where: {
+                    estado: "Pagada",
+                    activo: true,
+                },
+            })
+        },
+
         //----------------------------------Pago------------------------------------------------
         async getPagos(root, args, { models }) {
             return await models.pago.findAll({

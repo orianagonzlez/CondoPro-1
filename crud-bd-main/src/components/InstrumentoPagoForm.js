@@ -15,9 +15,18 @@ const createInstrumentoDePago = gql`
     }
 `;
 
+const createPago = gql`
+    mutation createPago($Fid: Int!, $num: Int!) {
+        createPago(FacturaId: $Fid, InstrumentoDePagoId: $num) {
+            FacturaId
+            InstrumentoDePagoId
+        }
+    }
+`;
+
 const updateFactura = gql`
-    mutation updateFactura ($Fnumero: Int!, $Festado: String!, $FfechaEmision: String!, $FfechaVenc: String!, $resta: Float!, $FCasaId: Int!, $Fid: Int!) {
-        updateFactura(numero: $Fnumero, estado: $Festado, fechaEmision: $FfechaEmision, fechaVenc: $FfechaVenc, saldo: $resta, CasaId: $FCasaId, id: $Fid) {
+    mutation updateFactura ($Fnumero: Int!, $estadoFinal: String!, $FfechaEmision: String!, $FfechaVenc: String!, $resta: Float!, $FCasaId: Int!, $Fid: Int!) {
+        updateFactura(numero: $Fnumero, estado: $estadoFinal, fechaEmision: $FfechaEmision, fechaVenc: $FfechaVenc, saldo: $resta, CasaId: $FCasaId, id: $Fid) {
             id
             estado
             CasaId
@@ -30,9 +39,9 @@ export const InstrumentoDePagoForm = ({ factura }) => {
 
     const { user } = useContext(AppContext);
 
-    if (factura){
+    if (factura) {
         console.log("Hay Factura");
-    }else{
+    } else {
         console.log("No Hay Factura");
     }
 
@@ -63,24 +72,46 @@ export const InstrumentoDePagoForm = ({ factura }) => {
 
     const [crearInstrumentoDePago] = useMutation(createInstrumentoDePago);
     const [cambiarSaldoFactura] = useMutation(updateFactura);
+    const [crearPago] = useMutation(createPago);
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
         console.log(formValues);
 
         const num = parseInt(numero);
         const date = new Date().toDateString();
         const mon = parseInt(monto);
-        const resta = Fsaldo - mon;
+        let resta = Fsaldo - mon;
+        let estadoFinal = Festado;
+        let Fid = factura.id;
 
-        crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
-        window.alert("Instrumento de Pago registrado con exito");
-        let Fid = factura.id
-        cambiarSaldoFactura({variables: {Fnumero, Festado, FfechaEmision, FfechaVenc, resta, FCasaId, Fid}})
-        reset();
+        if (resta < 0) {
+
+            window.alert("ERROR!\nEl monto que está pagando es mayor al monto que debe, por favor ingrese la cantidad exacta o un monto menor.");
+
+        } else if (resta === 0) {
+
+            estadoFinal = "Pagada";
+            crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
+            crearPago({variables: { Fid, Fnumero }});
+            cambiarSaldoFactura({ variables: { Fnumero, estadoFinal, FfechaEmision, FfechaVenc, resta, FCasaId, Fid } });
+            window.alert("Instrumento de Pago registrado con exito");
+            reset();
+
+        } else {
+
+            crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
+            crearPago({variables: { Fid, num }});
+            cambiarSaldoFactura({ variables: { Fnumero, estadoFinal, FfechaEmision, FfechaVenc, resta, FCasaId, Fid } });
+            window.alert("Instrumento de Pago registrado con exito");
+            reset();
+
+        }
+
     }
 
-    
+
     return (
 
         <div>
@@ -89,12 +120,12 @@ export const InstrumentoDePagoForm = ({ factura }) => {
 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Numero</Form.Label>
-                    <Form.Control name="numero" value={numero} onChange={handleInputChange} type="number" placeholder=""/>
+                    <Form.Control name="numero" value={numero} onChange={handleInputChange} type="number" placeholder="" />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Fecha</Form.Label>
-                    <Form.Control name="fecha" value={fecha} onChange={handleInputChange} type="text" placeholder="" disabled/>
+                    <Form.Control name="fecha" value={fecha} onChange={handleInputChange} type="text" placeholder="" disabled />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
