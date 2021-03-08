@@ -4,7 +4,6 @@ import { gql, useQuery } from '@apollo/client';
 import { AppContext } from '../context/AppContext';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { GastoRow } from '../components/GastoRow';
-import { findDeprecatedUsages } from 'graphql';
 
 const getDetallesFactura = gql`
     query GetDetallesFactura($id: Int!)
