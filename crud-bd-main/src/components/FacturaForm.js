@@ -192,7 +192,7 @@ export const FacturaForm = () => {
       let fechaVen = new Date(fVencimiento);
       fechaVen.setDate(fechaVen.getDate() + 1);
       fechaVen = fechaVen.toDateString();
-      let saldo = parseFloat(monto);
+      let saldo = parseFloat(monto*(alicuota/100));
       let CasaId = parseInt(casaId);
 
       let res = await crearFactura({ variables:  { num, estado, fechaEmi, fechaVen, saldo, CasaId }} )
