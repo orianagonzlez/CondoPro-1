@@ -62,7 +62,7 @@ export const AppRouter = () => {
                           <Route exact path="/condo/resumenDeudas" component={ ResumenDeudas } />
                           <Route exact path="/condo/ownersInfo" component={ OwnersInfo } />
                           <Route exact path="/condo/createCasa" component={ CreateCasa } />
-                          <Route exact path="/condo/facturaDetail/:facturaId" component={ FacturaDetail } />
+                          <Route exact path="/condo/facturaDetail/:facturaId/:casaId" component={ FacturaDetail } />
                           <Route exact path="/condo/editCasa/:casaId" component={ EditCasa } />
                           <Route exact path="/condo/AllFacturas" component={ AllFacturas } />
                           <Route exact path="/condo/allCasas" component={ AllCasas } />

@@ -295,9 +295,7 @@ const resolvers = {
         //----------------------------------GastoDeFactura------------------------------------------------
         async getGastosDeFactura(root, args, { models }) {
             return await models.gastoDeFactura.findAll({
-                where: {
-                    activo: true
-                }
+              include: models.gasto,
             })
         },
 
@@ -305,8 +303,8 @@ const resolvers = {
             return await models.gastoDeFactura.findOne({
                 where: {
                     id: args.id,
-                    activo: true,
                 },
+                include: models.gasto,
             })
         },
 
@@ -314,19 +312,22 @@ const resolvers = {
             return await models.gastoDeFactura.findAll({
                 where: {
                     GastoId: args.GastoId,
-                    activo: true,
                 },
             })
         },
 
-        async getGastosDeFacturaByFactura(root, args, { models }) {
+        async getDetallesFactura(root, args, { models }) {
             return await models.gastoDeFactura.findAll({
                 where: {
                     FacturaId: args.FacturaId,
-                    activo: true,
                 },
+                include: models.gasto,
             })
-        },
+        }
+
+
+
+ 
     },
 
     Mutation: {

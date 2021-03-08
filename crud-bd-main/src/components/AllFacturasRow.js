@@ -22,8 +22,8 @@ export const AllFacturasRow = ({ factura }) => {
                     <td>{ saldo }</td>
                     <td>{ CasaId }</td>
                     <td>
-                    <NavLink to={`/condo/facturaDetail/${id}`}>  
-                        <i className="far fa-edit"></i>
+                    <NavLink to={`/condo/facturaDetail/${id}/${CasaId}`}>  
+                        <i className="fas fa-arrow-circle-right"></i>
                     </NavLink>
                     </td>
             </tr>

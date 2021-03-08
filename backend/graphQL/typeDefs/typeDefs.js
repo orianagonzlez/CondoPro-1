@@ -98,6 +98,7 @@ type GastoDeFactura{
     id: Int!,
     GastoId: Int!,
     FacturaId: Int!
+    Gasto: Gasto
 }
 
 type Query{
@@ -135,7 +136,7 @@ type Query{
     getGastosDeFactura: [GastoDeFactura],
     getGastoDeFactura(id: Int!): GastoDeFactura,
     getGastosDeFacturaByGasto(GastoId: Int!): [GastoDeFactura],
-    getGastosDeFacturaByFactura(FacturaId: Int!): [GastoDeFactura],
+    getDetallesFactura(FacturaId: Int!): [GastoDeFactura],
 
 }
 
