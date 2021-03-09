@@ -177,12 +177,12 @@ export const FacturaDetail = () => {
       <Row className= "my-3 d-flex">
         <Col className= "text-center">
 
-          <h5>Nombre: { casa.Propietario?.nombre+ " "+ casa.Propietario?.apellido }</h5>
+          <h5>Nombre: { casa.Propietario?.id ? casa.Propietario?.nombre+ " "+ casa.Propietario?.apellido : 'Sin propietario'}</h5>
 
         </Col >
 
         <Col className= "text-center">
-          <h5>CI: { casa.Propietario.cedula }</h5>
+          <h5>CI: { casa.Propietario?.cedula }</h5>
         </Col>
 
         <Col className= "text-center">
