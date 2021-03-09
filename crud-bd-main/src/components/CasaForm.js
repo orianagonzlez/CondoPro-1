@@ -54,7 +54,7 @@ export const CasaForm = ({ casa, buttonText }) => {
             dimensiones: casa.dimensiones,
             estado: casa.estado,
             alicuota: casa.alicuota,
-            propietarioId: casa.PropietarioId
+            propietarioId: casa.PropietarioId ? casa.PropietarioId : ''
           };
         }else{
           form = {
