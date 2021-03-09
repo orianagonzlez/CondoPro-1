@@ -89,14 +89,14 @@ LEFT OUTER JOIN Propietarios P ON C.PropietarioId = P.id
 WHERE Factura.id = 4 AND Factura.activo = true;
 
 /* Facturas pendientes */
-F.id ID, F.numero NumeroFactura, F.estado Estado, F.fechaEmision FechaDeEmision, F.fechaVenc FechaDeVencimiento, F.saldo Saldo
+SELECT F.id ID, F.numero NumeroFactura, F.estado Estado, F.fechaEmision FechaDeEmision, F.fechaVenc FechaDeVencimiento, F.saldo Saldo
 FROM Facturas F 
-WHERE F.estado = 'Pendiente' AND F.activo = true AND F.CasaId = 1
+WHERE F.estado = 'Pendiente' AND F.activo = true AND F.CasaId = 2;
 
 /* Facturas pagadas */
-F.id ID, F.numero NumeroFactura, F.estado Estado, F.fechaEmision FechaDeEmision, F.fechaVenc FechaDeVencimiento, F.saldo Saldo
+SELECT F.id ID, F.numero NumeroFactura, F.estado Estado, F.fechaEmision FechaDeEmision, F.fechaVenc FechaDeVencimiento, F.saldo Saldo
 FROM Facturas F 
-WHERE F.estado = 'Pagada' AND F.activo = true AND F.CasaId = 1
+WHERE F.estado = 'Pagada' AND F.activo = true AND F.CasaId = 2;
 
 /* Facturas pendientes por casa */
 SELECT C.id ID, C.nombre NombreCasa, C.numero Numero, CONCAT(P.nombre, ' ', P.apellido) Propietario, COUNT(Factura.id) FactPen 
@@ -130,16 +130,16 @@ WHERE GastoDeFactura.FacturaId = 5;
 /* PAGOS */
 
 /* Todos los pagos realizados */
-SELECT F.id #Factura, I.id #InstrumentoDePago, I.monto, I.fecha, I.tipo
-FROM Pagos P
+SELECT F.id NumFactura, I.id NumInstrumentoDePago, I.monto Monto, I.fecha Fecha, I.tipo Tipo
+FROM pagos P
 INNER JOIN Facturas AS F ON F.id = P.FacturaId
-INNER JOIN InstrumentoDePago AS I ON I.id = P.InstrumentoDePagoId
+INNER JOIN InstrumentoDePagos AS I ON I.id = P.InstrumentoDePagoId;
 
 /* Todos los pagos realizados por casa id */
-SELECT F.id #Factura, I.id #InstrumentoDePago, I.fecha Fecha, I.monto Monto, I.tipo Tipo
-FROM Pagos P
+SELECT F.id NumFactura, I.id NumInstrumentoDePago, I.fecha Fecha, I.monto Monto, I.tipo Tipo
+FROM pagos P
 INNER JOIN Facturas AS F ON F.id = P.FacturaId
-INNER JOIN InstrumentoDePago AS I ON I.id = P.InstrumentoDePagoId
-WHERE Factura.CasaId = 1
+INNER JOIN InstrumentoDePagos AS I ON I.id = P.InstrumentoDePagoId
+WHERE F.CasaId = 1;
 
 
