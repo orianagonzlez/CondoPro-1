@@ -290,6 +290,7 @@ const resolvers = {
         async getFacturasPendientes(root, args, { models }) {
             return await models.factura.findAll({
                 where: {
+                    CasaId: args.CasaId,
                     estado: "Pendiente",
                     activo: true,
                 },
@@ -299,6 +300,7 @@ const resolvers = {
         async getFacturasPagadas(root, args, { models }) {
             return await models.factura.findAll({
                 where: {
+                    CasaId: args.CasaId,
                     estado: "Pagada",
                     activo: true,
                 },
