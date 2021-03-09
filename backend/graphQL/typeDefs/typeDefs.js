@@ -107,6 +107,11 @@ type FacturaPendientesPorCasa{
     numFactPen: Int
 }
 
+type FactPen {
+    Casa: Casa
+    FactPen: Int
+}
+
 type Numero{
   numero: Int
 }

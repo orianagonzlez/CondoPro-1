@@ -88,6 +88,23 @@ INNER JOIN Casas C ON Factura.CasaId = C.id
 LEFT OUTER JOIN Propietarios P ON C.PropietarioId = P.id 
 WHERE Factura.id = 4 AND Factura.activo = true;
 
+/* Facturas pendientes por casa */
+SELECT C.id ID, C.nombre NombreCasa, C.numero Numero, CONCAT(P.nombre, ' ', P.apellido) Propietario, COUNT(Factura.id) FactPen 
+FROM Facturas Factura 
+RIGHT OUTER JOIN Casas C ON Factura.CasaId = C.id 
+LEFT OUTER JOIN Propietarios P ON C.PropietarioId = P.id 
+WHERE (Factura.estado = 'Pendiente' AND Factura.activo = true) OR Factura.id is null
+GROUP BY C.id;
+
+
+/* Deuda total de una casa*/
+SELECT sum(saldo) AS sum FROM Facturas AS Factura 
+WHERE Factura.CasaId = 1 AND Factura.activo = true AND Factura.estado = 'Pendiente';
+
+/* Facturas pendientes de una casa*/
+ SELECT count(*) AS count FROM Facturas AS Factura 
+ WHERE Factura.CasaId = 4 AND Factura.activo = true AND Factura.estado = 'Pendiente';
+
 /* Facturas activas por casa id*/
 SELECT Factura.id ID, Factura.numero Numero, Factura.estado Estado, Factura.fechaEmision FechaDeEmision, Factura.fechaVenc FechaDeVencimiento, Factura.saldo Saldo
 FROM Facturas AS Factura 
@@ -100,3 +117,5 @@ SELECT Gasto.concepto Concepto, Gasto.tipo Tipo, Gasto.monto TotalGasto, Gasto.C
 FROM GastoDeFacturas GastoDeFactura
 INNER JOIN Gastos AS Gasto ON GastoDeFactura.GastoId = Gasto.id 
 WHERE GastoDeFactura.FacturaId = 5;
+
+
