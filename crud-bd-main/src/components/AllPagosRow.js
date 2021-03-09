@@ -1,26 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
 
-export const AllPagosRow = ({ factura }) => {
+const getDetallesDePagos = gql`
 
-  const { id, numero, estado, fechaEmision ,fechaVenc , saldo, CasaId } = factura; 
+    query getDetallesDePagos
+    {
+      getDetallesDePagos {
+        id
+        FacturaId
+        InstrumentoDePagoId
+        Factura{
+          numero
+        }
+        InstrumentoDePago{
+          numero
+          fecha
+          monto
+          tipo
+        }
+      }
+    }
+`;
 
-  let fechaEmi = new Date(fechaEmision);
-  fechaEmi = fechaEmi.toLocaleDateString();
+export const AllPagosRow = ({ pago }) => {
 
-  let fechaVen = new Date(fechaVenc);
-  fechaVen = fechaVen.toLocaleDateString();
+  const { id, FacturaId, InstrumentoDePagoId, Factura , InstrumentoDePago } = pago; 
+
+  const { loading, error, data, refetch } = useQuery(getDetallesDePagos);
 
   return (
   <>
             <tr className="text-center">
-                    <td>000{ numero }</td>
-                    <td>{ estado }</td>
-                    <td>{ fechaEmi }</td>
-                    <td>{ fechaVen }</td>
-                    <td>{ saldo }</td>
+                    <td>000{ Factura.numero }</td>
+                    <td>{ InstrumentoDePago.numero }</td>
+                    <td>{ InstrumentoDePago.fecha }</td>
+                    <td>{ InstrumentoDePago.monto }</td>
+                    <td>{ InstrumentoDePago.tipo }</td>
                     <td>
-                    <NavLink to={`/condo/facturaDetail/${id}/${CasaId}`}>  
+                    <NavLink to={`/condo/facturaDetail/${FacturaId}/${Factura.CasaId}`}>  
                         <i className="fas fa-arrow-circle-right"></i>
                     </NavLink>
                     </td>

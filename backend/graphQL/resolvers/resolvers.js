@@ -376,11 +376,25 @@ const resolvers = {
             })
         },
 
+        async getDetallesDePagoCasa(root, args, { models }) {
+            return await models.pago.findAll({
+
+                include: [
+                    {
+                        model: models.instrumentoDePago,
+                    },
+                    {
+                        model: models.factura,
+                        where: {
+                            CasaId: args.CasaId
+                        },
+                    }
+                ]
+            })
+        },
+
         async getDetallesDePagos(root, args, { models }) {
             return await models.pago.findAll({
-                where: {
-                    id: args.id
-                },
                 include: [
                     {
                         model: models.instrumentoDePago

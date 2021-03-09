@@ -23,7 +23,7 @@ export const NavBarUser = () => {
               <Link to="/condo/userHome" className="nav-link" >Facturas</Link>
             </li>
             <li className="nav-item">
-              <Link to="/condo/detallePago" className="nav-link" >Pagos</Link>
+              <Link to="/condo/Pagos" className="nav-link" >Pagos</Link>
             </li>
             <li className="nav-item">
               <Link to="/condo/allGuests" className="nav-link" >Visitantes</Link>

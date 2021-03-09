@@ -70,7 +70,8 @@ type Pago{
     FacturaId: Int!,
     Factura: Factura!
     InstrumentoDePagoId: String!,
-    InstrumentoDePago: InstrumentoDePago!
+    InstrumentoDePago: InstrumentoDePago!,
+    CasaId: Int!
 }
 
 type Gasto{
@@ -163,7 +164,8 @@ type Query{
     getFacturasPendientes(CasaId: Int!): [Factura],
     getFacturasPagadas(CasaId: Int!): [Factura],
 
-    getDetallesDePagos(id:Int!): [Pago],
+    getDetallesDePagoCasa(CasaId: Int!): [Pago],
+    getDetallesDePagos: [Pago],
 
 }
 

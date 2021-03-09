@@ -31,6 +31,7 @@ import { AllGuests } from '../pages/AllGuests';
 import { EditGuest } from '../pages/EditGuest';
 import { FacturasDeUnaCasa } from '../pages/FacturasDeUnaCasa';
 import { AllPagos } from '../pages/AllPagos';
+import { AllPagosUser } from '../pages/AllPagosUser';
 
 
 
@@ -90,6 +91,7 @@ export const AppRouter = () => {
                           <Route exact path="/condo/registerGuest" component={ RegisterGuest } />
                           <Route exact path="/condo/editGuest/:visitanteId" component={ EditGuest } />
                           <Route exact path="/condo/allGuests" component={ AllGuests } />
+                          <Route exact path="/condo/Pagos" component={ AllPagosUser } />
 
                       <Redirect to="/condo/userHome" />
                   </Switch>
