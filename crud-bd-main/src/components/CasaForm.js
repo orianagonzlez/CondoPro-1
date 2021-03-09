@@ -72,7 +72,7 @@ export const CasaForm = ({ casa, buttonText }) => {
       
       const [ formValues , handleInputChange, reset] = useForm( initialFormState());
 
-      const { loading, error, data } = useQuery(getOwners);
+      const { loading, error, data, refetch } = useQuery(getOwners);
 
       const { nombre, numero, dimensiones, estado, alicuota,  propietarioId }= formValues;
 
@@ -85,6 +85,9 @@ export const CasaForm = ({ casa, buttonText }) => {
           }
       }, [data]);
     
+      useEffect(() => {
+        refetch()
+      }, [])
     
       const [crearCasa]= useMutation(createCasa);
     
