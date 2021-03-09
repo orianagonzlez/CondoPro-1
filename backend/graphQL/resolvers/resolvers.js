@@ -99,6 +99,8 @@ const resolvers = {
             })
         },
 
+      
+
         //----------------------------------Admin------------------------------------------------
         async getAdmins(root, args, { models }) {
             return await models.admin.findAll({
@@ -328,6 +330,23 @@ const resolvers = {
             console.log(numero);
             return { numero: numero }
         },
+
+        // async getFacturasPen(root, args, { models }) {
+        //     return await models.factura.findAll({
+        //         attributes: [ [models.sequelize.fn('COUNT', models.sequelize.col('Factura.id')), 'FactPen']],
+        //         where: {
+        //             estado: 'Pendiente',
+        //             activo: true,
+        //         },
+        //         include: {
+        //             model: models.casa,
+        //             required: true,
+        //             include: models.propietario
+        //         },
+        //         group: 'Casa.id',
+        //         raw:true
+        //     })
+        // },
 
 
 

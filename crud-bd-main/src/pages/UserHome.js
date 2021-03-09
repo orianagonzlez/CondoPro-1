@@ -68,11 +68,11 @@ export const UserHome = () => {
     variables: { CasaId: user.casaID }
   });
 
-  const { loading: loadingPen, error: penError, data: pendiente} = useQuery(getFacturasPendientes, {
+  const { loading: loadingPen, error: penError, data: pendiente, refetch: refetchPen} = useQuery(getFacturasPendientes, {
     variables: { casaIdPen: user.casaID }
   });
 
-  const { loading: loadingPag, error: pagError, data: pagada} = useQuery(getFacturasPagadas, {
+  const { loading: loadingPag, error: pagError, data: pagada, refetch: refetchPag} = useQuery(getFacturasPagadas, {
     variables: { casaIdPag: user.casaID }
   });
 
@@ -96,6 +96,11 @@ export const UserHome = () => {
       setTableData(pagada?.getFacturasPagadas);
     }
   }, [casaIdPag, pagada]);
+
+  useEffect(() => {
+    refetchPag()
+    refetchPen()
+  }, [])
 
 
   if (loading || loadingPen || loadingPag) return <p>Cargando Facturas</p>
@@ -142,6 +147,7 @@ export const UserHome = () => {
             <th>Fecha de emisión</th>
             <th>Fecha de Vencimiento</th>
             <th>Saldo</th>
+            <th>Ver detalles</th>
             <th>Pagar</th>
           </tr>
         </thead>

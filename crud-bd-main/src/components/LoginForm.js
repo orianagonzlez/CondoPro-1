@@ -83,8 +83,7 @@ export const LoginForm = ({buttonText}) => {
 
    useEffect(() => {
     if( data && !loading && loadingLogin){
-
-      if( data.getPropietarioByCI ){
+      if( data?.getPropietarioByCI ){
         
         let userInfo = data.getPropietarioByCI;
         let myCasa = casas.filter((casa) => casa.id === parseInt(casaId) && casa.PropietarioId === userInfo.id);

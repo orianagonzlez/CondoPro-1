@@ -109,6 +109,11 @@ type FacturaPendientesPorCasa{
     numFactPen: Int
 }
 
+type FactPen {
+    Casa: Casa
+    FactPen: Int
+}
+
 type Numero{
   numero: Int
 }
@@ -151,6 +156,7 @@ type Query{
     getDeudaByCasaId(CasaId: Int!): NumFloat,
     getNumFacturasPenByCasaId(CasaId: Int!): Numero,
     getFacturasPenByCasaId(CasaId: Int!): [Factura],
+    getFacturasPenCondominio(condoId: Int!): [Factura]
     
     
     getPagos: [Pago],

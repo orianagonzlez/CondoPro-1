@@ -17,11 +17,11 @@ export const NavBarUser = () => {
           <ul className="navbar-nav">
             <li className="nav-item active"></li>
             <li className="nav-item">
-              <Link to="/condo/userHome" className="nav-link" >Home</Link>
-            </li>
-            <li className="nav-item">
               <Link to="/condo/userHome" className="nav-link" >Facturas</Link>
             </li>
+            {/* <li className="nav-item">
+              <Link to="/condo/userHome" className="nav-link" >Facturas</Link>
+            </li> */}
             <li className="nav-item">
               <Link to="/condo/Pagos" className="nav-link" >Pagos</Link>
             </li>
