@@ -88,6 +88,14 @@ INNER JOIN Casas C ON Factura.CasaId = C.id
 LEFT OUTER JOIN Propietarios P ON C.PropietarioId = P.id 
 WHERE Factura.id = 4 AND Factura.activo = true;
 
+/* Facturas pendientes por casa */
+SELECT C.id ID, C.nombre NombreCasa, C.numero Numero, CONCAT(P.nombre, ' ', P.apellido) Propietario, COUNT(Factura.id) FactPen 
+FROM Facturas Factura 
+RIGHT OUTER JOIN Casas C ON Factura.CasaId = C.id 
+LEFT OUTER JOIN Propietarios P ON C.PropietarioId = P.id 
+WHERE (Factura.estado = 'Pendiente' AND Factura.activo = true) OR Factura.id is null
+GROUP BY C.id;
+
 /* Facturas activas por casa id*/
 SELECT Factura.id ID, Factura.numero Numero, Factura.estado Estado, Factura.fechaEmision FechaDeEmision, Factura.fechaVenc FechaDeVencimiento, Factura.saldo Saldo
 FROM Facturas AS Factura 
