@@ -48,7 +48,7 @@ const resolvers = {
                 include: models.propietario,
             })
         },
-        
+
         async getCasa(root, args, { models }) {
             return await models.casa.findOne({
                 where: {
@@ -326,13 +326,13 @@ const resolvers = {
                 },
             })
             console.log(numero);
-            return {numero: numero}
+            return { numero: numero }
         },
 
 
-        
+
         async getDeudaByCasaId(root, args, { models }) {
-            let numero = await models.factura.sum('saldo',{
+            let numero = await models.factura.sum('saldo', {
                 where: {
                     CasaId: args.CasaId,
                     activo: true,
@@ -340,16 +340,13 @@ const resolvers = {
                 },
             })
             console.log(numero);
-            return {numero: numero}
+            return { numero: numero }
         },
 
 
         //----------------------------------Pago------------------------------------------------
         async getPagos(root, args, { models }) {
             return await models.pago.findAll({
-                where: {
-                    activo: true
-                }
             })
         },
 
@@ -357,7 +354,6 @@ const resolvers = {
             return await models.pago.findOne({
                 where: {
                     id: args.id,
-                    activo: true,
                 },
             })
         },
@@ -380,12 +376,28 @@ const resolvers = {
             })
         },
 
+        async getDetallesDePagos(root, args, { models }) {
+            return await models.pago.findAll({
+                where: {
+                    id: args.id
+                },
+                include: [
+                    {
+                        model: models.instrumentoDePago
+                    },
+                    {
+                        model: models.factura
+                    }
+                ]
+            })
+        },
+
         //----------------------------------GastoDeFactura------------------------------------------------
         async getGastosDeFactura(root, args, { models }) {
             return await models.gastoDeFactura.findAll({
-              include: {
-                  model: models.gasto,
-                  required: true
+                include: {
+                    model: models.gasto,
+                    required: true
                 },
             })
         },
@@ -420,11 +432,23 @@ const resolvers = {
                     required: true
                 }
             })
-        }
+        },
 
+        // //----------------------------------DetallesDePago------------------------------------------------
 
+        // async getDetallesDePagos(root, args, { models }) {
+        //     return await models.pago.findAll({
 
- 
+        //         include: [
+        //             {
+        //                 model: models.factura
+        //             },
+        //             {
+        //                 model: models.instrumentoDePago
+        //             }]
+        //     })
+        // }
+
     },
 
     Mutation: {

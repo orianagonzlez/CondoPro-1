@@ -30,6 +30,7 @@ import { FacturaDetail } from '../pages/FacturaDetail';
 import { AllGuests } from '../pages/AllGuests';
 import { EditGuest } from '../pages/EditGuest';
 import { FacturasDeUnaCasa } from '../pages/FacturasDeUnaCasa';
+import { AllPagos } from '../pages/AllPagos';
 
 
 
@@ -69,6 +70,8 @@ export const AppRouter = () => {
                           <Route exact path="/condo/AllFacturas" component={ AllFacturas } />
                           <Route exact path="/condo/allCasas" component={ AllCasas } />
                           <Route exact path="/condo/allGastos" component={ AllGastos } />
+                          <Route exact path="/condo/allPagos" component={ AllPagos } />
+
 
                       <Redirect to="/condo/ownersInfo" />
                   </Switch>

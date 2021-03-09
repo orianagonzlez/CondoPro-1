@@ -68,8 +68,9 @@ type InstrumentoDePago{
 type Pago{
     id: Int!,
     FacturaId: Int!,
+    Factura: Factura!
     InstrumentoDePagoId: String!,
-    activo: Boolean!
+    InstrumentoDePago: InstrumentoDePago!
 }
 
 type Gasto{
@@ -161,6 +162,8 @@ type Query{
     getDetallesFactura(FacturaId: Int!): [GastoDeFactura],
     getFacturasPendientes(CasaId: Int!): [Factura],
     getFacturasPagadas(CasaId: Int!): [Factura],
+
+    getDetallesDePagos(id:Int!): [Pago],
 
 }
 
