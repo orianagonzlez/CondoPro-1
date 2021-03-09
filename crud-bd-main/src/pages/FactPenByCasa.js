@@ -55,6 +55,10 @@ export const FactPenByCasa = () => {
         }
       }, [data]);
 
+      useEffect(() => {
+        refetch()
+      }, [])
+
 
     if (loading) return <p>Cargando casas</p>
     if (error) console.log('error', error);

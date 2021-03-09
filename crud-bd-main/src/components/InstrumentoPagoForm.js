@@ -11,13 +11,14 @@ const createInstrumentoDePago = gql`
     mutation createInstrumentoDePago($num: Int!, $date: String!, $tipo: String!, $mon: Int!) {
         createInstrumentoDePago(numero: $num, fecha: $date, tipo: $tipo, monto: $mon, activo: true) {
             tipo
+            id
         }
     }
 `;
 
 const createPago = gql`
-    mutation createPago($Fid: Int!, $num: Int!) {
-        createPago(FacturaId: $Fid, InstrumentoDePagoId: $num) {
+    mutation createPago($Fid: Int!, $numPago: Int!) {
+        createPago(FacturaId: $Fid, InstrumentoDePagoId: $numPago) {
             FacturaId
             InstrumentoDePagoId
         }
@@ -74,7 +75,7 @@ export const InstrumentoDePagoForm = ({ factura }) => {
     const [cambiarSaldoFactura] = useMutation(updateFactura);
     const [crearPago] = useMutation(createPago);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
         console.log(formValues);
@@ -93,16 +94,23 @@ export const InstrumentoDePagoForm = ({ factura }) => {
         } else if (resta === 0) {
 
             estadoFinal = "Pagada";
-            crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
-            crearPago({variables: { Fid, num }});
+            let resp = await crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
+            let numPago = resp.data.createInstrumentoDePago.id
+
+            
+            crearPago({variables: { Fid, numPago }});
+
             cambiarSaldoFactura({ variables: { Fnumero, estadoFinal, FfechaEmision, FfechaVenc, resta, FCasaId, Fid } });
             window.alert("Instrumento de Pago registrado con exito");
             reset();
 
         } else {
 
-            crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
-            crearPago({variables: { Fid, num }});
+            let resp = await crearInstrumentoDePago({ variables: { num, date, tipo, mon } });
+            //console.log(resp, "AQUI VIENE EL ID ");
+            let numPago = resp.data.createInstrumentoDePago.id
+            crearPago({variables: { Fid, numPago }});
+            console.log(numPago, 'ESTE ES EL NUMERO DEL PAGO');
             cambiarSaldoFactura({ variables: { Fnumero, estadoFinal, FfechaEmision, FfechaVenc, resta, FCasaId, Fid } });
             window.alert("Instrumento de Pago registrado con exito");
             reset();
@@ -119,7 +127,7 @@ export const InstrumentoDePagoForm = ({ factura }) => {
             <Form onSubmit={handleSubmit} className="my-5">
 
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Numero</Form.Label>
+                    <Form.Label>Numero de referencia </Form.Label>
                     <Form.Control name="numero" value={numero} onChange={handleInputChange} type="number" placeholder="" />
                 </Form.Group>
 

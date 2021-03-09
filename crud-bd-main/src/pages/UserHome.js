@@ -142,6 +142,7 @@ export const UserHome = () => {
             <th>Fecha de emisión</th>
             <th>Fecha de Vencimiento</th>
             <th>Saldo</th>
+            <th>Ver detalles</th>
             <th>Pagar</th>
           </tr>
         </thead>
